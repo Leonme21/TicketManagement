@@ -1,0 +1,195 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+
+<PageTitle>Inicio - Ticket Management</PageTitle>
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container py-5">
+            <!-- Header mejorado con mejor jerarquía -->
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <span class="badge bg-emerald-subtle text-emerald mb-3 px-3 py-2 rounded-pill fs-6">
+                        <i class="bi bi-check-circle me-1"></i> Panel de Control
+                    </span>
+                    <h1 class="display-5 fw-bold text-slate-900 mb-3">
+                        Bienvenido al Sistema de Gestión
+                    </h1>
+                    <p class="lead text-slate-500 col-lg-8 mx-auto">
+                        Gestiona tus tickets de soporte de manera eficiente y profesional
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tarjetas de acción principal - diseño más limpio -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm card-hover">
+                        <div class="card-body p-4 text-center">
+                            <div class="icon-wrapper bg-slate-100 text-slate-700 rounded-circle d-inline-flex align-items-center justify-content-center mb-4">
+                                <i class="bi bi-speedometer2 fs-3"></i>
+                            </div>
+                            <h5 class="card-title fw-semibold text-slate-800 mb-2">Dashboard</h5>
+                            <p class="card-text text-slate-500 small mb-4">
+                                Ve estadísticas y métricas de tus tickets en tiempo real
+                            </p>
+                            <a href="/dashboard" class="btn btn-slate w-100">
+                                <i class="bi bi-arrow-right me-2"></i>Ir al Dashboard
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm card-hover">
+                        <div class="card-body p-4 text-center">
+                            <div class="icon-wrapper bg-emerald-subtle text-emerald rounded-circle d-inline-flex align-items-center justify-content-center mb-4">
+                                <i class="bi bi-ticket-detailed-fill fs-3"></i>
+                            </div>
+                            <h5 class="card-title fw-semibold text-slate-800 mb-2">Ver Tickets</h5>
+                            <p class="card-text text-slate-500 small mb-4">
+                                Explora y filtra todos los tickets del sistema
+                            </p>
+                            <a href="/tickets" class="btn btn-emerald w-100">
+                                <i class="bi bi-arrow-right me-2"></i>Ver Tickets
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm card-hover">
+                        <div class="card-body p-4 text-center">
+                            <div class="icon-wrapper bg-amber-subtle text-amber rounded-circle d-inline-flex align-items-center justify-content-center mb-4">
+                                <i class="bi bi-plus-circle-fill fs-3"></i>
+                            </div>
+                            <h5 class="card-title fw-semibold text-slate-800 mb-2">Crear Ticket</h5>
+                            <p class="card-text text-slate-500 small mb-4">
+                                Reporta un nuevo problema o solicitud de soporte
+                            </p>
+                            <a href="/tickets/create" class="btn btn-outline-emerald w-100">
+                                <i class="bi bi-plus-lg me-2"></i>Crear Ticket
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección secundaria: diseño más compacto y elegante -->
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm card-hover">
+                        <div class="card-body p-4 d-flex align-items-center gap-3">
+                            <div class="icon-wrapper-sm bg-slate-100 text-slate-600 rounded-3 d-flex align-items-center justify-content-center flex-shrink-0">
+                                <i class="bi bi-folder-fill fs-5"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="fw-semibold text-slate-800 mb-1">Mis Tickets</h6>
+                                <p class="text-slate-500 small mb-0">Tickets que has creado</p>
+                            </div>
+                            <a href="/tickets/my-tickets" class="btn btn-sm btn-outline-slate">
+                                Ver <i class="bi bi-chevron-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm card-hover">
+                        <div class="card-body p-4 d-flex align-items-center gap-3">
+                            <div class="icon-wrapper-sm bg-emerald-subtle text-emerald rounded-3 d-flex align-items-center justify-content-center flex-shrink-0">
+                                <i class="bi bi-clipboard-check-fill fs-5"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="fw-semibold text-slate-800 mb-1">Asignados a Mí</h6>
+                                <p class="text-slate-500 small mb-0">Tickets que debes atender</p>
+                            </div>
+                            <a href="/tickets/assigned" class="btn btn-sm btn-outline-emerald">
+                                Ver <i class="bi bi-chevron-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+
+    <NotAuthorized>
+        <div class="min-vh-100 d-flex align-items-center bg-slate-50">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-xl-8 text-center">
+
+                        <!-- Hero Section -->
+                        <div class="hero-fade-in mb-5">
+                            <img src="logo-300.png"
+                                 alt="Ticket Management Logo"
+                                 class="img-fluid mb-4"
+                                 style="max-height: 280px; width: auto;" />
+
+                            <h1 class="display-4 fw-bold text-slate-900 mb-3">
+                                Sistema de Gestión de Tickets
+                            </h1>
+                            <p class="lead text-slate-500 col-lg-10 mx-auto mb-5">
+                                Gestiona y da seguimiento a los tickets de soporte de manera profesional y eficiente.
+                            </p>
+
+                            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                                <a href="/login" class="btn btn-emerald btn-lg px-5 py-3">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+                                </a>
+                                <a href="/register" class="btn btn-outline-slate btn-lg px-5 py-3">
+                                    <i class="bi bi-person-plus-fill me-2"></i>Registrarse
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Características - tarjetas más limpias -->
+                        <div class="row g-4 mt-5">
+                            <div class="col-md-4">
+                                <div class="card border-0 shadow-sm h-100 card-hover bg-white">
+                                    <div class="card-body p-4 text-center">
+                                        <div class="icon-wrapper bg-emerald-subtle text-emerald rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                            <i class="bi bi-lightning-fill fs-4"></i>
+                                        </div>
+                                        <h5 class="fw-bold text-slate-800 mb-2">Rápido</h5>
+                                        <p class="text-slate-500 small mb-0">
+                                            Gestión optimizada para resolver en segundos.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card border-0 shadow-sm h-100 card-hover bg-white">
+                                    <div class="card-body p-4 text-center">
+                                        <div class="icon-wrapper bg-slate-100 text-slate-700 rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                            <i class="bi bi-people-fill fs-4"></i>
+                                        </div>
+                                        <h5 class="fw-bold text-slate-800 mb-2">Colaborativo</h5>
+                                        <p class="text-slate-500 small mb-0">
+                                            Trabajo en equipo sincronizado en tiempo real.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card border-0 shadow-sm h-100 card-hover bg-white">
+                                    <div class="card-body p-4 text-center">
+                                        <div class="icon-wrapper bg-amber-subtle text-amber rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                                            <i class="bi bi-graph-up fs-4"></i>
+                                        </div>
+                                        <h5 class="fw-bold text-slate-800 mb-2">Métricas</h5>
+                                        <p class="text-slate-500 small mb-0">
+                                            Estadísticas detalladas y reportes visuales.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>

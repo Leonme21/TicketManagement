@@ -1,0 +1,214 @@
+﻿@page "/tickets/create"
+@attribute [Authorize]
+@inject ITicketApiClient TicketApiClient
+@inject NavigationManager Navigation
+
+<PageTitle>Crear Ticket</PageTitle>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            <!-- Header con breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb small">
+                    <li class="breadcrumb-item"><a href="/tickets" class="text-emerald text-decoration-none">Tickets</a></li>
+                    <li class="breadcrumb-item active text-slate-500">Crear nuevo</li>
+                </ol>
+            </nav>
+
+            <div class="card shadow-sm border-0">
+                <!-- Header del card -->
+                <div class="card-header bg-slate-800 text-white py-4 px-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="icon-wrapper-sm d-flex align-items-center justify-content-center rounded-circle bg-emerald-subtle">
+                            <i class="bi bi-plus-circle-fill text-emerald fs-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0 fw-semibold">Crear Nuevo Ticket</h4>
+                            <small class="opacity-75">Completa los campos para registrar tu solicitud</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body p-4 p-lg-5">
+                    @if (!string.IsNullOrEmpty(_errorMessage))
+                    {
+                        <div class="alert alert-danger border-0 rounded-3 d-flex align-items-center gap-2 mb-4">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                            <span>@_errorMessage</span>
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(_successMessage))
+                    {
+                        <div class="alert alert-success border-0 rounded-3 d-flex align-items-center gap-2 mb-4">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span>@_successMessage</span>
+                        </div>
+                    }
+
+                    @if (_isLoadingCategories)
+                    {
+                        <div class="text-center py-5">
+                            <div class="spinner-border text-emerald" role="status">
+                                <span class="visually-hidden">Cargando categorías...</span>
+                            </div>
+                            <p class="mt-3 text-slate-500 small">Cargando categorías...</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <EditForm Model="@_ticketRequest" OnValidSubmit="@HandleSubmit">
+                            <DataAnnotationsValidator />
+
+                            <div class="mb-4">
+                                <label for="title" class="form-label fw-medium text-slate-700">
+                                    Título <span class="text-danger">*</span>
+                                </label>
+                                <InputText id="title" class="form-control form-control-lg border-slate-200"
+                                           @bind-Value="_ticketRequest.Title"
+                                           placeholder="Describe el problema brevemente" />
+                                <ValidationMessage For="@(() => _ticketRequest.Title)" class="text-danger small mt-1" />
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="description" class="form-label fw-medium text-slate-700">
+                                    Descripción <span class="text-danger">*</span>
+                                </label>
+                                <InputTextArea id="description" class="form-control border-slate-200" rows="5"
+                                               @bind-Value="_ticketRequest.Description"
+                                               placeholder="Describe el problema en detalle..." />
+                                <ValidationMessage For="@(() => _ticketRequest.Description)" class="text-danger small mt-1" />
+                            </div>
+
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <label for="priority" class="form-label fw-medium text-slate-700">
+                                        Prioridad <span class="text-danger">*</span>
+                                    </label>
+                                    <InputSelect id="priority" class="form-select border-slate-200" @bind-Value="_ticketRequest.Priority">
+                                        <option value="Low">Baja</option>
+                                        <option value="Medium" selected>Media</option>
+                                        <option value="High">Alta</option>
+                                        <option value="Urgent">Urgente</option>
+                                    </InputSelect>
+                                    <ValidationMessage For="@(() => _ticketRequest.Priority)" class="text-danger small mt-1" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="category" class="form-label fw-medium text-slate-700">
+                                        Categoría <span class="text-danger">*</span>
+                                    </label>
+                                    <InputSelect id="category" class="form-select border-slate-200" @bind-Value="_ticketRequest.CategoryId">
+                                        <option value="0">-- Selecciona una categoría --</option>
+                                        @foreach (var category in _categories)
+                                        {
+                                            <option value="@category.Id">@category.Name</option>
+                                        }
+                                    </InputSelect>
+                                    <ValidationMessage For="@(() => _ticketRequest.CategoryId)" class="text-danger small mt-1" />
+                                </div>
+                            </div>
+
+                            <!-- Guía de prioridades -->
+                            <div class="bg-slate-50 rounded-3 p-4 mb-4">
+                                <div class="d-flex gap-2 mb-2">
+                                    <i class="bi bi-info-circle text-slate-500"></i>
+                                    <span class="fw-semibold text-slate-700 small">Guía de prioridades</span>
+                                </div>
+                                <div class="text-slate-600 small">
+                                    <div class="row g-2">
+                                        <div class="col-md-6"><span class="badge badge-low me-1">Baja</span> Problemas menores sin impacto urgente</div>
+                                        <div class="col-md-6"><span class="badge badge-medium me-1">Media</span> Requiere atención pero no es urgente</div>
+                                        <div class="col-md-6"><span class="badge badge-high me-1">Alta</span> Afecta funcionalidad importante</div>
+                                        <div class="col-md-6"><span class="badge badge-urgent me-1">Urgente</span> Requiere atención inmediata</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-3 pt-2">
+                                <button type="submit" class="btn btn-emerald btn-lg px-4" disabled="@_isSubmitting">
+                                    @if (_isSubmitting)
+                                    {
+                                        <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                        <span>Creando...</span>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-check-circle me-2"></i>
+                                        <span>Crear Ticket</span>
+                                    }
+                                </button>
+                                <a href="/tickets" class="btn btn-outline-slate btn-lg px-4">
+                                    <i class="bi bi-x-circle me-2"></i> Cancelar
+                                </a>
+                            </div>
+                        </EditForm>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private CreateTicketRequest _ticketRequest = new() { Priority = "Medium" };
+    private List<CategoryDto> _categories = new();
+    private string? _errorMessage;
+    private string? _successMessage;
+    private bool _isSubmitting = false;
+    private bool _isLoadingCategories = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCategories();
+    }
+
+    private async Task LoadCategories()
+    {
+        try
+        {
+            _isLoadingCategories = true;
+            _categories = await TicketApiClient.GetCategoriesAsync();
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"Error al cargar las categorías: {ex.Message}";
+        }
+        finally
+        {
+            _isLoadingCategories = false;
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            _isSubmitting = true;
+            _errorMessage = null;
+            _successMessage = null;
+
+            if (_ticketRequest.CategoryId == 0)
+            {
+                _errorMessage = "Por favor selecciona una categoría.";
+                return;
+            }
+
+            var result = await TicketApiClient.CreateTicketAsync(_ticketRequest);
+
+            _successMessage = "¡Ticket creado exitosamente! Redirigiendo...";
+
+            await Task.Delay(1500);
+            Navigation.NavigateTo($"/tickets/{result.Id}");
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"Error al crear el ticket: {ex.Message}";
+        }
+        finally
+        {
+            _isSubmitting = false;
+        }
+    }
+}

@@ -1,0 +1,1485 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\applicationdbcontextinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\applicationdbcontextinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D5FCFF7-8BD3-47B9-8B5B-FAB0264D57AB}|src\\Presentation\\TicketManagement.API\\TicketManagement.API.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.api\\controllers\\tagscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D5FCFF7-8BD3-47B9-8B5B-FAB0264D57AB}|src\\Presentation\\TicketManagement.API\\TicketManagement.API.csproj|solutionrelative:src\\presentation\\ticketmanagement.api\\controllers\\tagscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\tags\\commands\\addtagtoticket\\addtagtoticketcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\tags\\commands\\addtagtoticket\\addtagtoticketcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\tags\\commands\\addtagtoticket\\addtagtotickethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\tags\\commands\\addtagtoticket\\addtagtotickethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\tags\\commands\\addtagtoticket\\addtagtoticketvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\tags\\commands\\addtagtoticket\\addtagtoticketvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\tags\\commands\\createtagcommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\tags\\commands\\createtagcommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\tags\\commands\\createtagcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\tags\\commands\\createtagcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\tags\\commands\\createtagcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\tags\\commands\\createtagcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\repositories\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\repositories\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\repositories\\tagrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\repositories\\tagrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\interfaces\\itagrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\interfaces\\itagrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\tags\\createtagrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\tags\\createtagrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\tags\\tagdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\tags\\tagdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\authentication\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\authentication\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\configurations\\ticketconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\configurations\\ticketconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\entities\\tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\entities\\tag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\configurations\\tagconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\configurations\\tagconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\entities\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\entities\\ticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\common\\ticketfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\common\\ticketfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\common\\paginatedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\common\\paginatedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\entities\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\entities\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\authentication\\commands\\login\\logincommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\authentication\\commands\\login\\logincommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\tickets\\queries\\getticketbyid\\getticketbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\tickets\\queries\\getticketbyid\\getticketbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\tickets\\queries\\getticketbyid\\getticketbyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\tickets\\queries\\getticketbyid\\getticketbyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\common\\behaviors\\validationbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\common\\behaviors\\validationbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\authentication\\commands\\login\\logincommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\authentication\\commands\\login\\logincommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\common\\exceptions\\validationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\common\\exceptions\\validationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\common\\behaviors\\performancebehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\common\\behaviors\\performancebehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\common\\behaviors\\loggingbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\common\\behaviors\\loggingbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\categories\\queries\\getallcategories\\getallcategoriesqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\categories\\queries\\getallcategories\\getallcategoriesqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\categories\\categorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\categories\\categorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\categories\\queries\\getallcategories\\getallcategoriesquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\categories\\queries\\getallcategories\\getallcategoriesquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\interfaces\\iticketrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\interfaces\\iticketrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\interfaces\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\interfaces\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\authentication\\commands\\login\\logincommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\authentication\\commands\\login\\logincommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\common\\models\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\common\\models\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\authentication\\authenticationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\authentication\\authenticationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\common\\paginatedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\common\\paginatedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\tickets\\addcommentrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\tickets\\addcommentrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\authentication\\commands\\register\\registercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\authentication\\commands\\register\\registercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\authentication\\commands\\register\\registercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\authentication\\commands\\register\\registercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\tickets\\assignticketrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\tickets\\assignticketrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\tickets\\attachmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\tickets\\attachmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\tickets\\commentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\tickets\\commentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\tickets\\createticketrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\tickets\\createticketrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\tickets\\ticketdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\tickets\\ticketdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\tickets\\ticketdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\tickets\\ticketdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\tickets\\updateticketrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\tickets\\updateticketrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\tickets\\updateticketstatusrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\tickets\\updateticketstatusrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\authentication\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\authentication\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application.contracts\\authentication\\registerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{377BC074-1E90-4F0B-81BE-31B1B607B68E}|src\\Core\\TicketManagement.Application.Contracts\\TicketManagement.Application.Contracts.csproj|solutionrelative:src\\core\\ticketmanagement.application.contracts\\authentication\\registerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\authentication\\commands\\register\\registercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\authentication\\commands\\register\\registercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\common\\exceptions\\forbiddenaccessexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\common\\exceptions\\forbiddenaccessexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\common\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\common\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\common\\extensions\\ticketqueryextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\common\\extensions\\ticketqueryextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\common\\interfaces\\icurrentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\common\\interfaces\\icurrentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\common\\interfaces\\idatetime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\common\\interfaces\\idatetime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\valueobjects\\email.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\valueobjects\\email.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\exceptions\\domainexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\exceptions\\domainexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\enums\\ticketpriority.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\enums\\ticketpriority.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\enums\\ticketstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\enums\\ticketstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\constants\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\constants\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\enums\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\enums\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\common\\isoftdeletable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\common\\isoftdeletable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\common\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\common\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.domain\\entities\\attachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E530E96E-9F3E-4A14-BDB0-C3CC760A6226}|src\\Core\\TicketManagement.Domain\\TicketManagement.Domain.csproj|solutionrelative:src\\core\\ticketmanagement.domain\\entities\\attachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\tickets\\queries\\getticketsbyagent\\getticketsbyagentqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\tickets\\queries\\getticketsbyagent\\getticketsbyagentqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\tickets\\queries\\getticketsbyagent\\getticketsbyagentquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\tickets\\queries\\getticketsbyagent\\getticketsbyagentquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\persistence\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\services\\datetimeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\services\\datetimeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.blazorwasm\\services\\customauthstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|solutionrelative:src\\presentation\\ticketmanagement.blazorwasm\\services\\customauthstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.blazorwasm\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|solutionrelative:src\\presentation\\ticketmanagement.blazorwasm\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\core\\ticketmanagement.application\\tickets\\commands\\assignticket\\assignticketcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DB89967-ECA6-4B96-A924-2CA38B0153BD}|src\\Core\\TicketManagement.Application\\TicketManagement.Application.csproj|solutionrelative:src\\core\\ticketmanagement.application\\tickets\\commands\\assignticket\\assignticketcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.blazorwasm\\services\\authorizationmessagehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|solutionrelative:src\\presentation\\ticketmanagement.blazorwasm\\services\\authorizationmessagehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.blazorwasm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|solutionrelative:src\\presentation\\ticketmanagement.blazorwasm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.blazorwasm\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|solutionrelative:src\\presentation\\ticketmanagement.blazorwasm\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.blazorwasm\\wwwroot\\css\\bootstrap\\bootstrap.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|solutionrelative:src\\presentation\\ticketmanagement.blazorwasm\\wwwroot\\css\\bootstrap\\bootstrap.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.blazorwasm\\wwwroot\\css\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|solutionrelative:src\\presentation\\ticketmanagement.blazorwasm\\wwwroot\\css\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.blazorwasm\\pages\\index.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|solutionrelative:src\\presentation\\ticketmanagement.blazorwasm\\pages\\index.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.blazorwasm\\pages\\dashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|solutionrelative:src\\presentation\\ticketmanagement.blazorwasm\\pages\\dashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.blazorwasm\\wwwroot\\logo-300.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|solutionrelative:src\\presentation\\ticketmanagement.blazorwasm\\wwwroot\\logo-300.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\presentation\\ticketmanagement.blazorwasm\\wwwroot\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{13507297-88DB-447A-BB79-D96F5C656585}|src\\Presentation\\TicketManagement.BlazorWasm\\TicketManagement.BlazorWasm.csproj|solutionrelative:src\\presentation\\ticketmanagement.blazorwasm\\wwwroot\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|c:\\users\\miguel\\source\\repos\\ticketmanagement\\src\\infrastructure\\ticketmanagement.infrastructure\\migrations\\20260125233712_addtagssystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE573F34-F3FD-36BE-3BAF-53AA9209092E}|src\\Infrastructure\\TicketManagement.Infrastructure\\TicketManagement.Infrastructure.csproj|solutionrelative:src\\infrastructure\\ticketmanagement.infrastructure\\migrations\\20260125233712_addtagssystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationDbContextInitializer.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\ApplicationDbContextInitializer.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\ApplicationDbContextInitializer.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\ApplicationDbContextInitializer.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\ApplicationDbContextInitializer.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAwwFEAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-26T00:21:57.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AddTagToTicketHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketHandler.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketHandler.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketHandler.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-26T00:01:25.201Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AddTagToTicketCommand.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketCommand.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketCommand.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketCommand.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-26T00:01:07.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CategoryRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:57:01.111Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CreateTagCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommandHandler.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommandHandler.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommandHandler.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommandHandler.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:45:21.199Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CreateTagCommand.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommand.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommand.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommand.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:43:41.588Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\ApplicationDbContext.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAA9wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-16T03:45:01.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AddTagToTicketValidator.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketValidator.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketValidator.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketValidator.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\AddTagToTicket\\AddTagToTicketValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-26T00:02:04.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TagsController.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.API\\Controllers\\TagsController.cs",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.API\\Controllers\\TagsController.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.API\\Controllers\\TagsController.cs",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.API\\Controllers\\TagsController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBUAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-26T00:14:05.779Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\DependencyInjection.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAFMAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T05:58:25.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CreateTagCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommandValidator.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommandValidator.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommandValidator.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Tags\\Commands\\CreateTagCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:44:31.935Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "BaseRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\BaseRepository.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\BaseRepository.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\BaseRepository.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\BaseRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:56:56.71Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "TagRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\TagRepository.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\TagRepository.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\TagRepository.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Repositories\\TagRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:49:15.619Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ITagRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Interfaces\\ITagRepository.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Interfaces\\ITagRepository.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Interfaces\\ITagRepository.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Interfaces\\ITagRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:47:11.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CreateTagRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tags\\CreateTagRequest.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Tags\\CreateTagRequest.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tags\\CreateTagRequest.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Tags\\CreateTagRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:41:09.952Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "TagDto.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tags\\TagDto.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Tags\\TagDto.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tags\\TagDto.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Tags\\TagDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:40:13.83Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\UnitOfWork.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\UnitOfWork.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAA5wCQAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T05:59:51.605Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 90,
+              "Title": "20260125233712_AddTagsSystem.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Migrations\\20260125233712_AddTagsSystem.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\Migrations\\20260125233712_AddTagsSystem.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Migrations\\20260125233712_AddTagsSystem.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\Migrations\\20260125233712_AddTagsSystem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:37:12.695Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Interfaces\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Interfaces\\IUnitOfWork.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Interfaces\\IUnitOfWork.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Interfaces\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:05:25.62Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "TicketConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\TicketConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\TicketConfiguration.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\TicketConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\TicketConfiguration.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAAAGgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:27:12.027Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "TagConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\TagConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\TagConfiguration.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\TagConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\TagConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:27:08.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "TicketFilter.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Common\\TicketFilter.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Common\\TicketFilter.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Common\\TicketFilter.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Common\\TicketFilter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:06:14.187Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Ticket.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Entities\\Ticket.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Entities\\Ticket.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Entities\\Ticket.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Entities\\Ticket.cs",
+              "ViewState": "AgIAANMAAAAAAAAAAAAswOMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:05:16.934Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Tag.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Entities\\Tag.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Entities\\Tag.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Entities\\Tag.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Entities\\Tag.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T23:04:27.405Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "GetTicketByIdQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketById\\GetTicketByIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketById\\GetTicketByIdQueryHandler.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketById\\GetTicketByIdQueryHandler.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketById\\GetTicketByIdQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T22:58:01.778Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "GetTicketByIdQuery.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketById\\GetTicketByIdQuery.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketById\\GetTicketByIdQuery.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketById\\GetTicketByIdQuery.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketById\\GetTicketByIdQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T22:57:59.546Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "LoginRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Authentication\\LoginRequest.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Authentication\\LoginRequest.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Authentication\\LoginRequest.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Authentication\\LoginRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:06:15.813Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "LoggingBehavior.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Behaviors\\LoggingBehavior.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Common\\Behaviors\\LoggingBehavior.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Behaviors\\LoggingBehavior.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Common\\Behaviors\\LoggingBehavior.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:10:14.529Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "PerformanceBehavior.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Behaviors\\PerformanceBehavior.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Common\\Behaviors\\PerformanceBehavior.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Behaviors\\PerformanceBehavior.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Common\\Behaviors\\PerformanceBehavior.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:10:19.078Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ValidationBehavior.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Common\\Behaviors\\ValidationBehavior.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:10:32.376Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T05:57:56.2Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "PaginatedResult.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Common\\PaginatedResult.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Common\\PaginatedResult.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Common\\PaginatedResult.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Common\\PaginatedResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:04:37.212Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "GetAllCategoriesQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Categories\\Queries\\GetAllCategories\\GetAllCategoriesQueryHandler.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Categories\\Queries\\GetAllCategories\\GetAllCategoriesQueryHandler.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Categories\\Queries\\GetAllCategories\\GetAllCategoriesQueryHandler.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Categories\\Queries\\GetAllCategories\\GetAllCategoriesQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-16T03:27:07.144Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Entities\\Comment.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Entities\\Comment.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Entities\\Comment.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Entities\\Comment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-17T03:32:50.043Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "LoginCommand.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommand.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommand.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommand.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:07:37.658Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "CategoryDto.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Categories\\CategoryDto.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Categories\\CategoryDto.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Categories\\CategoryDto.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Categories\\CategoryDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:06:39.247Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "GetAllCategoriesQuery.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Categories\\Queries\\GetAllCategories\\GetAllCategoriesQuery.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Categories\\Queries\\GetAllCategories\\GetAllCategoriesQuery.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Categories\\Queries\\GetAllCategories\\GetAllCategoriesQuery.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Categories\\Queries\\GetAllCategories\\GetAllCategoriesQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-16T03:27:01.643Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "ValidationException.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Exceptions\\ValidationException.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Common\\Exceptions\\ValidationException.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Exceptions\\ValidationException.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Common\\Exceptions\\ValidationException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:10:38.414Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "LoginCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommandValidator.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommandValidator.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommandValidator.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:08:48.395Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Interfaces\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Interfaces\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Interfaces\\IUserRepository.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Interfaces\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:05:28.124Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "ITicketRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Interfaces\\ITicketRepository.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Interfaces\\ITicketRepository.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Interfaces\\ITicketRepository.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Interfaces\\ITicketRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:05:23.11Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "ICategoryRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Interfaces\\ICategoryRepository.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Interfaces\\ICategoryRepository.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Interfaces\\ICategoryRepository.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Interfaces\\ICategoryRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:05:17.869Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "LoginCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommandHandler.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommandHandler.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommandHandler.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Login\\LoginCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:07:43.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Result.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Models\\Result.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Common\\Models\\Result.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Models\\Result.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Common\\Models\\Result.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T22:43:01.78Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "AuthenticationResult.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Authentication\\AuthenticationResult.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Authentication\\AuthenticationResult.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Authentication\\AuthenticationResult.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Authentication\\AuthenticationResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:06:08.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "PaginatedList.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Common\\PaginatedList.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Common\\PaginatedList.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Common\\PaginatedList.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Common\\PaginatedList.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:06:48.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "AddCommentRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AddCommentRequest.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AddCommentRequest.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AddCommentRequest.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AddCommentRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:06:54.732Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "RegisterCommand.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommand.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommand.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommand.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:09:00.37Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "RegisterCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommandHandler.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommandHandler.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommandHandler.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:09:06.401Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "AssignTicketRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AssignTicketRequest.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AssignTicketRequest.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AssignTicketRequest.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AssignTicketRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:07:07.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "AttachmentDto.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AttachmentDto.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AttachmentDto.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AttachmentDto.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\AttachmentDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:07:06.661Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "CommentDto.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\CommentDto.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\CommentDto.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\CommentDto.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\CommentDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:07:05.404Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "CreateTicketRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\CreateTicketRequest.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\CreateTicketRequest.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\CreateTicketRequest.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\CreateTicketRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:07:04.422Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "TicketDetailsDto.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\TicketDetailsDto.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\TicketDetailsDto.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\TicketDetailsDto.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\TicketDetailsDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:07:03.712Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "TicketDto.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\TicketDto.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\TicketDto.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\TicketDto.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\TicketDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:07:02.478Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "UpdateTicketRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\UpdateTicketRequest.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\UpdateTicketRequest.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\UpdateTicketRequest.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\UpdateTicketRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:07:01.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "UpdateTicketStatusRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\UpdateTicketStatusRequest.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\UpdateTicketStatusRequest.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Tickets\\UpdateTicketStatusRequest.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Tickets\\UpdateTicketStatusRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:06:59.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Authentication\\UserDto.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Authentication\\UserDto.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Authentication\\UserDto.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Authentication\\UserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-13T01:18:48.339Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "RegisterRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Authentication\\RegisterRequest.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application.Contracts\\Authentication\\RegisterRequest.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application.Contracts\\Authentication\\RegisterRequest.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application.Contracts\\Authentication\\RegisterRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:06:31.865Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "RegisterCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommandValidator.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommandValidator.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommandValidator.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Authentication\\Commands\\Register\\RegisterCommandValidator.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwDIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:09:14.565Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "ForbiddenAccessException.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Exceptions\\ForbiddenAccessException.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Common\\Exceptions\\ForbiddenAccessException.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Exceptions\\ForbiddenAccessException.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Common\\Exceptions\\ForbiddenAccessException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:10:36.185Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "NotFoundException.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Exceptions\\NotFoundException.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Common\\Exceptions\\NotFoundException.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Exceptions\\NotFoundException.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Common\\Exceptions\\NotFoundException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:10:37.767Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "TicketQueryExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Extensions\\TicketQueryExtensions.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Common\\Extensions\\TicketQueryExtensions.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Extensions\\TicketQueryExtensions.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Common\\Extensions\\TicketQueryExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:10:42.075Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "ICurrentUserService.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Interfaces\\ICurrentUserService.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Common\\Interfaces\\ICurrentUserService.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Interfaces\\ICurrentUserService.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Common\\Interfaces\\ICurrentUserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:12:10.647Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "IDateTime.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Interfaces\\IDateTime.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Common\\Interfaces\\IDateTime.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Common\\Interfaces\\IDateTime.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Common\\Interfaces\\IDateTime.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:12:16.815Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "Email.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\ValueObjects\\Email.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\ValueObjects\\Email.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\ValueObjects\\Email.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\ValueObjects\\Email.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:05:34.962Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "DomainException.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Exceptions\\DomainException.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Exceptions\\DomainException.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Exceptions\\DomainException.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Exceptions\\DomainException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:05:09.105Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "TicketPriority.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Enums\\TicketPriority.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Enums\\TicketPriority.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Enums\\TicketPriority.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Enums\\TicketPriority.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:05:04.321Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "UserRole.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Enums\\UserRole.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Enums\\UserRole.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Enums\\UserRole.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Enums\\UserRole.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:04:56.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "ISoftDeletable.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Common\\ISoftDeletable.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Common\\ISoftDeletable.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Common\\ISoftDeletable.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Common\\ISoftDeletable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:04:16.734Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Entities\\Category.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Entities\\Category.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Entities\\Category.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Entities\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T06:04:09.181Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Common\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Common\\BaseEntity.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Common\\BaseEntity.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Common\\BaseEntity.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-17T03:33:10.164Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "Attachment.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Entities\\Attachment.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Entities\\Attachment.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Entities\\Attachment.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Entities\\Attachment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-16T03:31:48.646Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "Roles.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Constants\\Roles.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Constants\\Roles.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Constants\\Roles.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Constants\\Roles.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-17T03:33:22.949Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "TicketStatus.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Enums\\TicketStatus.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Domain\\Enums\\TicketStatus.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Domain\\Enums\\TicketStatus.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Domain\\Enums\\TicketStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-17T03:33:31.224Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "GetTicketsByAgentQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketsByAgent\\GetTicketsByAgentQueryHandler.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketsByAgent\\GetTicketsByAgentQueryHandler.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketsByAgent\\GetTicketsByAgentQueryHandler.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketsByAgent\\GetTicketsByAgentQueryHandler.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T05:57:25.832Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "GetTicketsByAgentQuery.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketsByAgent\\GetTicketsByAgentQuery.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketsByAgent\\GetTicketsByAgentQuery.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketsByAgent\\GetTicketsByAgentQuery.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Tickets\\Queries\\GetTicketsByAgent\\GetTicketsByAgentQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-25T05:57:24.204Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "UserConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\UserConfiguration.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\UserConfiguration.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\UserConfiguration.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\Persistence\\Configurations\\UserConfiguration.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-16T03:20:37.711Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "DateTimeService.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Services\\DateTimeService.cs",
+              "RelativeDocumentMoniker": "src\\Infrastructure\\TicketManagement.Infrastructure\\Services\\DateTimeService.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Infrastructure\\TicketManagement.Infrastructure\\Services\\DateTimeService.cs",
+              "RelativeToolTip": "src\\Infrastructure\\TicketManagement.Infrastructure\\Services\\DateTimeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-16T03:20:28.1Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "CustomAuthStateProvider.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Services\\CustomAuthStateProvider.cs",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.BlazorWasm\\Services\\CustomAuthStateProvider.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Services\\CustomAuthStateProvider.cs",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.BlazorWasm\\Services\\CustomAuthStateProvider.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-15T03:57:24.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "Login.razor",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Login.razor",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Login.razor",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Login.razor",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Login.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-15T03:44:14.712Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "AssignTicketCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tickets\\Commands\\AssignTicket\\AssignTicketCommandHandler.cs",
+              "RelativeDocumentMoniker": "src\\Core\\TicketManagement.Application\\Tickets\\Commands\\AssignTicket\\AssignTicketCommandHandler.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Core\\TicketManagement.Application\\Tickets\\Commands\\AssignTicket\\AssignTicketCommandHandler.cs",
+              "RelativeToolTip": "src\\Core\\TicketManagement.Application\\Tickets\\Commands\\AssignTicket\\AssignTicketCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-15T03:58:49.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "AuthorizationMessageHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Services\\AuthorizationMessageHandler.cs",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.BlazorWasm\\Services\\AuthorizationMessageHandler.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Services\\AuthorizationMessageHandler.cs",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.BlazorWasm\\Services\\AuthorizationMessageHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-15T03:58:39.605Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.BlazorWasm\\Program.cs",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Program.cs",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.BlazorWasm\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-15T03:57:28.355Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "Register.razor",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Register.razor",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Register.razor",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Register.razor",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Register.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-15T03:44:02.338Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "bootstrap.min.css",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-01-15T03:26:47.393Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 85,
+              "Title": "app.css",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\css\\app.css",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\css\\app.css",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\css\\app.css",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\css\\app.css",
+              "ViewState": "AgIAAEoBAAAAAAAAAAAkwHkBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-01-13T01:02:27.009Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 86,
+              "Title": "Index.razor",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Index.razor",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Index.razor",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Index.razor",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Index.razor",
+              "ViewState": "AgIAACMAAAAAAAAAAAAqwMIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-13T00:34:55.045Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 87,
+              "Title": "Dashboard.razor",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Dashboard.razor",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Dashboard.razor",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Dashboard.razor",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.BlazorWasm\\Pages\\Dashboard.razor",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACkAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-13T00:29:44.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 88,
+              "Title": "logo-300.png - PNG [800x800, 32 bits, PNG]",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\logo-300.png",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\logo-300.png",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\logo-300.png - PNG [800x800, 32 bits, PNG]",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\logo-300.png - PNG [800x800, 32 bits, PNG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2026-01-13T01:11:08.893Z",
+              "EditorCaption": " - PNG [800x800, 32 bits, PNG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 89,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\appsettings.json",
+              "RelativeDocumentMoniker": "src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\appsettings.json",
+              "ToolTip": "C:\\Users\\Miguel\\source\\repos\\TicketManagement\\src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\appsettings.json",
+              "RelativeToolTip": "src\\Presentation\\TicketManagement.BlazorWasm\\wwwroot\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-01-13T01:11:12.944Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

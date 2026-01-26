@@ -1,0 +1,81 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = TicketManagement.BlazorWasm
+build_property.RootNamespace = TicketManagement.BlazorWasm
+build_property.ProjectDir = C:\Users\Miguel\source\repos\TicketManagement\src\Presentation\TicketManagement.BlazorWasm\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Miguel\source\repos\TicketManagement\src\Presentation\TicketManagement.BlazorWasm
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Pages/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Pages/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Pages/Tickets/AssignedTickets.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGlja2V0c1xBc3NpZ25lZFRpY2tldHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Pages/Tickets/CreateTicket.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGlja2V0c1xDcmVhdGVUaWNrZXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Pages/Tickets/MyTickets.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGlja2V0c1xNeVRpY2tldHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Pages/Tickets/TicketDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGlja2V0c1xUaWNrZXREZXRhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Pages/Tickets/TicketList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGlja2V0c1xUaWNrZXRMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/Shared/RedirectToLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFJlZGlyZWN0VG9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Miguel/source/repos/TicketManagement/src/Presentation/TicketManagement.BlazorWasm/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 

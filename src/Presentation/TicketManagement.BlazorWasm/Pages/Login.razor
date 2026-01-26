@@ -1,0 +1,133 @@
+﻿@page "/login"
+@inject IAuthApiClient AuthApiClient
+@inject CustomAuthStateProvider AuthStateProvider
+@inject NavigationManager Navigation
+
+<PageTitle>Iniciar Sesión</PageTitle>
+
+<!-- <CHANGE> Fondo con gradiente sutil y centrado vertical mejorado -->
+<div class="min-vh-100 d-flex align-items-center py-5 bg-slate-50">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5 col-lg-4">
+                
+                <!-- <CHANGE> Logo/Branding superior -->
+                <div class="text-center mb-4">
+                    <div class="icon-wrapper bg-emerald-subtle rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                        <i class="bi bi-ticket-perforated fs-3 text-emerald"></i>
+                    </div>
+                    <h1 class="h4 fw-bold text-slate-800 mb-1">Ticket Management</h1>
+                    <p class="text-slate-500 small mb-0">Sistema de gestión de tickets</p>
+                </div>
+
+                <!-- <CHANGE> Card con sombra sutil y padding mejorado -->
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4 p-lg-5">
+                        <h2 class="h5 fw-semibold text-slate-800 text-center mb-4">Iniciar Sesión</h2>
+
+                        @if (!string.IsNullOrEmpty(_errorMessage))
+                        {
+                            <!-- <CHANGE> Alerta con bordes redondeados y estilo mejorado -->
+                            <div class="alert alert-danger border-0 rounded-3 py-2 px-3 small" role="alert">
+                                <i class="bi bi-exclamation-circle me-2"></i>@_errorMessage
+                            </div>
+                        }
+
+                        <EditForm Model="@_loginModel" OnValidSubmit="@HandleLogin">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary class="text-danger small" />
+
+                            <!-- <CHANGE> Labels con mejor jerarquía y inputs estilizados -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label small fw-medium text-slate-700">Correo Electrónico</label>
+                                <InputText id="email" class="form-control form-control-lg border-slate-200" @bind-Value="_loginModel.Email" placeholder="tu@email.com" />
+                                <ValidationMessage For="@(() => _loginModel.Email)" class="small text-danger" />
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="password" class="form-label small fw-medium text-slate-700">Contraseña</label>
+                                <InputText id="password" type="password" class="form-control form-control-lg border-slate-200" @bind-Value="_loginModel.Password" placeholder="••••••••" />
+                                <ValidationMessage For="@(() => _loginModel.Password)" class="small text-danger" />
+                            </div>
+
+                            <!-- <CHANGE> Botón con estilo emerald personalizado -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-emerald btn-lg py-3" disabled="@_isLoading">
+                                    @if (_isLoading)
+                                    {
+                                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                        <span>Iniciando sesión...</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Iniciar Sesión</span>
+                                    }
+                                </button>
+                            </div>
+                        </EditForm>
+
+                        <!-- <CHANGE> Separador con estilo mejorado -->
+                        <div class="d-flex align-items-center my-4">
+                            <hr class="flex-grow-1 border-slate-200">
+                            <span class="px-3 text-slate-400 small">o</span>
+                            <hr class="flex-grow-1 border-slate-200">
+                        </div>
+
+                        <p class="text-center text-slate-600 small mb-0">
+                            ¿No tienes cuenta? <a href="/register" class="text-emerald fw-medium text-decoration-none">Regístrate aquí</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- <CHANGE> Caja de cuentas de prueba fuera del card principal -->
+                <div class="card shadow-sm border-0 mt-3">
+                    <div class="card-body p-3">
+                        <div class="d-flex align-items-start gap-2">
+                            <i class="bi bi-info-circle text-slate-400 mt-1"></i>
+                            <div>
+                                <p class="small fw-medium text-slate-700 mb-2">Cuentas de prueba:</p>
+                                <div class="small text-slate-500 lh-lg">
+                                    <div><span class="badge bg-slate-100 text-slate-700 me-1">Admin</span> admin@ticketmanagement.com</div>
+                                    <div><span class="badge bg-slate-100 text-slate-700 me-1">Agent</span> agent@ticketmanagement.com</div>
+                                    <div><span class="badge bg-slate-100 text-slate-700 me-1">Customer</span> customer@ticketmanagement.com</div>
+                                    <div class="text-slate-400 mt-1">Contraseña: [Rol]@@123</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private LoginRequest _loginModel = new();
+    private string? _errorMessage;
+    private bool _isLoading = false;
+
+    private async Task HandleLogin()
+    {
+        try
+        {
+            _isLoading = true;
+            _errorMessage = null;
+
+            var result = await AuthApiClient.LoginAsync(_loginModel);
+
+            await AuthStateProvider.MarkUserAsAuthenticated(result.Token);
+
+            Navigation.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = "Error al iniciar sesión. Verifica tus credenciales.";
+            Console.WriteLine($"Login error: {ex.Message}");
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+}

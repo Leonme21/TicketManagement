@@ -1,0 +1,61 @@
+﻿<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    @if (routeData.PageType != typeof(Pages.Login) &&
+                                        routeData.PageType != typeof(Pages.Register))
+                    {
+                        @if (context.User?.Identity?.IsAuthenticated == true)
+                        {
+                            <!-- <CHANGE> Alerta de acceso denegado mejorada -->
+                            <div class="container py-5">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        <div class="card border-0 shadow-sm rounded-4 text-center p-5">
+                                            <div class="d-flex align-items-center justify-content-center rounded-circle bg-danger bg-opacity-10 text-danger mx-auto mb-4" style="width: 64px; height: 64px;">
+                                                <i class="bi bi-shield-exclamation fs-3"></i>
+                                            </div>
+                                            <h4 class="fw-bold text-slate-800 mb-2">Acceso Denegado</h4>
+                                            <p class="text-slate-500 mb-4">No tienes permisos para ver esta página.</p>
+                                            <a href="/" class="btn btn-emerald px-4">
+                                                <i class="bi bi-house-door me-2"></i>Ir al Inicio
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <RedirectToLogin />
+                        }
+                    }
+                </NotAuthorized>
+            </AuthorizeRouteView>
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        </Found>
+        <NotFound>
+            <PageTitle>No encontrado</PageTitle>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <!-- <CHANGE> Página 404 mejorada -->
+                <div class="container py-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm rounded-4 text-center p-5">
+                                <div class="d-flex align-items-center justify-content-center rounded-circle bg-warning bg-opacity-10 text-warning mx-auto mb-4" style="width: 64px; height: 64px;">
+                                    <i class="bi bi-question-circle fs-3"></i>
+                                </div>
+                                <h4 class="fw-bold text-slate-800 mb-2">404 - Página no encontrada</h4>
+                                <p class="text-slate-500 mb-4">Lo sentimos, no hay nada en esta dirección.</p>
+                                <a href="/" class="btn btn-emerald px-4">
+                                    <i class="bi bi-house-door me-2"></i>Ir al Inicio
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

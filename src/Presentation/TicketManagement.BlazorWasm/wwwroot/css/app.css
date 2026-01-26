@@ -1,0 +1,377 @@
+/* ===================================
+   VARIABLES Y COLORES - SLATE & EMERALD
+   =================================== */
+
+:root {
+    /* Slate (Gris profesional) */
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+    /* Emerald (Verde esmeralda) */
+    --emerald-50: #ecfdf5;
+    --emerald-100: #d1fae5;
+    --emerald-200: #a7f3d0;
+    --emerald-400: #34d399;
+    --emerald-500: #10b981;
+    --emerald-600: #059669;
+    --emerald-700: #047857;
+    /* Amber (Acento cálido) */
+    --amber-50: #fffbeb;
+    --amber-100: #fef3c7;
+    --amber-500: #f59e0b;
+    --amber-600: #d97706;
+}
+
+/* ===================================
+   ESTILOS GENERALES
+   =================================== */
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--slate-50);
+    color: var(--slate-700);
+    line-height: 1.6;
+}
+
+/* ===================================
+   CLASES DE COLOR UTILITY
+   =================================== */
+
+/* Backgrounds */
+.bg-slate-50 {
+    background-color: var(--slate-50) !important;
+}
+
+.bg-slate-100 {
+    background-color: var(--slate-100) !important;
+}
+
+.bg-emerald-subtle {
+    background-color: var(--emerald-50) !important;
+}
+
+.bg-amber-subtle {
+    background-color: var(--amber-50) !important;
+}
+
+/* Textos */
+.text-slate-400 {
+    color: var(--slate-400) !important;
+}
+
+.text-slate-500 {
+    color: var(--slate-500) !important;
+}
+
+.text-slate-600 {
+    color: var(--slate-600) !important;
+}
+
+.text-slate-700 {
+    color: var(--slate-700) !important;
+}
+
+.text-slate-800 {
+    color: var(--slate-800) !important;
+}
+
+.text-slate-900 {
+    color: var(--slate-900) !important;
+}
+
+.text-emerald {
+    color: var(--emerald-600) !important;
+}
+
+.text-amber {
+    color: var(--amber-600) !important;
+}
+
+/* ===================================
+   BOTONES PERSONALIZADOS
+   =================================== */
+
+.btn-emerald {
+    background-color: var(--emerald-600);
+    border-color: var(--emerald-600);
+    color: #fff;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+    .btn-emerald:hover {
+        background-color: var(--emerald-700);
+        border-color: var(--emerald-700);
+        color: #fff;
+        transform: translateY(-1px);
+    }
+
+.btn-outline-emerald {
+    border: 2px solid var(--emerald-600);
+    color: var(--emerald-600);
+    background: transparent;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+    .btn-outline-emerald:hover {
+        background-color: var(--emerald-600);
+        border-color: var(--emerald-600);
+        color: #fff;
+    }
+
+.btn-slate {
+    background-color: var(--slate-800);
+    border-color: var(--slate-800);
+    color: #fff;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+    .btn-slate:hover {
+        background-color: var(--slate-900);
+        border-color: var(--slate-900);
+        color: #fff;
+        transform: translateY(-1px);
+    }
+
+.btn-outline-slate {
+    border: 2px solid var(--slate-300);
+    color: var(--slate-700);
+    background: transparent;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+    .btn-outline-slate:hover {
+        background-color: var(--slate-100);
+        border-color: var(--slate-400);
+        color: var(--slate-800);
+    }
+
+.btn-lg {
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+/* ===================================
+   TARJETAS MEJORADAS
+   =================================== */
+
+.card {
+    border: none;
+    border-radius: 16px;
+    background: #fff;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08) !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* ===================================
+   ICONOS WRAPPER
+   =================================== */
+
+.icon-wrapper {
+    width: 64px;
+    height: 64px;
+}
+
+.icon-wrapper-sm {
+    width: 48px;
+    height: 48px;
+}
+
+/* ===================================
+   SIDEBAR ACTUALIZADO
+   =================================== */
+
+.sidebar {
+    background: linear-gradient(180deg, var(--slate-800) 0%, var(--slate-900) 100%);
+}
+
+    .sidebar .top-row {
+        background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar .navbar-brand {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .sidebar .nav-item {
+        font-size: 0.95rem;
+    }
+
+    .sidebar .nav-link {
+        color: rgba(255, 255, 255, 0.7);
+        border-radius: 8px;
+        padding: 0.625rem 1rem;
+        margin: 0.25rem 0.5rem;
+        transition: all 0.2s ease;
+    }
+
+        .sidebar .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .sidebar .nav-link.active {
+            background-color: var(--emerald-600);
+            color: #fff;
+        }
+
+    .sidebar .user-info {
+        padding: 1.25rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 0.5rem;
+    }
+
+/* ===================================
+   BADGES DE ESTADO
+   =================================== */
+
+.badge-open {
+    background-color: var(--slate-500);
+    color: #fff;
+}
+
+.badge-in-progress {
+    background-color: var(--amber-500);
+    color: #000;
+}
+
+.badge-closed {
+    background-color: var(--slate-400);
+    color: #fff;
+}
+
+.badge-resolved {
+    background-color: var(--emerald-500);
+    color: #fff;
+}
+
+/* ===================================
+   BADGES DE PRIORIDAD
+   =================================== */
+
+.badge-low {
+    background-color: var(--emerald-500);
+}
+
+.badge-medium {
+    background-color: var(--amber-500);
+    color: #000;
+}
+
+.badge-high {
+    background-color: #f97316;
+    color: #fff;
+}
+
+.badge-urgent {
+    background-color: #ef4444;
+    color: #fff;
+}
+
+/* ===================================
+   UTILIDADES ADICIONALES
+   =================================== */
+
+.btn-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    text-align: left;
+    width: 100%;
+    border: none;
+    background: none;
+}
+
+    .btn-link:hover {
+        color: white;
+    }
+
+.white-space-pre-line {
+    white-space: pre-line;
+}
+
+.comment-item {
+    background-color: var(--slate-50);
+    border-radius: 12px;
+}
+
+.hover-shadow {
+    transition: box-shadow 0.2s ease;
+}
+
+    .hover-shadow:hover {
+        box-shadow: 0 8px 16px rgba(15, 23, 42, 0.1) !important;
+    }
+
+/* Modal */
+.modal.show {
+    display: block;
+}
+
+/* ===================================
+   ANIMACIONES
+   =================================== */
+
+.hero-fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        position: fixed;
+        z-index: 1000;
+    }
+
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* ===================================
+   BOOTSTRAP ICONS FIX
+   =================================== */
+
+.bi {
+    display: inline-block;
+    vertical-align: -0.125em;
+}

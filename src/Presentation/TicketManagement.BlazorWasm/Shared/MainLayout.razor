@@ -1,0 +1,33 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page bg-slate-50">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+    <main>
+        <!-- <CHANGE> Top bar mejorada con mejor diseño -->
+        <div class="top-row px-4 py-3 bg-white border-bottom shadow-sm">
+            <div class="d-flex align-items-center justify-content-end w-100">
+                <AuthorizeView>
+                    <Authorized>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="d-flex align-items-center justify-content-center rounded-circle bg-slate-100 text-slate-600" style="width: 32px; height: 32px;">
+                                <i class="bi bi-person-fill small"></i>
+                            </span>
+                            <span class="text-slate-700 fw-medium">@context.User.Identity?.Name</span>
+                        </div>
+                    </Authorized>
+                    <NotAuthorized>
+                        <a href="/login" class="btn btn-emerald btn-sm px-3">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+                        </a>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </div>
+        </div>
+        <!-- <CHANGE> Contenido con mejor padding -->
+        <article class="content px-4 py-4">
+            @Body
+        </article>
+    </main>
+</div>

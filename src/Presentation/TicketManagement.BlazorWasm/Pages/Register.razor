@@ -1,0 +1,150 @@
+﻿@page "/register"
+@inject IAuthApiClient AuthApiClient
+@inject CustomAuthStateProvider AuthStateProvider
+@inject NavigationManager Navigation
+
+<PageTitle>Registrarse</PageTitle>
+
+<!-- <CHANGE> Fondo consistente con login y centrado vertical -->
+<div class="min-vh-100 d-flex align-items-center py-5 bg-slate-50">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+
+                <!-- <CHANGE> Logo/Branding superior -->
+                <div class="text-center mb-4">
+                    <div class="icon-wrapper bg-emerald-subtle rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+                        <i class="bi bi-person-plus fs-3 text-emerald"></i>
+                    </div>
+                    <h1 class="h4 fw-bold text-slate-800 mb-1">Crear Cuenta</h1>
+                    <p class="text-slate-500 small mb-0">Únete a Ticket Management</p>
+                </div>
+
+                <!-- <CHANGE> Card con sombra sutil y padding mejorado -->
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4 p-lg-5">
+
+                        @if (!string.IsNullOrEmpty(_errorMessage))
+                        {
+                            <div class="alert alert-danger border-0 rounded-3 py-2 px-3 small" role="alert">
+                                <i class="bi bi-exclamation-circle me-2"></i>@_errorMessage
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(_successMessage))
+                        {
+                            <div class="alert alert-success border-0 rounded-3 py-2 px-3 small" role="alert">
+                                <i class="bi bi-check-circle me-2"></i>@_successMessage
+                            </div>
+                        }
+
+                        <EditForm Model="@_registerModel" OnValidSubmit="@HandleRegister">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary class="text-danger small" />
+
+                            <!-- <CHANGE> Row con gap mejorado -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label small fw-medium text-slate-700">Nombre</label>
+                                    <InputText id="firstName" class="form-control form-control-lg border-slate-200" @bind-Value="_registerModel.FirstName" placeholder="Juan" />
+                                    <ValidationMessage For="@(() => _registerModel.FirstName)" class="small text-danger" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label small fw-medium text-slate-700">Apellido</label>
+                                    <InputText id="lastName" class="form-control form-control-lg border-slate-200" @bind-Value="_registerModel.LastName" placeholder="Pérez" />
+                                    <ValidationMessage For="@(() => _registerModel.LastName)" class="small text-danger" />
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label small fw-medium text-slate-700">Correo Electrónico</label>
+                                <InputText id="email" class="form-control form-control-lg border-slate-200" @bind-Value="_registerModel.Email" placeholder="tu@email.com" />
+                                <ValidationMessage For="@(() => _registerModel.Email)" class="small text-danger" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label small fw-medium text-slate-700">Contraseña</label>
+                                <InputText id="password" type="password" class="form-control form-control-lg border-slate-200" @bind-Value="_registerModel.Password" placeholder="••••••••" />
+                                <ValidationMessage For="@(() => _registerModel.Password)" class="small text-danger" />
+                                <!-- <CHANGE> Texto de ayuda con mejor estilo -->
+                                <div class="form-text text-slate-400 small mt-2">
+                                    <i class="bi bi-shield-check me-1"></i>Mínimo 6 caracteres con mayúsculas, minúsculas, números y símbolos.
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="confirmPassword" class="form-label small fw-medium text-slate-700">Confirmar Contraseña</label>
+                                <InputText id="confirmPassword" type="password" class="form-control form-control-lg border-slate-200" @bind-Value="_registerModel.ConfirmPassword" placeholder="••••••••" />
+                                <ValidationMessage For="@(() => _registerModel.ConfirmPassword)" class="small text-danger" />
+                            </div>
+
+                            <!-- <CHANGE> Botón con estilo emerald -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-emerald btn-lg py-3" disabled="@_isLoading">
+                                    @if (_isLoading)
+                                    {
+                                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                        <span>Registrando...</span>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-person-plus me-2"></i>
+                                        <span>Crear Cuenta</span>
+                                    }
+                                </button>
+                            </div>
+                        </EditForm>
+
+                        <!-- <CHANGE> Separador con estilo mejorado -->
+                        <div class="d-flex align-items-center my-4">
+                            <hr class="flex-grow-1 border-slate-200">
+                            <span class="px-3 text-slate-400 small">o</span>
+                            <hr class="flex-grow-1 border-slate-200">
+                        </div>
+
+                        <p class="text-center text-slate-600 small mb-0">
+                            ¿Ya tienes cuenta? <a href="/login" class="text-emerald fw-medium text-decoration-none">Inicia sesión aquí</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private RegisterRequest _registerModel = new();
+    private string? _errorMessage;
+    private string? _successMessage;
+    private bool _isLoading = false;
+
+    private async Task HandleRegister()
+    {
+        try
+        {
+            _isLoading = true;
+            _errorMessage = null;
+            _successMessage = null;
+
+            var result = await AuthApiClient.RegisterAsync(_registerModel);
+
+            await AuthStateProvider.MarkUserAsAuthenticated(result.Token);
+
+            _successMessage = "¡Registro exitoso! Redirigiendo...";
+
+            await Task.Delay(1500);
+            Navigation.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = "Error al registrarse. Por favor verifica los datos e intenta nuevamente.";
+            Console.WriteLine($"Register error: {ex.Message}");
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+}

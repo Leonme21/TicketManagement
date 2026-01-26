@@ -1,0 +1,139 @@
+﻿@inject NavigationManager Navigation
+@inject CustomAuthStateProvider AuthStateProvider
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<!-- <CHANGE> Header con esquema Slate/Esmeralda y mejor branding -->
+<div class="top-row ps-3 navbar navbar-dark bg-slate-800">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold" href="">
+            <span class="d-flex align-items-center justify-content-center rounded-circle bg-emerald text-white" style="width: 32px; height: 32px;">
+                <i class="bi bi-ticket-detailed-fill small"></i>
+            </span>
+            Ticket Management
+        </a>
+        <button title="Navigation menu" class="navbar-toggler border-0" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass nav-scrollable bg-slate-900" @onclick="ToggleNavMenu">
+    <nav class="flex-column py-3">
+        <AuthorizeView>
+            <Authorized>
+                <!-- <CHANGE> Sección de usuario mejorada con card sutil -->
+                <div class="nav-item px-3 mb-3">
+                    <div class="d-flex align-items-center gap-3 p-3 rounded-3 bg-slate-800">
+                        <div class="d-flex align-items-center justify-content-center rounded-circle bg-emerald text-white" style="width: 40px; height: 40px;">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div>
+                            <span class="text-white fw-medium d-block">@context.User.Identity?.Name</span>
+                            <small class="text-slate-400">@GetUserRole(context)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <CHANGE> Sección de navegación principal -->
+                <div class="px-3 mb-2">
+                    <small class="text-slate-500 text-uppercase fw-semibold" style="font-size: 0.7rem; letter-spacing: 0.05em;">Principal</small>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link rounded-2 py-2 px-3" href="" Match="NavLinkMatch.All">
+                        <span class="bi bi-house-door-fill me-2" aria-hidden="true"></span> Inicio
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link rounded-2 py-2 px-3" href="dashboard">
+                        <span class="bi bi-speedometer2 me-2" aria-hidden="true"></span> Dashboard
+                    </NavLink>
+                </div>
+
+                <!-- <CHANGE> Sección de tickets -->
+                <div class="px-3 mb-2 mt-4">
+                    <small class="text-slate-500 text-uppercase fw-semibold" style="font-size: 0.7rem; letter-spacing: 0.05em;">Tickets</small>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link rounded-2 py-2 px-3" href="tickets">
+                        <span class="bi bi-ticket-detailed-fill me-2" aria-hidden="true"></span> Todos los Tickets
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link rounded-2 py-2 px-3" href="tickets/my-tickets">
+                        <span class="bi bi-folder-fill me-2" aria-hidden="true"></span> Mis Tickets
+                    </NavLink>
+                </div>
+
+                @if (IsInRole(context, "Admin") || IsInRole(context, "Agent"))
+                {
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link rounded-2 py-2 px-3" href="tickets/assigned">
+                            <span class="bi bi-clipboard-check-fill me-2" aria-hidden="true"></span> Asignados a Mí
+                        </NavLink>
+                    </div>
+                }
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link rounded-2 py-2 px-3" href="tickets/create">
+                        <span class="bi bi-plus-circle-fill me-2" aria-hidden="true"></span> Crear Ticket
+                    </NavLink>
+                </div>
+
+                <!-- <CHANGE> Separador y logout mejorado -->
+                <div class="px-3 my-3">
+                    <hr class="border-slate-700 m-0" />
+                </div>
+
+                <div class="nav-item px-3">
+                    <button class="nav-link btn btn-link w-100 text-start rounded-2 py-2 px-3 text-slate-400" @onclick="HandleLogout">
+                        <span class="bi bi-box-arrow-right me-2" aria-hidden="true"></span> Cerrar Sesión
+                    </button>
+                </div>
+            </Authorized>
+            <NotAuthorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link rounded-2 py-2 px-3" href="login">
+                        <span class="bi bi-box-arrow-in-right me-2" aria-hidden="true"></span> Iniciar Sesión
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link rounded-2 py-2 px-3" href="register">
+                        <span class="bi bi-person-plus-fill me-2" aria-hidden="true"></span> Registrarse
+                    </NavLink>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    private string GetUserRole(AuthenticationState context)
+    {
+        var roleClaim = context.User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role);
+        return roleClaim?.Value ?? "Usuario";
+    }
+
+    private bool IsInRole(AuthenticationState context, string role)
+    {
+        return context.User.IsInRole(role);
+    }
+
+    private async Task HandleLogout()
+    {
+        await AuthStateProvider.MarkUserAsLoggedOut();
+        Navigation.NavigateTo("/login");
+    }
+}
