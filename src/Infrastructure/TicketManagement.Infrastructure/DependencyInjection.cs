@@ -20,6 +20,7 @@ using TicketManagement.Infrastructure.Resilience;
 using TicketManagement.Infrastructure.FeatureFlags;
 using TicketManagement.Infrastructure.HealthChecks;
 using TicketManagement.Application.Common.Authorization;
+using TicketManagement.Application.Common.Mappings;
 
 namespace TicketManagement.Infrastructure;
 
@@ -81,6 +82,9 @@ public static class DependencyInjection
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<ITagRepository, TagRepository>();
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+        
+        // Unit of Work
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         
         // ✅ ISP: Register segregated query interfaces
         // Single implementation, multiple interfaces (Interface Segregation Principle)
@@ -158,6 +162,16 @@ public static class DependencyInjection
 
     private static void AddEssentialServices(IServiceCollection services)
     {
+        // AutoMapper - Manual registration to avoid ambiguous reference
+        var mapperConfig = new AutoMapper.MapperConfiguration(cfg =>
+        {
+            cfg.AddProfile<MappingProfile>();
+        });
+        services.AddSingleton<AutoMapper.IMapper>(mapperConfig.CreateMapper());
+        
+        // Cache Service
+        services.AddScoped<ICacheService, DistributedCacheService>();
+        
         // Essential Services
         services.AddTransient<IDateTime, DateTimeService>();
         services.AddScoped<ITokenService, TokenService>();
