@@ -1,0 +1,330 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options directory
+.vs/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Local History for Visual Studio
+.localhistory/
+
+# Visual Studio History (VSHistory) files
+.vshistory/
+
+# BeatPulse healthcheck temp database
+healthchecksdb
+
+# Backup & swap files
+*.bak
+*.swp
+*.swo
+*~
+*.tmp
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+.nuget/
+
+# NuGet Symbol Packages
+*.snupkg
+
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+
+# Rider
+.idea/
+*.sln.iml
+*.swp
+*.swo
+
+# ResharperPlus
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# VS Code extensions
+.vscode/extensions/
+
+# Entity Framework
+migrations/
+*.db
+*.db-shm
+*.db-wal
+
+# Database files
+*.mdf
+*.ldf
+*.ndf
+*.sqlite
+*.sqlite3
+
+# Application Insights Telemetry
+ApplicationInsights.config
+.ApplicationInsightsConfig
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# User secrets
+secrets.json
+appsettings.local.json
+appsettings.Development.local.json
+
+# TypeScript v1 declaration files
+typings/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS specific files
+.DS_Store
+Thumbs.db
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Node modules (if using any frontend build tools)
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Blazor WebAssembly specific
+**/wwwroot/service-worker.js
+**/wwwroot/service-worker.asset.js
+
+# Build output directories for Blazor
+obj/
+bin/
+
+# Coverage reports
+coverage/
+*.opencover.xml
+*.coveragexml
+
+# Test Results
+TestResults/
+*.trx
+
+# Profiler files
+*.prof
+*.vsp
+*.vspx
+*.sap
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Cake - Uncomment if you are using it
+# tools/**
+# !tools/packages.config
+
+# Tabs Studio
+*.tss
+
+# Telerik's JustMock mock assistant
+*.jmconfig
+
+# MightyMoose
+*.mm.*
+
+# Installshield output folder
+[Ee]xpress/
+
+# DocProject is a documentation generator add-in
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/Html2
+DocProject/Help/html
+
+# Click-Once directory
+publish/
+
+# Publish Web Output
+*.[Pp]ublish.xml
+*.azurePubxml
+*.pubxml
+*.publishproj
+
+# Microsoft Azure Web App publish settings. Comment the next line if you want to
+# checkin your publish settings, but in that case, don't check in user secrets
+PublishSettings/
+
+# NuGet Symbol Packages
+*.snupkg
+
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+
+# Publish Web Output
+*_Publish.properties
+*.Publish.xml
+
+# MyGet build specific properties
+*.myget.props
+*.myget.targets
+
+# Node.js Tools for Visual Studio
+.ntvs_analysis.dat
+node_modules/
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Logical backup files created by Transact-SQL Language Service
+*.fnbak
+
+# Temporary test certificate
+*.pfx
+*.pem
+
+# SSDT specific files
+*.dacpac
+*.dacproject
+
+# Fody - auto-generated
+FodyWeavers.xsd
+
+# Unit test / performance analysis files
+*.coverage
+*.coveragexml
+OpenCover/
+
+# ASP.NET Core app settings overrides
+appsettings.*.json
+!appsettings.Development.json
+!appsettings.json
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Kubernetes
+kustomization.yml
+
+# Azure App Service deployment files
+PublishProfiles/
+*.PublishSettings
+
+# Local settings files
+launchSettings.json
+Properties/launchSettings.json
+
+# Configuration files with sensitive data
+*.config.local
+web.config.local
+
+# Log files
+logs/
+*.log
+*.log.*
+
+# Application logs
+app.log
+application*.log
+
+# Rider specific files
+.idea/
+*.sln.iml
+
+# IntelliJ
+out/
+.idea_modules/
+
+# Gradle
+.gradle/
+build/
+
+# npm
+package-lock.json
+yarn.lock
+
+# Misc
+.cache/
+.temp/
+.venv/
+venv/
+env/
+
+# Azure Storage Emulator
+AzureStorageEmulator/
+
+# OpenTelemetry/Prometheus files
+*.prom
+
+# Development environment
+.devcontainer/
+!.devcontainer/devcontainer.json
+!.devcontainer/Dockerfile
+
+# Database Migrations (development)
+Migrations/
+
+# Temporary build output
+_build/
+_artifacts/
+artifacts/
+
+# CI/CD
+.github/workflows/secrets.yml
+.github/secrets/
+
+# Testing
+.coverage
+.coveragerc
+htmlcov/
