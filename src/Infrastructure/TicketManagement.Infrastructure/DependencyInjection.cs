@@ -82,6 +82,9 @@ public static class DependencyInjection
         services.AddScoped<ITagRepository, TagRepository>();
         services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
         
+        // Unit of Work
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
         // ✅ ISP: Register segregated query interfaces
         // Single implementation, multiple interfaces (Interface Segregation Principle)
         services.AddScoped<TicketQueryService>();
@@ -209,6 +212,9 @@ public static class DependencyInjection
         // Cache validation
         services.AddScoped<ICacheInvalidationService, CacheInvalidationService>();
         services.AddScoped<ICacheWarmupService, CacheWarmupService>();
+        
+        // Distributed cache service
+        services.AddScoped<ICacheService, DistributedCacheService>();
         
         // Ticket cache service
         services.AddScoped<Application.Common.Interfaces.ITicketCacheService, TicketCacheService>();
