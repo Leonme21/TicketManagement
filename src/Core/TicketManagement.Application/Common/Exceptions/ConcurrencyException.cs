@@ -1,15 +1,12 @@
+using System;
+
 namespace TicketManagement.Application.Common.Exceptions;
 
 /// <summary>
-/// ✅ NEW: Exception for optimistic concurrency conflicts
+/// Exception thrown when optimistic locking detects a concurrency conflict
 /// </summary>
-public class ConcurrencyException : Exception
+public sealed class ConcurrencyException : Exception
 {
-    public ConcurrencyException()
-        : base("The record you attempted to edit was modified by another user after you got the original value. The edit operation was canceled.")
-    {
-    }
-
     public ConcurrencyException(string message)
         : base(message)
     {
@@ -18,5 +15,28 @@ public class ConcurrencyException : Exception
     public ConcurrencyException(string message, Exception innerException)
         : base(message, innerException)
     {
+    }
+
+    public ConcurrencyException(
+        string entityName,
+        object entityId,
+        byte[]? expectedVersion = null,
+        byte[]? actualVersion = null)
+        : base(BuildMessage(entityName, entityId))
+    {
+        EntityName = entityName;
+        EntityId = entityId;
+        ExpectedVersion = expectedVersion;
+        ActualVersion = actualVersion;
+    }
+
+    public string? EntityName { get; }
+    public object? EntityId { get; }
+    public byte[]? ExpectedVersion { get; }
+    public byte[]? ActualVersion { get; }
+
+    private static string BuildMessage(string entityName, object entityId)
+    {
+        return $"{entityName} with ID '{entityId}' was modified by another user. Please refresh and try again.";
     }
 }
