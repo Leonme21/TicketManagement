@@ -1,4 +1,4 @@
-Ôªøusing System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +10,9 @@ namespace TicketManagement.Application.Contracts.Authentication;
 public class LoginRequest
 {
     [Required(ErrorMessage = "El correo es requerido")]
-    [EmailAddress(ErrorMessage = "Formato de correo inv√°lido")]
+    [EmailAddress(ErrorMessage = "Formato de correo inv·lido")]
     public string Email { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "La contrase√±a es requerida")]
+    [Required(ErrorMessage = "La contraseÒa es requerida")]
     public string Password { get; set; } = string.Empty;
 }

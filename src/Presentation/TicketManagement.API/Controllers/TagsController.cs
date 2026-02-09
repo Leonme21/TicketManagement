@@ -1,38 +1,51 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TicketManagement.Application.Tags.Commands;
 using TicketManagement.Application.Tags.Commands.AddTagToTicket;
-using TicketManagement.Application.Tags.Commands.CreateTag;
-// using TicketManagement.Application.Tags.Queries.GetAllTags; // (Futuro: Query para listar)
+using TicketManagement.Domain.Common;
 
 namespace TicketManagement.WebApi.Controllers;
 
-[Authorize] // Solo usuarios registrados
+[Authorize]
 public class TagsController : ApiControllerBase
 {
-    /// <summary>
-    /// Crea una nueva etiqueta
-    /// </summary>
+    private readonly ILogger<TagsController> _logger;
+
+    public TagsController(ILogger<TagsController> logger)
+    {
+        _logger = logger;
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateTagCommand command)
     {
         var result = await Mediator.Send(command);
-        // En una API estricta REST, deberíamos devolver la URL del recurso creado.
-        // Por simplificación devolvemos el objeto.
-        return Ok(result);
+        if (result.IsSuccess)
+        {
+            return CreatedAtAction(nameof(Create), new { id = result.Value }, new { id = result.Value });
+        }
+        return Problem(detail: result.Error.Description, statusCode: StatusCodes.Status400BadRequest);
     }
 
-    /// <summary>
-    /// Asigna una etiqueta existente a un ticket
-    /// </summary>
-    [HttpPost("{tagId}/assign-to-ticket/{ticketId}")] // Ejemplo de ruta: api/tags/5/assign-to-ticket/10
+    [HttpPost("{tagId}/assign-to-ticket/{ticketId}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> AssignToTicket(int tagId, int ticketId)
     {
-        // Creamos el comando manualmente con los datos de la URL
         var command = new AddTagToTicketCommand(TicketId: ticketId, TagId: tagId);
+        var result = await Mediator.Send(command);
 
-        await Mediator.Send(command);
+        if (result.IsSuccess) return NoContent();
 
-        return NoContent();
+        return result.Error switch
+        {
+            var error when error.Description.Contains("not found") => NotFound(new { error = error.Description }),
+            var error when error.Description.Contains("exists") || error.Description.Contains("duplicate") => 
+                Conflict(new { error = error.Description }),
+            _ => BadRequest(new { error = result.Error.Description })
+        };
     }
 }

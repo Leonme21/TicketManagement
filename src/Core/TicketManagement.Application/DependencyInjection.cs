@@ -1,44 +1,42 @@
-﻿﻿using System.Reflection;
-using AutoMapper;
+using System.Reflection;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using TicketManagement.Application.Common.Behaviors;
-using TicketManagement.Application.Common.Mappings;
+using Microsoft.Extensions.Configuration;
 
 namespace TicketManagement.Application;
 
 /// <summary>
-/// Registro de servicios de Application Layer
-/// Se llama desde WebApi/Program.cs
+/// 🔥 BIG TECH LEVEL: Complete MediatR pipeline with all essential behaviors
+/// Pipeline order: Logging -> Idempotency -> RateLimiting -> Validation -> Transaction
 /// </summary>
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
         var assembly = Assembly.GetExecutingAssembly();
 
-        // AutoMapper: Usar registro estándar para permitir DI en perfiles/resolvers
-        // AutoMapper: Manual registration to avoid build ambiguity with extension methods
-        var mapperConfig = new MapperConfiguration(cfg => 
-        {
-            cfg.AddMaps(assembly);
-        });
-        var mapper = mapperConfig.CreateMapper();
-        services.AddSingleton(mapper);
-
-        // FluentValidation (escanea todos los AbstractValidator<>)
+        // FluentValidation
         services.AddValidatorsFromAssembly(assembly);
 
-        // MediatR (escanea todos los IRequestHandler<,>)
+        // ✅ COMPLETE: MediatR with all essential behaviors
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssembly(assembly);
-
-            // Pipeline Behaviors (se ejecutan en orden)
+            
+            // ✅ Pipeline Order matters:
+            // 1. Logging - Always first to capture all requests
+            // 2. Idempotency - Check for duplicate requests before processing (only for IIdempotentCommand)
+            // 3. RateLimiting - Check rate limits (only for IRateLimitedRequest)
+            // 4. Validation - Validate request data
+            // 5. Transaction - Wrap in transaction
+            
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-            cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
+            cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(IdempotencyBehavior<,>));
+            cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(RateLimitingBehavior<,>));
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>));
         });
 
         return services;

@@ -1,64 +1,75 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using TicketManagement.Application.Common.Exceptions;
 using TicketManagement.Application.Common.Interfaces;
 using TicketManagement.Domain.Entities;
 using TicketManagement.Domain.Interfaces;
+using TicketManagement.Domain.Common;
 
 namespace TicketManagement.Application.Tickets.Commands.CreateTicket;
 
 /// <summary>
-/// Handler para crear ticket
+/// 🔥 STAFF LEVEL: Pure application logic without infrastructure dependencies
+/// No references to EF Core - abstraction preserved
+/// Concurrency handling moved to Infrastructure layer
 /// </summary>
-public class CreateTicketCommandHandler : IRequestHandler<CreateTicketCommand, int>
+public sealed class CreateTicketCommandHandler : IRequestHandler<CreateTicketCommand, Result<CreateTicketResponse>>
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly ITicketRepository _ticketRepository;
+    private readonly IApplicationDbContext _context;
     private readonly ICurrentUserService _currentUserService;
     private readonly ILogger<CreateTicketCommandHandler> _logger;
 
     public CreateTicketCommandHandler(
-        IUnitOfWork unitOfWork,
+        ITicketRepository ticketRepository,
+        IApplicationDbContext context,
         ICurrentUserService currentUserService,
         ILogger<CreateTicketCommandHandler> logger)
     {
-        _unitOfWork = unitOfWork;
+        _ticketRepository = ticketRepository;
+        _context = context;
         _currentUserService = currentUserService;
         _logger = logger;
     }
 
-    public async Task<int> Handle(CreateTicketCommand request, CancellationToken cancellationToken)
+    public async Task<Result<CreateTicketResponse>> Handle(CreateTicketCommand request, CancellationToken cancellationToken)
     {
-        // Obtener ID del usuario autenticado
-        var userId = _currentUserService.UserIdInt;
-        if (!userId.HasValue)
-        {
-            throw new ForbiddenAccessException("User is not authenticated");
-        }
+        var userId = _currentUserService.GetUserId();
 
-        _logger.LogInformation("Creating new ticket. UserId: {UserId}, CategoryId: {CategoryId}, Priority: {Priority}", 
-            userId.Value, request.CategoryId, request.Priority);
-
-        // Validar Regla de Negocio: Existencia de Categoría
-        var categoryExists = await _unitOfWork.Categories.ExistsAsync(request.CategoryId, cancellationToken);
-        if (!categoryExists)
-        {
-            throw new NotFoundException(nameof(Category), request.CategoryId);
-        }
-
-        // Crear entidad de dominio
-        var ticket = new Ticket(
+        // 1. Create Aggregate (Pure Domain Logic)
+        var ticketResult = Ticket.Create(
             request.Title,
             request.Description,
             request.Priority,
             request.CategoryId,
-            userId.Value);
+            userId);
 
-        // Guardar en BD
-        _unitOfWork.Tickets.Add(ticket);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        if (ticketResult.IsFailure)
+            return Result.Failure<CreateTicketResponse>(ticketResult.Error);
 
-        _logger.LogInformation("Ticket {TicketId} created successfully for user {UserId}", ticket.Id, userId.Value);
+        var ticket = ticketResult.Value!;
+        
+        // 2. Add to Repository
+        await _ticketRepository.AddAsync(ticket, cancellationToken);
+        
+        // 3. Commit - Concurrency exceptions are caught by TransactionBehavior
+        // ✅ FIXED: No try-catch for DbUpdateConcurrencyException (abstraction leak removed)
+        await _context.SaveChangesAsync(cancellationToken);
 
-        return ticket.Id;
+        _logger.LogInformation(
+            "Ticket {TicketId} created successfully by User {UserId}",
+            ticket.Id,
+            userId);
+
+        // 4. Return response
+        return Result.Success(new CreateTicketResponse
+        {
+            TicketId = ticket.Id,
+            Message = "Ticket created successfully",
+            Priority = ticket.Priority.ToString(),
+            Status = ticket.Status.ToString(),
+            CreatedAt = ticket.CreatedAt,
+            EstimatedResolutionTime = null 
+        });
     }
 }

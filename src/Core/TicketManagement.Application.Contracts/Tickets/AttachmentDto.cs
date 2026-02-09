@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TicketManagement.Application.Contracts.Tickets;
 
-/// <summary>
-/// DTO para archivo adjunto
-/// </summary>
-public class AttachmentDto
+public record AttachmentDto
 {
-    public int Id { get; set; }
-    public string FileName { get; set; } = string.Empty;
-    public string ContentType { get; set; } = string.Empty;
-    public long FileSize { get; set; }
-    public string FileSizeFormatted { get; set; } = string.Empty;
-    public string DownloadUrl { get; set; } = string.Empty;
-    public DateTime CreatedAt { get; set; }
+    public required int Id { get; init; }
+    public required string FileName { get; init; }
+    public required string ContentType { get; init; }
+    public required long Size { get; init; }
+    public required string DownloadUrl { get; init; }
+    public required DateTimeOffset UploadedAt { get; init; }
+    public required string UploadedBy { get; init; }
 }

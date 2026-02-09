@@ -1,34 +1,28 @@
-﻿﻿namespace TicketManagement.Domain.Interfaces;
+namespace TicketManagement.Domain.Interfaces;
 
 /// <summary>
-/// Patrón Unit of Work:   agrupa múltiples operaciones en una transacción
-/// Garantiza que todos los cambios se guardan juntos o ninguno se guarda
+/// Unit of Work Pattern - Coordina repositorios y transacciones
+/// ? Inversi�n de Dependencias: Definido en Domain, implementado en Infrastructure
+/// ? REFACTORIZADO: Agregado ExecuteTransactionAsync para operaciones complejas
 /// </summary>
-public interface IUnitOfWork : IDisposable, IAsyncDisposable
+public interface IUnitOfWork : IDisposable
 {
+    // Repositorios
     ITicketRepository Tickets { get; }
     IUserRepository Users { get; }
     ICategoryRepository Categories { get; }
     ITagRepository Tags { get; }
+    IRefreshTokenRepository RefreshTokens { get; } // ✅ NUEVO
 
+    // Operaciones transaccionales
+    Task<int> SaveChangesAsync(CancellationToken ct = default);
+    Task BeginTransactionAsync(CancellationToken ct = default);
+    Task CommitTransactionAsync(CancellationToken ct = default);
+    Task RollbackTransactionAsync(CancellationToken ct = default);
+    
     /// <summary>
-    /// Guarda todos los cambios pendientes en la base de datos
-    /// Retorna el número de entidades afectadas
+    /// Ejecuta una acci�n dentro de una transacci�n expl�cita
+    /// Hace commit si tiene �xito, rollback si falla
     /// </summary>
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Inicia una transacción explícita (para operaciones complejas)
-    /// </summary>
-    Task BeginTransactionAsync(CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Confirma la transacción actual
-    /// </summary>
-    Task CommitTransactionAsync(CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Revierte la transacción actual
-    /// </summary>
-    Task RollbackTransactionAsync(CancellationToken cancellationToken = default);
+    Task ExecuteTransactionAsync(Func<Task> action, CancellationToken ct = default);
 }

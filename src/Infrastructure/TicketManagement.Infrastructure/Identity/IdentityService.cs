@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TicketManagement.Application.Common.Interfaces;
-using TicketManagement.Application.Common.Models;
+using TicketManagement.Domain.Common;
 using TicketManagement.Domain.Entities;
 using TicketManagement.Domain.Enums;
 using TicketManagement.Infrastructure.Persistence;
@@ -13,7 +13,7 @@ using TicketManagement.Infrastructure.Persistence;
 namespace TicketManagement.Infrastructure.Identity;
 
 /// <summary>
-/// Servicio de autenticación e identidad
+/// Servicio de autenticacin e identidad
 /// Implementa IIdentityService (definido en Application)
 /// </summary>
 public class IdentityService : IIdentityService
@@ -49,13 +49,13 @@ public class IdentityService : IIdentityService
             return Result<AuthenticationResult>.Failure("Invalid email or password.");
         }
 
-        // Verificar contraseña
+        // Verificar contrasea
         if (!_passwordHasher.VerifyPassword(password, user.PasswordHash))
         {
             return Result<AuthenticationResult>.Failure("Invalid email or password.");
         }
 
-        // Verificar que el usuario esté activo
+        // Verificar que el usuario est activo
         if (!user.IsActive)
         {
             return Result<AuthenticationResult>.Failure("User account is deactivated.");
@@ -103,12 +103,18 @@ public class IdentityService : IIdentityService
             return Result<AuthenticationResult>.Failure("Invalid role.");
         }
 
-        // Hashear contraseña
+        // Hashear contrasea
         var passwordHash = _passwordHasher.HashPassword(password);
 
-        // Crear usuario
-        var user = new User(firstName, lastName, email, passwordHash, userRole);
+        // Crear usuario usando Factory Method (ahora retorna Result<User>)
+        var userResult = User.Create(firstName, lastName, email, passwordHash, userRole);
+        
+        if (userResult.IsFailure)
+        {
+            return Result<AuthenticationResult>.Failure(userResult.Error);
+        }
 
+        var user = userResult.Value!;
         _context.Users.Add(user);
         await _context.SaveChangesAsync(cancellationToken);
 
@@ -131,7 +137,7 @@ public class IdentityService : IIdentityService
     }
 
     /// <summary>
-    /// Verifica si un email ya está registrado
+    /// Verifica si un email ya est registrado
     /// </summary>
     public async Task<bool> EmailExistsAsync(string email, CancellationToken cancellationToken = default)
     {

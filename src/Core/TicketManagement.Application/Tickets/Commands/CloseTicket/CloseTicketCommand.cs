@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TicketManagement.Application.Common.Security;
+using TicketManagement.Domain.Common;
+using TicketManagement.Domain.Enums;
 using MediatR;
 
 namespace TicketManagement.Application.Tickets.Commands.CloseTicket;
 
-/// <summary>
-/// Command para cerrar ticket
-/// </summary>
-public record CloseTicketCommand : IRequest<Unit>
+[Authorize(Policy = "CanCloseTickets")]
+public record CloseTicketCommand : IRequest<Result>
 {
     public int TicketId { get; init; }
+    public string? Reason { get; init; }
+    public string? Resolution { get; init; }
 }

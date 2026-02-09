@@ -1,4 +1,4 @@
-Ôªøusing System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,18 +9,18 @@ namespace TicketManagement.Application.Contracts.Tickets;
 
 public class CreateTicketRequest
 {
-    [Required(ErrorMessage = "El t√≠tulo es requerido")]
-    [StringLength(200, ErrorMessage = "El t√≠tulo no puede exceder 200 caracteres")]
+    [Required(ErrorMessage = "El tÌtulo es requerido")]
+    [StringLength(200, ErrorMessage = "El tÌtulo no puede exceder 200 caracteres")]
     public string Title { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "La descripci√≥n es requerida")]
-    [StringLength(2000, ErrorMessage = "La descripci√≥n no puede exceder 2000 caracteres")]
+    [Required(ErrorMessage = "La descripciÛn es requerida")]
+    [StringLength(2000, ErrorMessage = "La descripciÛn no puede exceder 2000 caracteres")]
     public string Description { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "La prioridad es requerida")]
     public string Priority { get; set; } = "Medium";
 
-    [Required(ErrorMessage = "La categor√≠a es requerida")]
-    [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar una categor√≠a v√°lida")]
+    [Required(ErrorMessage = "La categorÌa es requerida")]
+    [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar una categorÌa v·lida")]
     public int CategoryId { get; set; }
 }

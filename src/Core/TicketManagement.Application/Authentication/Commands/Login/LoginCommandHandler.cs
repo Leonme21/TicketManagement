@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using TicketManagement.Application.Common.Interfaces;
-using TicketManagement.Application.Common.Models;
+using TicketManagement.Domain.Common;
 
 namespace TicketManagement.Application.Authentication.Commands.Login;
 
 /// <summary>
 /// Handler que procesa el login
-/// Delega autenticación a IIdentityService (implementado en Infrastructure)
+/// Delega autenticaci�n a IIdentityService (implementado en Infrastructure)
 /// </summary>
 public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<AuthenticationResult>>
 {

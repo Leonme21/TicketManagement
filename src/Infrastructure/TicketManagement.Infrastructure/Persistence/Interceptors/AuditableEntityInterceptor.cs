@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
@@ -12,7 +12,7 @@ using TicketManagement.Domain.Common;
 namespace TicketManagement.Infrastructure.Persistence.Interceptors;
 
 /// <summary>
-/// Interceptor que automáticamente llena CreatedAt/UpdatedAt/CreatedBy/UpdatedBy
+/// Interceptor que autom�ticamente llena CreatedAt/UpdatedAt/CreatedBy/UpdatedBy
 /// Se ejecuta ANTES de SaveChanges
 /// </summary>
 public class AuditableEntityInterceptor : SaveChangesInterceptor

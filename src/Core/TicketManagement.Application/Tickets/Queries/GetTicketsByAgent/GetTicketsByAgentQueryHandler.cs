@@ -1,50 +1,68 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using MediatR;
-using TicketManagement.Application.Common.Exceptions;
-using TicketManagement.Application.Common.Interfaces;
 using TicketManagement.Application.Contracts.Tickets;
-using TicketManagement.Domain.Interfaces;
+using TicketManagement.Application.Common.Interfaces;
+using TicketManagement.Domain.Common;
+using TicketManagement.Domain.Enums;
 
 namespace TicketManagement.Application.Tickets.Queries.GetTicketsByAgent;
 
-    public class GetTicketsByAgentQueryHandler : IRequestHandler<GetTicketsByAgentQuery, TicketManagement.Application.Contracts.Common.PaginatedList<TicketDto>>
+/// <summary>
+/// ?? BIG TECH LEVEL: Handler using ITicketQueryService for read operations (CQRS)
+/// </summary>
+public sealed class GetTicketsByAgentQueryHandler : IRequestHandler<GetTicketsByAgentQuery, Result<PaginatedResult<TicketSummaryDto>>>
+{
+    private readonly ITicketQueryService _queryService;
+    private readonly ICurrentUserService _currentUserService;
+
+    public GetTicketsByAgentQueryHandler(
+        ITicketQueryService queryService,
+        ICurrentUserService currentUserService)
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        private readonly ICurrentUserService _currentUserService;
-
-        public GetTicketsByAgentQueryHandler(
-            IUnitOfWork unitOfWork,
-            IMapper mapper,
-            ICurrentUserService currentUserService)
-        {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-            _currentUserService = currentUserService;
-        }
-
-        public async Task<TicketManagement.Application.Contracts.Common.PaginatedList<TicketDto>> Handle(GetTicketsByAgentQuery request, CancellationToken cancellationToken)
-        {
-        var userId = _currentUserService.UserIdInt;
-        if (!userId.HasValue)
-        {
-            throw new ForbiddenAccessException("User is not authenticated");
-        }
-
-        var filter = new TicketManagement.Domain.Common.TicketFilter { AssignedToId = userId.Value };
-            
-            // Use translation to DTO directly in the database (Projection)
-            var result = await _unitOfWork.Tickets.GetProjectedPagedAsync<TicketDto>(filter, request.PageNumber, request.PageSize, cancellationToken);
-            
-            return new TicketManagement.Application.Contracts.Common.PaginatedList<TicketDto>(
-                result.Items,
-                result.TotalCount,
-                result.PageNumber,
-                result.PageSize);
-        }
+        _queryService = queryService;
+        _currentUserService = currentUserService;
     }
+
+    public async Task<Result<PaginatedResult<TicketSummaryDto>>> Handle(GetTicketsByAgentQuery request, CancellationToken cancellationToken)
+    {
+        var userId = _currentUserService.GetUserId();
+        if (userId == 0)
+        {
+            return Result.Unauthorized<PaginatedResult<TicketSummaryDto>>("User is not authenticated");
+        }
+
+        var filter = new TicketQueryFilter
+        {
+            AssignedToId = userId,
+            Status = request.Status,
+            Priority = request.Priority,
+            SortBy = request.SortBy,
+            SortDescending = request.SortDescending
+        };
+
+        var result = await _queryService.GetPaginatedAsync(
+            filter,
+            request.PageNumber,
+            request.PageSize,
+            cancellationToken);
+
+        return Result.Success(result);
+    }
+}
+
+/// <summary>
+/// Query for getting agent's assigned tickets with pagination
+/// </summary>
+public record GetTicketsByAgentQuery : IRequest<Result<PaginatedResult<TicketSummaryDto>>>
+{
+    public int PageNumber { get; init; } = 1;
+    public int PageSize { get; init; } = 10;
+    public TicketStatus? Status { get; init; }
+    public TicketPriority? Priority { get; init; }
+    public string? SortBy { get; init; }
+    public bool SortDescending { get; init; } = true;
+}

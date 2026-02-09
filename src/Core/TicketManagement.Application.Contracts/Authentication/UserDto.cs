@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TicketManagement.Application.Contracts.Authentication;
 
 /// <summary>
-/// DTO para información de usuario
+/// DTO para informaci�n de usuario
 /// </summary>
 public class UserDto
 {

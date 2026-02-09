@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +13,7 @@ namespace TicketManagement.Application.Common.Mappings;
 
 /// <summary>
 /// Configuración de mapeos de AutoMapper
-/// Entity → DTO (nunca DTO → Entity, eso es responsabilidad de Handlers)
+/// Entity -> DTO (nunca DTO -> Entity, eso es responsabilidad de Handlers)
 /// </summary>
 public class MappingProfile : Profile
 {
@@ -29,7 +29,7 @@ public class MappingProfile : Profile
 
         // ==================== TICKET MAPPINGS ====================
 
-        // Ticket → TicketDto (para listas)
+        // Ticket -> TicketDto (para listas)
         CreateMap<Ticket, TicketDto>()
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
             .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority.ToString()))
@@ -40,7 +40,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.CommentsCount, opt => opt.MapFrom(src => src.Comments.Count))
             .ForMember(dest => dest.AttachmentsCount, opt => opt.MapFrom(src => src.Attachments.Count));
 
-        // Ticket → TicketDetailsDto (para detalle completo)
+        // Ticket -> TicketDetailsDto (para detalle completo)
         CreateMap<Ticket, TicketDetailsDto>()
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
             .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority.ToString()))
@@ -59,7 +59,10 @@ public class MappingProfile : Profile
 
         // ==================== ATTACHMENT MAPPINGS ====================
         CreateMap<Attachment, AttachmentDto>()
-            .ForMember(dest => dest.FileSizeFormatted, opt => opt.MapFrom(src => src.GetFileSizeFormatted()))
+            .ForMember(dest => dest.FileName, opt => opt.MapFrom(src => src.OriginalFileName))
+            .ForMember(dest => dest.Size, opt => opt.MapFrom(src => src.FileSizeBytes))
+            .ForMember(dest => dest.UploadedBy, opt => opt.MapFrom(src => "Unknown")) // Missing in logic
+            .ForMember(dest => dest.UploadedAt, opt => opt.MapFrom(src => DateTimeOffset.UtcNow))
             .ForMember(dest => dest.DownloadUrl, opt => opt.MapFrom(src => $"/api/attachments/{src.Id}/download"));
     }
 }

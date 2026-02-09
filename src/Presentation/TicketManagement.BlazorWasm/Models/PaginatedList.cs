@@ -1,4 +1,4 @@
-﻿namespace TicketManagement.BlazorWasm.Models;
+namespace TicketManagement.BlazorWasm.Models;
 
 public class PaginatedList<T>
 {

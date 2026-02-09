@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using TicketManagement.Application.Common.Interfaces;
-using TicketManagement.Application.Common.Models;
+using TicketManagement.Domain.Common;
 
 namespace TicketManagement.Application.Authentication.Commands.Register;
 
 /// <summary>
 /// Handler que procesa el registro
-/// Delega creación de usuario a IIdentityService
+/// Delega creaci�n de usuario a IIdentityService
 /// </summary>
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<AuthenticationResult>>
 {

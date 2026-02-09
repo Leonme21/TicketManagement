@@ -1,17 +1,17 @@
-ï»¿namespace TicketManagement.Domain.Enums;
+namespace TicketManagement.Domain.Enums;
 
 /// <summary>
-/// Nivel de prioridad para resoluciÃ³n de tickets
+/// Nivel de prioridad para resolución de tickets
 /// </summary>
 public enum TicketPriority
 {
     /// <summary>
-    /// Baja prioridad - SLA:  7 dÃ­as
+    /// Baja prioridad - SLA:  7 días
     /// </summary>
     Low = 1,
 
     /// <summary>
-    /// Prioridad media - SLA:  3 dÃ­as
+    /// Prioridad media - SLA:  3 días
     /// </summary>
     Medium = 2,
 
@@ -21,7 +21,7 @@ public enum TicketPriority
     High = 3,
 
     /// <summary>
-    /// CrÃ­tica - SLA: 4 horas
+    /// Crítica - SLA: 4 horas
     /// </summary>
     Critical = 4
 }

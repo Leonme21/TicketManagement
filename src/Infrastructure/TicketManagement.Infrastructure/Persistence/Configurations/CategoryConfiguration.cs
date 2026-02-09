@@ -1,47 +1,43 @@
-ï»¿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TicketManagement.Domain.Entities;
 
 namespace TicketManagement.Infrastructure.Persistence.Configurations;
 
-public class CategoryConfiguration : IEntityTypeConfiguration<Category>
+/// <summary>
+/// Configuración de EF Core para la entidad Category
+/// ? Refactorizado: Hereda de BaseEntityConfiguration para eliminar duplicación
+/// </summary>
+public class CategoryConfiguration : BaseEntityConfiguration<Category>
 {
-    public void Configure(EntityTypeBuilder<Category> builder)
+    public override void Configure(EntityTypeBuilder<Category> builder)
     {
+        base.Configure(builder); // ? Aplica configuración base (auditoría, concurrencia, soft delete)
+
         builder.ToTable("Categories");
 
-        builder.HasKey(c => c.Id);
-
+        // ==================== PROPERTIES ====================
+        
         builder.Property(c => c.Name)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(Category.MaxNameLength);
 
         builder.HasIndex(c => c.Name)
             .IsUnique();
 
         builder.Property(c => c.Description)
             .IsRequired()
-            .HasMaxLength(500);
+            .HasMaxLength(Category.MaxDescriptionLength);
 
         builder.Property(c => c.IsActive)
             .IsRequired()
             .HasDefaultValue(true);
 
-        // AuditorÃ­a
-        builder.Property(c => c.CreatedAt).IsRequired();
-        builder.Property(c => c.UpdatedAt);
-        builder.Property(c => c.CreatedBy).HasMaxLength(100);
-        builder.Property(c => c.UpdatedBy).HasMaxLength(100);
-
-        // Relaciones
+        // ==================== RELATIONSHIPS ====================
+        
         builder.HasMany(c => c.Tickets)
             .WithOne(t => t.Category)
             .HasForeignKey(t => t.CategoryId)
-            .OnDelete(DeleteBehavior.Restrict); // No eliminar categorÃ­a si tiene tickets
+            .OnDelete(DeleteBehavior.Restrict); // ? No eliminar categoría si tiene tickets asociados
     }
 }

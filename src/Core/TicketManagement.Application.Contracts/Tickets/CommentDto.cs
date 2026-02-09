@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,4 +17,5 @@ public class CommentDto
     public string AuthorName { get; set; } = string.Empty;
     public string AuthorEmail { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
+    public bool IsInternal { get; set; }
 }

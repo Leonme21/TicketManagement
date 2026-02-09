@@ -1,33 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MediatR;
-using TicketManagement.Application.Contracts.Tags;
+using Microsoft.Extensions.Logging;
+using TicketManagement.Domain.Common;
 using TicketManagement.Domain.Entities;
 using TicketManagement.Domain.Interfaces;
-namespace TicketManagement.Application.Tags.Commands.CreateTag;
-public class CreateTagCommandHandler : IRequestHandler<CreateTagCommand, TagDto>
+
+namespace TicketManagement.Application.Tags.Commands;
+
+/// <summary>
+/// Handler para crear nuevo tag
+/// ? REFACTORIZADO: Usa IUnitOfWork como �nico punto de acceso
+/// </summary>
+public class CreateTagCommandHandler : IRequestHandler<CreateTagCommand, Result<int>>
 {
     private readonly IUnitOfWork _unitOfWork;
-    public CreateTagCommandHandler(IUnitOfWork unitOfWork)
+    private readonly ILogger<CreateTagCommandHandler> _logger;
+
+    public CreateTagCommandHandler(
+        IUnitOfWork unitOfWork,
+        ILogger<CreateTagCommandHandler> logger)
     {
         _unitOfWork = unitOfWork;
+        _logger = logger;
     }
-    public async Task<TagDto> Handle(CreateTagCommand request, CancellationToken cancellationToken)
+
+    public async Task<Result<int>> Handle(CreateTagCommand request, CancellationToken cancellationToken)
     {
-        // 1. Crear entidad de Dominio
-        var tag = new Tag(request.Name, request.Color);
-        // 2. Guardar en BD (Ahora sí funciona .Tags)
-        _unitOfWork.Tags.Add(tag);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
-        // 3. Devolver DTO
-        return new TagDto
+        // Validar que no exista un tag con el mismo nombre
+        var existingTag = await _unitOfWork.Tags.GetByNameAsync(request.Name, cancellationToken);
+        if (existingTag != null)
         {
-            Id = tag.Id,
-            Name = tag.Name,
-            Color = tag.Color
-        };
+            return Result<int>.Invalid($"Tag with name '{request.Name}' already exists");
+        }
+
+        // ? Factory Method con validaciones (Aprovechamos Result Pattern)
+        var tagResult = Tag.Create(request.Name, request.Color);
+
+        if (tagResult.IsFailure)
+        {
+            _logger.LogWarning("Domain validation failed for tag creation: {Error}", tagResult.Error);
+            return Result<int>.Invalid(tagResult.Error);
+        }
+
+        var tag = tagResult.Value!;
+        _unitOfWork.Tags.Add(tag);
+        
+        // ? UnitOfWork maneja el SaveChanges
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        _logger.LogInformation("Tag {TagId} created successfully with name {TagName}", tag.Id, tag.Name);
+
+        return Result<int>.Success(tag.Id);
     }
 }

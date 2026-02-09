@@ -1,5 +1,9 @@
-﻿using MediatR;
+using MediatR;
+using TicketManagement.Domain.Common;
 
 namespace TicketManagement.Application.Tags.Commands.AddTagToTicket;
 
-public record AddTagToTicketCommand(int TicketId, int TagId) : IRequest;
+/// <summary>
+/// Command para agregar tag a un ticket
+/// </summary>
+public record AddTagToTicketCommand(int TicketId, int TagId) : IRequest<Result>;

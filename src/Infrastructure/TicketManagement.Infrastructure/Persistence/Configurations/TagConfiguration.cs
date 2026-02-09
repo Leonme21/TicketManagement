@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +16,7 @@ namespace TicketManagement.Infrastructure.Persistence.Configurations
             builder.ToTable("Tags"); // Nombre de la tabla
             builder.Property(t => t.Name)
                 .IsRequired()
-                .HasMaxLength(50); // Validación de BD
+                .HasMaxLength(50); // Validaci�n de BD
             builder.Property(t => t.Color)
                 .HasMaxLength(7); // #RRGGBB
         }

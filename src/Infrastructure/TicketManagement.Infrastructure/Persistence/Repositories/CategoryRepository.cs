@@ -1,46 +1,42 @@
-﻿﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TicketManagement.Domain.Entities;
-using TicketManagement.Application.Common.Interfaces;
 using TicketManagement.Domain.Interfaces;
 
 namespace TicketManagement.Infrastructure.Persistence.Repositories;
 
 /// <summary>
-/// Repositorio específico para Categories
+/// Repository para Categories
 /// </summary>
 public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
 {
-    public CategoryRepository(ApplicationDbContext context, IDateTime dateTime) : base(context, dateTime)
+    public CategoryRepository(ApplicationDbContext context) : base(context)
     {
     }
 
-    public async Task<List<Category>> GetAllAsync(CancellationToken cancellationToken = default)
+    public void Delete(Category category)
     {
-        return await _dbSet.AsNoTracking().ToListAsync(cancellationToken);
+        Remove(category);
     }
 
-    public async Task<List<Category>> GetActiveAsync(CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Obtiene categoría por nombre
+    /// </summary>
+    public async Task<Category?> GetByNameAsync(string name, CancellationToken ct = default)
     {
-        return await _dbSet
+        return await _context.Categories
             .AsNoTracking()
-            .Where(c => c.IsActive)
+            .FirstOrDefaultAsync(c => c.Name == name, ct);
+    }
+
+    /// <summary>
+    /// Obtiene solo categorías activas
+    /// </summary>
+    public async Task<IReadOnlyList<Category>> GetActiveAsync(CancellationToken ct = default)
+    {
+        return await _context.Categories
+            .AsNoTracking()
+            .Where(c => !c.IsDeleted) // Soft delete filter
             .OrderBy(c => c.Name)
-            .ToListAsync(cancellationToken);
-    }
-
-    public async Task<Category?> GetByNameAsync(string name, CancellationToken cancellationToken = default)
-    {
-        return await _dbSet
-            .AsNoTracking()
-            .FirstOrDefaultAsync(c => c.Name == name, cancellationToken);
-    }
-    public async Task<bool> ExistsAsync(int id, CancellationToken cancellationToken = default)
-    {
-        return await _dbSet.AnyAsync(c => c.Id == id, cancellationToken);
+            .ToListAsync(ct);
     }
 }

@@ -1,83 +1,76 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TicketManagement.Application.Common.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using TicketManagement.Domain.Entities;
 using TicketManagement.Domain.Interfaces;
-using TicketManagement.Application.Common.Extensions;
-using AutoMapper.QueryableExtensions;
-using TicketManagement.Domain.Common;
+using TicketManagement.Domain.Specifications;
 
 namespace TicketManagement.Infrastructure.Persistence.Repositories;
 
-public class TicketRepository : BaseRepository<Ticket>, ITicketRepository
+/// <summary>
+/// ✅ REFACTORED: Repository with Specification Pattern support
+/// Flexible queries - "Pay strictly for what you use" principle
+/// Following CQRS pattern: Write operations only, queries are in TicketQueryService
+/// </summary>
+public sealed class TicketRepository : BaseRepository<Ticket>, ITicketRepository
 {
-    private readonly AutoMapper.IMapper _mapper;
-
-    public TicketRepository(
-        ApplicationDbContext context, 
-        IDateTime dateTime, 
-        AutoMapper.IMapper mapper) : base(context, dateTime) 
+    public TicketRepository(ApplicationDbContext context) : base(context)
     {
-        _mapper = mapper;
     }
 
-
-
-    public async Task<Ticket?> GetByIdWithDetailsAsync(int id, CancellationToken cancellationToken = default)
+    /// <summary>
+    /// ✅ NEW: Get ticket using Specification Pattern (flexible includes)
+    /// Replaces hardcoded GetByIdWithDetailsAsync
+    /// </summary>
+    public async Task<Ticket?> GetBySpecificationAsync(ISpecification<Ticket> specification, CancellationToken ct = default)
     {
-        // Optimized: Only load Single-Entity relationships. 
-        // Collections like Comments should be loaded via paginated separate queries.
-        return await _dbSet
-            .Include(t => t.Creator)
-            .Include(t => t.AssignedTo)
-            .Include(t => t.Category)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
+        return await ApplySpecification(specification).FirstOrDefaultAsync(ct);
     }
 
-    public async Task<PaginatedResult<Ticket>> GetPagedAsync(
-        TicketFilter filter, 
-        int pageNumber, 
-        int pageSize, 
-        CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Apply specification to queryable
+    /// </summary>
+    private IQueryable<Ticket> ApplySpecification(ISpecification<Ticket> spec)
     {
-        var query = _dbSet
-            .Include(t => t.Creator)
-            .Include(t => t.Category)
-            .Include(t => t.AssignedTo)
-            .AsQueryable();
+        var query = _context.Tickets.AsQueryable();
 
-        // Use Extension method for cleaner code
-        query = query.ApplyFilter(filter);
+        // Apply criteria (WHERE clause)
+        if (spec.Criteria != null)
+        {
+            query = query.Where(spec.Criteria);
+        }
 
-        var totalCount = await query.CountAsync(cancellationToken);
+        // Apply includes (JOINs)
+        query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
 
-        var items = await query
-            .AsNoTracking()
-            .OrderByDescending(t => t.CreatedAt)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync(cancellationToken);
+        // Apply include strings (for nested properties)
+        query = spec.IncludeStrings.Aggregate(query, (current, include) => current.Include(include));
 
-        return new PaginatedResult<Ticket>(items, totalCount, pageNumber, pageSize);
+        // Apply ordering
+        if (spec.OrderBy != null)
+        {
+            query = query.OrderBy(spec.OrderBy);
+        }
+        else if (spec.OrderByDescending != null)
+        {
+            query = query.OrderByDescending(spec.OrderByDescending);
+        }
+
+        // Apply split query if needed (prevents cartesian explosion)
+        if (spec.IsSplitQuery)
+        {
+            query = query.AsSplitQuery();
+        }
+
+        // Apply tracking
+        if (!spec.IsTrackingEnabled)
+        {
+            query = query.AsNoTracking();
+        }
+
+        return query;
     }
 
-    public async Task<PaginatedResult<T>> GetProjectedPagedAsync<T>(
-        TicketFilter filter,
-        int pageNumber,
-        int pageSize,
-        CancellationToken cancellationToken = default)
+    public async Task AddAsync(Ticket ticket, CancellationToken ct = default)
     {
-        var query = _dbSet.AsNoTracking().ApplyFilter(filter);
-
-        var totalCount = await query.CountAsync(cancellationToken);
-
-        var items = await query
-            .OrderByDescending(t => t.CreatedAt)
-            .ProjectTo<T>(_mapper.ConfigurationProvider)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync(cancellationToken);
-
-        return new PaginatedResult<T>(items, totalCount, pageNumber, pageSize);
+        await _context.Tickets.AddAsync(ticket, ct);
     }
 }

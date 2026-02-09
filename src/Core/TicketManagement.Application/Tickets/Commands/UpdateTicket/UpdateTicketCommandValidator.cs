@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 
 namespace TicketManagement.Application.Tickets.Commands.UpdateTicket;
 
@@ -26,5 +26,8 @@ public class UpdateTicketCommandValidator : AbstractValidator<UpdateTicketComman
 
         RuleFor(x => x.CategoryId)
             .GreaterThan(0).WithMessage("CategoryId is required");
+
+        RuleFor(x => x.RowVersion)
+            .NotEmpty().WithMessage("RowVersion is required for concurrency control");
     }
 }

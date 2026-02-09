@@ -1,39 +1,61 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
-using TicketManagement.Application.Common.Exceptions;
-using TicketManagement.Domain.Entities;
+using TicketManagement.Application.Common.Interfaces;
+using TicketManagement.Domain.Common;
 using TicketManagement.Domain.Interfaces;
 
 namespace TicketManagement.Application.Tickets.Commands.AssignTicket;
 
-public class AssignTicketCommandHandler : IRequestHandler<AssignTicketCommand, Unit>
+/// <summary>
+/// ?? BIG TECH LEVEL: Handler for assigning ticket to an agent
+/// Uses Repository for aggregate operations, DbContext for SaveChanges
+/// </summary>
+public sealed class AssignTicketCommandHandler : IRequestHandler<AssignTicketCommand, Result<Unit>>
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly ITicketRepository _ticketRepository;
+    private readonly IUserRepository _userRepository;
+    private readonly IApplicationDbContext _dbContext;
 
-    public AssignTicketCommandHandler(IUnitOfWork unitOfWork)
+    public AssignTicketCommandHandler(
+        ITicketRepository ticketRepository,
+        IUserRepository userRepository,
+        IApplicationDbContext dbContext)
     {
-        _unitOfWork = unitOfWork;
+        _ticketRepository = ticketRepository;
+        _userRepository = userRepository;
+        _dbContext = dbContext;
     }
 
-    public async Task<Unit> Handle(AssignTicketCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Unit>> Handle(AssignTicketCommand request, CancellationToken cancellationToken)
     {
-        var ticket = await _unitOfWork.Tickets.GetByIdAsync(request.TicketId, cancellationToken);
+        // Get the ticket aggregate
+        var ticket = await _ticketRepository.GetByIdAsync(request.TicketId, cancellationToken);
 
         if (ticket == null)
         {
-            throw new NotFoundException(nameof(Ticket), request.TicketId);
+            return Result.NotFound<Unit>("Ticket", request.TicketId);
         }
 
-        // Aplicar lógica de dominio (validaciones incluidas)
-        ticket.Assign(request.AgentId);
+        // Verify that the agent exists and is active
+        if (!await _userRepository.ExistsAndActiveAsync(request.AgentId, cancellationToken))
+        {
+            return Result.Invalid<Unit>($"Agent {request.AgentId} not found or inactive");
+        }
 
-        _unitOfWork.Tickets.Update(ticket);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        // ?? Domain logic encapsulated in aggregate - emits domain event
+        var assignResult = ticket.Assign(request.AgentId);
+        if (assignResult.IsFailure)
+        {
+            return Result.Failure<Unit>(assignResult.Error);
+        }
 
-        return Unit.Value;
+        // Save changes via DbContext
+        await _dbContext.SaveChangesAsync(cancellationToken);
+
+        return Result.Success(Unit.Value);
     }
 }

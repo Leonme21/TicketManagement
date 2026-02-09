@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,7 @@ namespace TicketManagement.Domain.Enums;
 public enum TicketStatus
 {
     /// <summary>
-    /// Ticket reciÃ©n creado, sin asignar
+    /// Ticket recién creado, sin asignar
     /// </summary>
     Open = 1,
 
@@ -22,7 +22,7 @@ public enum TicketStatus
     InProgress = 2,
 
     /// <summary>
-    /// Ticket resuelto, esperando confirmaciÃ³n
+    /// Ticket resuelto, esperando confirmación
     /// </summary>
     Resolved = 3,
 
@@ -32,7 +32,7 @@ public enum TicketStatus
     Closed = 4,
 
     /// <summary>
-    /// Ticket reabierto despuÃ©s de cerrado
+    /// Ticket reabierto después de cerrado
     /// </summary>
     Reopened = 5
 }

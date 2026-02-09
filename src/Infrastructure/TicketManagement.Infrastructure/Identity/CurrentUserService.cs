@@ -1,11 +1,11 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using TicketManagement.Application.Common.Interfaces;
 
 namespace TicketManagement.Infrastructure.Identity;
 
 /// <summary>
-/// Servicio que obtiene información del usuario autenticado desde el JWT token
+/// Servicio que obtiene informaci�n del usuario autenticado desde el JWT token
 /// Lee los claims del HttpContext.User
 /// </summary>
 public class CurrentUserService : ICurrentUserService
@@ -20,6 +20,16 @@ public class CurrentUserService : ICurrentUserService
     public string? UserId => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
 
     public int? UserIdInt => int.TryParse(UserId, out var id) ? id : null;
+
+    public int GetUserId()
+    {
+        var id = UserIdInt;
+        if (!id.HasValue)
+        {
+            throw new UnauthorizedAccessException("User is not authenticated.");
+        }
+        return id.Value;
+    }
 
     public string? Email => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Email);
 

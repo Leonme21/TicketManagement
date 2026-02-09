@@ -1,37 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 using TicketManagement.Domain.Common;
 using TicketManagement.Domain.Exceptions;
 
 namespace TicketManagement.Domain.Entities;
 
 /// <summary>
-/// Comentario en un ticket (de cliente o agente)
+/// ✅ SENIOR LEVEL: Clean Comment entity with proper factory method
 /// </summary>
 public class Comment : BaseEntity
 {
     private Comment() { } // EF Core
 
-    /// <summary>
-    /// Constructor para crear nuevo comentario
-    /// </summary>
-    public Comment(string content, int ticketId, int authorId)
+    private Comment(string content, int ticketId, int authorId, bool isInternal = false)
     {
-        if (string.IsNullOrWhiteSpace(content))
-            throw new DomainException("Comment content cannot be empty");
-
-        if (content.Length > 5000)
-            throw new DomainException("Comment content cannot exceed 5000 characters");
-
         Content = content;
         TicketId = ticketId;
         AuthorId = authorId;
+        IsInternal = isInternal;
+    }
+
+    /// <summary>
+    /// ✅ Factory method for creating comments with validation
+    /// </summary>
+    public static Result<Comment> Create(string content, int ticketId, int authorId, bool isInternal = false)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+            return Result<Comment>.Failure("Comment content cannot be empty");
+
+        if (content.Length > 2000)
+            return Result<Comment>.Failure("Comment content cannot exceed 2000 characters");
+
+
+
+        if (authorId <= 0)
+            return Result<Comment>.Failure("Invalid author ID");
+
+        var comment = new Comment(content, ticketId, authorId, isInternal);
+        return Result<Comment>.Success(comment);
     }
 
     public string Content { get; private set; } = string.Empty;
+    public bool IsInternal { get; private set; }
 
     // Foreign Keys
     public int TicketId { get; private set; }
@@ -42,16 +51,17 @@ public class Comment : BaseEntity
     public User Author { get; set; } = null!;
 
     /// <summary>
-    /// Edita el contenido del comentario
+    /// ✅ Update comment content with validation
     /// </summary>
-    public void UpdateContent(string newContent)
+    public Result UpdateContent(string newContent)
     {
         if (string.IsNullOrWhiteSpace(newContent))
-            throw new DomainException("Comment content cannot be empty");
+            return Result.Failure("Comment content cannot be empty");
 
-        if (newContent.Length > 5000)
-            throw new DomainException("Comment content cannot exceed 5000 characters");
+        if (newContent.Length > 2000)
+            return Result.Failure("Comment content cannot exceed 2000 characters");
 
         Content = newContent;
+        return Result.Success();
     }
 }

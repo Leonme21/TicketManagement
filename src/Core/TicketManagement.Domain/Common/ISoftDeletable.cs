@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TicketManagement.Domain.Common;
 
 /// <summary>
-/// Marca entidades que soportan eliminaciÃ³n lÃ³gica (soft delete)
+/// Marca entidades que soportan eliminación lógica (soft delete)
 /// En lugar de DELETE, se marca IsDeleted = true
 /// </summary>
 public interface ISoftDeletable

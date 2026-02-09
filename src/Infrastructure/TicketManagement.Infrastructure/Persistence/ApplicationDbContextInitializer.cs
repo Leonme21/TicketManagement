@@ -1,4 +1,4 @@
-﻿﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +35,7 @@ public class ApplicationDbContextInitializer
     /// <summary>
     /// Ejecuta migraciones pendientes
     /// </summary>
-    public async Task InitialiseAsync()
+    public async Task InitializeAsync()
     {
         try
         {
@@ -49,7 +49,7 @@ public class ApplicationDbContextInitializer
     }
 
     /// <summary>
-    /// Inserta datos de prueba si la BD está vacía
+    /// Inserta datos de prueba si la BD est vaca
     /// </summary>
     public async Task SeedAsync()
     {
@@ -76,18 +76,15 @@ public class ApplicationDbContextInitializer
         _logger.LogInformation("Seeding database...");
 
         // ==================== USERS ====================
-        // GENERAR HASHES DINÁMICAMENTE
-
-        // Hashear cada contraseña individualmente
         var adminPassword = _passwordHasher.HashPassword("Admin@123");
         var agentPassword = _passwordHasher.HashPassword("Agent@123");
         var customerPassword = _passwordHasher.HashPassword("Customer@123");
 
         var users = new List<User>
         {
-            new User("Admin", "User", "admin@ticketmanagement.com", adminPassword, UserRole.Admin),
-            new User("John", "Agent", "agent@ticketmanagement.com", agentPassword, UserRole. Agent),
-            new User("Jane", "Customer", "customer@ticketmanagement.com", customerPassword, UserRole.Customer)
+            User.Create("Admin", "User", "admin@ticketmanagement.com", adminPassword, UserRole.Admin).Value!,
+            User.Create("John", "Agent", "agent@ticketmanagement.com", agentPassword, UserRole.Agent).Value!,
+            User.Create("Jane", "Customer", "customer@ticketmanagement.com", customerPassword, UserRole.Customer).Value!
         };
 
         _context.Users.AddRange(users);
@@ -98,11 +95,11 @@ public class ApplicationDbContextInitializer
         // ==================== CATEGORIES ====================
         var categories = new List<Category>
         {
-            new Category("Bug", "Software bugs and errors"),
-            new Category("Feature Request", "New feature suggestions"),
-            new Category("Support", "Technical support requests"),
-            new Category("Question", "General questions"),
-            new Category("Documentation", "Documentation issues")
+            Category.Create("Bug", "Software bugs and errors").Value!,
+            Category.Create("Feature Request", "New feature suggestions").Value!,
+            Category.Create("Support", "Technical support requests").Value!,
+            Category.Create("Question", "General questions").Value!,
+            Category.Create("Documentation", "Documentation issues").Value!
         };
 
         _context.Categories.AddRange(categories);
@@ -113,26 +110,26 @@ public class ApplicationDbContextInitializer
         // ==================== TICKETS ====================
         var tickets = new List<Ticket>
         {
-            new Ticket(
+            Ticket.Create(
                 "Login page not loading",
                 "When I try to access the login page, I get a 500 error.",
                 TicketPriority.High,
-                categories[0]. Id,
-                users[2].Id),
+                categories[0].Id,
+                users[2].Id).Value!,
 
-            new Ticket(
+            Ticket.Create(
                 "Add dark mode",
                 "It would be great to have a dark mode option in the settings.",
                 TicketPriority.Medium,
                 categories[1].Id,
-                users[2].Id),
+                users[2].Id).Value!,
 
-            new Ticket(
-                "How to reset password? ",
+            Ticket.Create(
+                "How to reset password?",
                 "I forgot my password and can't find the reset option.",
                 TicketPriority.Low,
                 categories[3].Id,
-                users[2].Id)
+                users[2].Id).Value!
         };
 
         // Asignar el primer ticket al agente
@@ -144,11 +141,13 @@ public class ApplicationDbContextInitializer
         _logger.LogInformation("Seeded {Count} tickets", tickets.Count);
 
         // ==================== COMMENTS ====================
-        var comments = new List<Comment>
-        {
-            new Comment("I'm looking into this issue.", tickets[0].Id, users[1].Id),
-            new Comment("Thanks for the quick response!", tickets[0].Id, users[2].Id)
-        };
+        var comments = new List<Comment>();
+        
+        var comment1Result = Comment.Create("I'm looking into this issue.", tickets[0].Id, users[1].Id);
+        if (comment1Result.IsSuccess) comments.Add(comment1Result.Value!);
+        
+        var comment2Result = Comment.Create("Thanks for the quick response!", tickets[0].Id, users[2].Id);
+        if (comment2Result.IsSuccess) comments.Add(comment2Result.Value!);
 
         _context.Comments.AddRange(comments);
         await _context.SaveChangesAsync();

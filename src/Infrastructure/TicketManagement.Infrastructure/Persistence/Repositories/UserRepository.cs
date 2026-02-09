@@ -1,68 +1,90 @@
-﻿﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TicketManagement.Domain.Entities;
-using TicketManagement.Domain.Enums;
-using TicketManagement.Application.Common.Interfaces;
 using TicketManagement.Domain.Interfaces;
 
 namespace TicketManagement.Infrastructure.Persistence.Repositories;
 
 /// <summary>
-/// Repositorio específico para Users
+/// Repository para Users con validaciones de seguridad
 /// </summary>
 public class UserRepository : BaseRepository<User>, IUserRepository
 {
-    public UserRepository(ApplicationDbContext context, IDateTime dateTime) : base(context, dateTime)
+    public UserRepository(ApplicationDbContext context) : base(context)
     {
     }
 
-    public async Task<List<User>> GetAllAsync(CancellationToken cancellationToken = default)
+    public void Delete(User user)
     {
-        return await _dbSet
+        Remove(user);
+    }
+
+    /// <summary>
+    /// Busca usuario por email (para login)
+    /// </summary>
+    public async Task<User?> GetByEmailAsync(string email, CancellationToken ct = default)
+    {
+        return await _context.Users
             .AsNoTracking()
-            .ToListAsync(cancellationToken);
+            .FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted, ct);
     }
 
-    public async Task<UserRole?> GetUserRoleAsync(int id, CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Verifica si un email ya está registrado
+    /// </summary>
+    public async Task<bool> EmailExistsAsync(string email, CancellationToken ct = default)
     {
-        // Proyección optimizada: No carga la entidad completa ni hace Tracking
-        return await _dbSet
+        return await _context.Users
             .AsNoTracking()
-            .Where(u => u.Id == id)
-            .Select(u => u.Role)
-            .FirstOrDefaultAsync(cancellationToken);
+            .AnyAsync(u => u.Email == email && !u.IsDeleted, ct);
     }
 
-    public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Obtiene usuarios por rol (para asignación de tickets)
+    /// </summary>
+    public async Task<IReadOnlyList<User>> GetByRoleAsync(Domain.Enums.UserRole role, CancellationToken ct = default)
     {
-        return await _dbSet
-            .AsNoTracking() // Read-only optimization
-            .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
-    }
-
-    public async Task<List<User>> GetByRoleAsync(UserRole role, CancellationToken cancellationToken = default)
-    {
-        return await _dbSet
+        return await _context.Users
             .AsNoTracking()
-            .Where(u => u.Role == role && u.IsActive)
-            .ToListAsync(cancellationToken);
+            .Where(u => u.Role == role && u.IsActive && !u.IsDeleted)
+            .OrderBy(u => u.FirstName)
+            .ThenBy(u => u.LastName)
+            .ToListAsync(ct);
     }
 
-    public async Task<List<User>> GetActiveAgentsAsync(CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Obtiene agentes disponibles (activos y con rol Agent o Admin)
+    /// </summary>
+    public async Task<IReadOnlyList<User>> GetAvailableAgentsAsync(CancellationToken ct = default)
     {
-        return await _dbSet
+        return await _context.Users
             .AsNoTracking()
-            .Where(u => (u.Role == UserRole.Agent || u.Role == UserRole.Admin) && u.IsActive)
-            .ToListAsync(cancellationToken);
+            .Where(u => 
+                (u.Role == Domain.Enums.UserRole.Agent || u.Role == Domain.Enums.UserRole.Admin) &&
+                u.IsActive && 
+                !u.IsDeleted)
+            .OrderBy(u => u.FirstName)
+            .ToListAsync(ct);
     }
 
-    public async Task<bool> ExistsWithEmailAsync(string email, CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Verifica si un usuario existe y está activo
+    /// </summary>
+    public async Task<bool> ExistsAndActiveAsync(int id, CancellationToken ct = default)
     {
-        return await _dbSet
-            .AnyAsync(u => u.Email == email, cancellationToken);
+        return await _context.Users
+            .AsNoTracking()
+            .AnyAsync(u => u.Id == id && u.IsActive && !u.IsDeleted, ct);
+    }
+
+    /// <summary>
+    /// Obtiene usuario con estadísticas de tickets
+    /// </summary>
+    public async Task<User?> GetByIdWithStatsAsync(int id, CancellationToken ct = default)
+    {
+        return await _context.Users
+            .AsNoTracking()
+            .Include(u => u.CreatedTickets)
+            .Include(u => u.AssignedTickets)
+            .FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted, ct);
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +30,7 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         builder.HasIndex(c => c.TicketId);
         builder.HasIndex(c => c.AuthorId);
 
-        // Auditoría
+        // Auditor�a
         builder.Property(c => c.CreatedAt).IsRequired();
         builder.Property(c => c.UpdatedAt);
         builder.Property(c => c.CreatedBy).HasMaxLength(100);

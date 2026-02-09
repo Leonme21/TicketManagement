@@ -1,12 +1,12 @@
-﻿﻿using System.Diagnostics;
+using System.Diagnostics;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace TicketManagement.Application.Common.Behaviors;
 
 /// <summary>
-/// Pipeline behavior que mide tiempo de ejecución de handlers
-/// Loguea warning si tarda más de 500ms (bottleneck)
+/// Pipeline behavior que mide tiempo de ejecuci�n de handlers
+/// Loguea warning si tarda m�s de 500ms (bottleneck)
 /// </summary>
 public class PerformanceBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>

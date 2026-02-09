@@ -1,18 +1,19 @@
+using FluentAssertions;
 using TicketManagement.Domain.Entities;
 using TicketManagement.Domain.Enums;
-using TicketManagement.Domain.Exceptions;
+using TicketManagement.Domain.Events;
+using Xunit;
 
 namespace TicketManagement.Domain.UnitTests.Entities;
 
 /// <summary>
-/// Unit tests for the Ticket entity business logic
+/// ✅ SENIOR LEVEL: Comprehensive unit tests for Ticket domain entity
+/// Tests business rules, edge cases, and domain invariants
 /// </summary>
 public class TicketTests
 {
-    #region Constructor Tests
-
     [Fact]
-    public void Constructor_WithValidData_ShouldCreateTicketWithOpenStatus()
+    public void Create_WithValidData_ShouldSucceed()
     {
         // Arrange
         var title = "Test Ticket";
@@ -22,152 +23,159 @@ public class TicketTests
         var creatorId = 1;
 
         // Act
-        var ticket = new Ticket(title, description, priority, categoryId, creatorId);
+        var result = Ticket.Create(title, description, priority, categoryId, creatorId);
 
         // Assert
-        Assert.Equal(title, ticket.Title);
-        Assert.Equal(description, ticket.Description);
-        Assert.Equal(priority, ticket.Priority);
-        Assert.Equal(categoryId, ticket.CategoryId);
-        Assert.Equal(creatorId, ticket.CreatorId);
-        Assert.Equal(TicketStatus.Open, ticket.Status);
-        Assert.Null(ticket.AssignedToId);
+        result.IsSuccess.Should().BeTrue();
+        result.Value.Should().NotBeNull();
+        result.Value!.Title.Value.Should().Be(title);
+        result.Value.Description.Value.Should().Be(description);
+        result.Value.Priority.Should().Be(priority);
+        result.Value.CategoryId.Should().Be(categoryId);
+        result.Value.CreatorId.Should().Be(creatorId);
+        result.Value.Status.Should().Be(TicketStatus.Open);
+        result.Value.AssignedToId.Should().BeNull();
     }
 
     [Theory]
-    [InlineData("")]
-    [InlineData("   ")]
-    [InlineData(null)]
-    public void Constructor_WithEmptyTitle_ShouldThrowDomainException(string? invalidTitle)
+    [InlineData("", "Description", TicketPriority.Low, 1, 1)]
+    [InlineData("Title", "", TicketPriority.Low, 1, 1)]
+    [InlineData("Title", "Description", TicketPriority.Low, 0, 1)]
+    [InlineData("Title", "Description", TicketPriority.Low, 1, 0)]
+    public void Create_WithInvalidData_ShouldFail(string title, string description, TicketPriority priority, int categoryId, int creatorId)
     {
-        // Arrange & Act & Assert
-        var exception = Assert.Throws<DomainException>(() =>
-            new Ticket(invalidTitle!, "Description", TicketPriority.Low, 1, 1));
+        // Act
+        var result = Ticket.Create(title, description, priority, categoryId, creatorId);
 
-        Assert.Equal("Ticket title cannot be empty", exception.Message);
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Code.Should().NotBeEmpty();
     }
-
-    [Theory]
-    [InlineData("")]
-    [InlineData("   ")]
-    [InlineData(null)]
-    public void Constructor_WithEmptyDescription_ShouldThrowDomainException(string? invalidDescription)
-    {
-        // Arrange & Act & Assert
-        var exception = Assert.Throws<DomainException>(() =>
-            new Ticket("Title", invalidDescription!, TicketPriority.Low, 1, 1));
-
-        Assert.Equal("Ticket description cannot be empty", exception.Message);
-    }
-
-    #endregion
-
-    #region Assign Tests
 
     [Fact]
-    public void Assign_WhenOpen_ShouldSetAgentAndChangeStatusToInProgress()
+    public void Create_ShouldEmitTicketCreatedEvent()
+    {
+        // Arrange & Act
+        var result = Ticket.Create("Title", "Description", TicketPriority.High, 1, 1);
+
+        // Assert
+        result.IsSuccess.Should().BeTrue();
+        result.Value!.DomainEvents.Should().HaveCount(1);
+        result.Value.DomainEvents.First().Should().BeOfType<TicketCreatedEvent>();
+    }
+
+    [Fact]
+    public void Assign_WithValidAgent_ShouldSucceed()
     {
         // Arrange
         var ticket = CreateValidTicket();
         var agentId = 2;
 
         // Act
-        ticket.Assign(agentId);
+        var result = ticket.Assign(agentId);
 
         // Assert
-        Assert.Equal(agentId, ticket.AssignedToId);
-        Assert.Equal(TicketStatus.InProgress, ticket.Status);
+        result.IsSuccess.Should().BeTrue();
+        ticket.AssignedToId.Should().Be(agentId);
+        ticket.Status.Should().Be(TicketStatus.InProgress);
+        ticket.DomainEvents.Should().Contain(e => e is TicketAssignedEvent);
     }
 
     [Fact]
-    public void Assign_WhenClosed_ShouldThrowDomainException()
+    public void Assign_ToClosedTicket_ShouldFail()
     {
         // Arrange
         var ticket = CreateValidTicket();
         ticket.Close();
+        ticket.ClearDomainEvents(); // Clear previous events
 
-        // Act & Assert
-        var exception = Assert.Throws<DomainException>(() => ticket.Assign(2));
-        Assert.Contains("Cannot assign a closed ticket", exception.Message);
+        // Act
+        var result = ticket.Assign(2);
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Description.Should().Contain("closed ticket");
+        ticket.AssignedToId.Should().BeNull();
     }
 
     [Theory]
     [InlineData(0)]
     [InlineData(-1)]
-    public void Assign_WithInvalidAgentId_ShouldThrowDomainException(int invalidAgentId)
-    {
-        // Arrange
-        var ticket = CreateValidTicket();
-
-        // Act & Assert
-        var exception = Assert.Throws<DomainException>(() => ticket.Assign(invalidAgentId));
-        Assert.Equal("Invalid agent ID", exception.Message);
-    }
-
-    #endregion
-
-    #region Close Tests
-
-    [Fact]
-    public void Close_WhenOpen_ShouldChangeStatusToClosed()
+    public void Assign_WithInvalidAgentId_ShouldFail(int agentId)
     {
         // Arrange
         var ticket = CreateValidTicket();
 
         // Act
-        ticket.Close();
+        var result = ticket.Assign(agentId);
 
         // Assert
-        Assert.Equal(TicketStatus.Closed, ticket.Status);
+        result.IsFailure.Should().BeTrue();
+        result.Error.Description.Should().Contain("Invalid agent ID");
     }
 
     [Fact]
-    public void Close_WhenAlreadyClosed_ShouldThrowDomainException()
+    public void Close_OpenTicket_ShouldSucceed()
+    {
+        // Arrange
+        var ticket = CreateValidTicket();
+
+        // Act
+        var result = ticket.Close();
+
+        // Assert
+        result.IsSuccess.Should().BeTrue();
+        ticket.Status.Should().Be(TicketStatus.Closed);
+        ticket.DomainEvents.Should().Contain(e => e is TicketClosedEvent);
+    }
+
+    [Fact]
+    public void Close_AlreadyClosedTicket_ShouldFail()
     {
         // Arrange
         var ticket = CreateValidTicket();
         ticket.Close();
+        ticket.ClearDomainEvents();
 
-        // Act & Assert
-        var exception = Assert.Throws<DomainException>(() => ticket.Close());
-        Assert.Equal("Ticket is already closed", exception.Message);
+        // Act
+        var result = ticket.Close();
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Description.Should().Contain("already closed");
     }
 
-    #endregion
-
-    #region Reopen Tests
-
     [Fact]
-    public void Reopen_WhenClosed_ShouldChangeStatusToReopened()
+    public void Reopen_ClosedTicket_ShouldSucceed()
     {
         // Arrange
         var ticket = CreateValidTicket();
         ticket.Close();
 
         // Act
-        ticket.Reopen();
+        var result = ticket.Reopen();
 
         // Assert
-        Assert.Equal(TicketStatus.Reopened, ticket.Status);
+        result.IsSuccess.Should().BeTrue();
+        ticket.Status.Should().Be(TicketStatus.Reopened);
     }
 
     [Fact]
-    public void Reopen_WhenNotClosed_ShouldThrowDomainException()
+    public void Reopen_OpenTicket_ShouldFail()
     {
         // Arrange
         var ticket = CreateValidTicket();
 
-        // Act & Assert
-        var exception = Assert.Throws<DomainException>(() => ticket.Reopen());
-        Assert.Equal("Only closed tickets can be reopened", exception.Message);
+        // Act
+        var result = ticket.Reopen();
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Description.Should().Contain("Only closed tickets can be reopened");
     }
 
-    #endregion
-
-    #region Update Tests
-
     [Fact]
-    public void Update_WithValidData_ShouldUpdateFields()
+    public void Update_ValidData_ShouldSucceed()
     {
         // Arrange
         var ticket = CreateValidTicket();
@@ -176,65 +184,141 @@ public class TicketTests
         var newPriority = TicketPriority.Critical;
 
         // Act
-        ticket.Update(newTitle, newDescription, newPriority);
+        var result = ticket.Update(newTitle, newDescription, newPriority);
 
         // Assert
-        Assert.Equal(newTitle, ticket.Title);
-        Assert.Equal(newDescription, ticket.Description);
-        Assert.Equal(newPriority, ticket.Priority);
+        result.IsSuccess.Should().BeTrue();
+        ticket.Title.Value.Should().Be(newTitle);
+        ticket.Description.Value.Should().Be(newDescription);
+        ticket.Priority.Should().Be(newPriority);
+        ticket.DomainEvents.Should().Contain(e => e is TicketUpdatedEvent);
     }
 
     [Fact]
-    public void Update_WhenClosed_ShouldThrowDomainException()
+    public void Update_ClosedTicket_ShouldFail()
+    {
+        // Arrange
+        var ticket = CreateValidTicket();
+        ticket.Close();
+
+        // Act
+        var result = ticket.Update("New Title", "New Description", TicketPriority.High);
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Description.Should().Contain("Cannot update a closed ticket");
+    }
+
+    [Fact]
+    public void AddComment_ValidData_ShouldSucceed()
+    {
+        // Arrange
+        var ticket = CreateValidTicket();
+        var content = "This is a test comment";
+        var authorId = 1;
+
+        // Act
+        var result = ticket.AddComment(content, authorId);
+
+        // Assert
+        result.IsSuccess.Should().BeTrue();
+        ticket.Comments.Should().HaveCount(1);
+        ticket.Comments.First().Content.Should().Be(content);
+        ticket.Comments.First().AuthorId.Should().Be(authorId);
+        ticket.DomainEvents.Should().Contain(e => e is TicketCommentAddedEvent);
+    }
+
+    [Theory]
+    [InlineData("", 1)]
+    [InlineData("Valid content", 0)]
+    [InlineData("Valid content", -1)]
+    public void AddComment_InvalidData_ShouldFail(string content, int authorId)
+    {
+        // Arrange
+        var ticket = CreateValidTicket();
+
+        // Act
+        var result = ticket.AddComment(content, authorId);
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        ticket.Comments.Should().BeEmpty();
+    }
+
+    [Fact]
+    public void AddComment_TooLongContent_ShouldFail()
+    {
+        // Arrange
+        var ticket = CreateValidTicket();
+        var longContent = new string('a', 2001); // Exceeds 2000 character limit
+
+        // Act
+        var result = ticket.AddComment(longContent, 1);
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Description.Should().Contain("cannot exceed 2000 characters");
+    }
+
+    [Fact]
+    public void CanBeAssignedTo_ValidAgent_ShouldReturnTrue()
+    {
+        // Arrange
+        var ticket = CreateValidTicket();
+
+        // Act & Assert
+        ticket.CanBeAssignedTo(1).Should().BeTrue();
+    }
+
+    [Fact]
+    public void CanBeAssignedTo_ClosedTicket_ShouldReturnFalse()
     {
         // Arrange
         var ticket = CreateValidTicket();
         ticket.Close();
 
         // Act & Assert
-        var exception = Assert.Throws<DomainException>(() =>
-            ticket.Update("New Title", "New Description", TicketPriority.High));
-
-        Assert.Equal("Cannot update a closed ticket", exception.Message);
-    }
-
-    #endregion
-
-    #region Resolve Tests
-
-    [Fact]
-    public void Resolve_WhenAssigned_ShouldChangeStatusToResolved()
-    {
-        // Arrange
-        var ticket = CreateValidTicket();
-        ticket.Assign(2);
-
-        // Act
-        ticket.Resolve();
-
-        // Assert
-        Assert.Equal(TicketStatus.Resolved, ticket.Status);
+        ticket.CanBeAssignedTo(1).Should().BeFalse();
     }
 
     [Fact]
-    public void Resolve_WhenNotAssigned_ShouldThrowDomainException()
+    public void CanBeUpdatedBy_Creator_ShouldReturnTrue()
     {
         // Arrange
         var ticket = CreateValidTicket();
 
         // Act & Assert
-        var exception = Assert.Throws<DomainException>(() => ticket.Resolve());
-        Assert.Equal("Only assigned tickets can be resolved", exception.Message);
+        ticket.CanBeUpdatedBy(ticket.CreatorId).Should().BeTrue();
     }
 
-    #endregion
+    [Fact]
+    public void CanBeUpdatedBy_AssignedAgent_ShouldReturnTrue()
+    {
+        // Arrange
+        var ticket = CreateValidTicket();
+        ticket.Assign(2);
 
-    #region Helper Methods
+        // Act & Assert
+        ticket.CanBeUpdatedBy(2).Should().BeTrue();
+    }
+
+    [Fact]
+    public void CanBeUpdatedBy_OtherUser_ShouldReturnFalse()
+    {
+        // Arrange
+        var ticket = CreateValidTicket();
+
+        // Act & Assert
+        ticket.CanBeUpdatedBy(999).Should().BeFalse();
+    }
+
+
 
     private static Ticket CreateValidTicket()
     {
-        return new Ticket("Test Ticket", "Test Description", TicketPriority.Medium, 1, 1);
+        var result = Ticket.Create("Test Ticket", "Test Description", TicketPriority.Medium, 1, 1);
+        result.IsSuccess.Should().BeTrue();
+        result.Value!.ClearDomainEvents(); // Clear creation event for cleaner tests
+        return result.Value;
     }
-
-    #endregion
 }

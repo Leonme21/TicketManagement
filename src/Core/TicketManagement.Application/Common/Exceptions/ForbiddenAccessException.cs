@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TicketManagement.Application.Common.Exceptions;
 
 /// <summary>
-/// Excepción cuando usuario no tiene permisos
+/// Excepci�n cuando usuario no tiene permisos
 /// Middleware la captura y retorna 403 Forbidden
 /// </summary>
 public class ForbiddenAccessException : Exception

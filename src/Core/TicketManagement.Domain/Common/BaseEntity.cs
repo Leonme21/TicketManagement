@@ -1,15 +1,12 @@
-﻿﻿using System;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TicketManagement.Domain.Common;
 
 /// <summary>
-/// Clase base para todas las entidades del dominio
-/// Proporciona:  ID, auditoría (CreatedAt/UpdatedAt/CreatedBy/UpdatedBy)
+/// ✅ REFACTORED: Base class for all domain entities
+/// Provides: ID, audit fields (CreatedAt/UpdatedAt/CreatedBy/UpdatedBy)
+/// Domain Events removed - only in AggregateRoot
 /// </summary>
 public abstract class BaseEntity
 {
@@ -42,5 +39,5 @@ public abstract class BaseEntity
     /// Token de concurrencia optimista (EF Core)
     /// </summary>
     [Timestamp]
-    public DateTime RowVersion { get; set; }
+    public byte[] RowVersion { get; set; } = Array.Empty<byte>();
 }

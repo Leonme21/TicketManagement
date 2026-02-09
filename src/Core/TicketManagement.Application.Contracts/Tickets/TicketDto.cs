@@ -1,4 +1,4 @@
-﻿namespace TicketManagement.Application.Contracts.Tickets;
+namespace TicketManagement.Application.Contracts.Tickets;
 
 /// <summary>
 /// DTO ligero para lista de tickets (sin comentarios/attachments)

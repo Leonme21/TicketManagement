@@ -1,4 +1,4 @@
-﻿using TicketManagement.Application.Contracts.Authentication;
+using TicketManagement.Application.Contracts.Authentication;
 
 namespace TicketManagement.BlazorWasm.Services.ApiClient;
 

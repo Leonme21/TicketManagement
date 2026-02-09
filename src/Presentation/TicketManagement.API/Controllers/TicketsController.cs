@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TicketManagement.Application.Tickets.Commands.AddComment;
 using TicketManagement.Application.Tickets.Commands.AssignTicket;
@@ -10,145 +10,202 @@ using TicketManagement.Application.Tickets.Queries.GetTicketById;
 using TicketManagement.Application.Tickets.Queries.GetTicketsByAgent;
 using TicketManagement.Application.Tickets.Queries.GetTicketsByUser;
 using TicketManagement.Application.Tickets.Queries.GetTicketsWithPagination;
-using TicketManagement.Domain.Enums;
+using TicketManagement.Application.Common.Interfaces;
+using TicketManagement.Application.Contracts.Tickets;
+using TicketManagement.Domain.Common;
+using TicketManagement.Application.Common.Authorization;
 
 namespace TicketManagement.WebApi.Controllers;
 
 /// <summary>
-/// Endpoints para gestión de tickets
+/// Tickets API Controller
+/// ✅ REFACTORED: Uses policy constants instead of magic strings
+/// Controllers are pure HTTP adapters
 /// </summary>
 [Authorize]
 public class TicketsController : ApiControllerBase
 {
-    /// <summary>
-    /// Obtiene tickets con paginación y filtros
-    /// </summary>
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetTickets([FromQuery] GetTicketsWithPaginationQuery query)
+    [ProducesResponseType(typeof(PaginatedResult<TicketSummaryDto>), StatusCodes.Status200OK)]
+    [ResponseCache(Duration = 300, Location = ResponseCacheLocation.Any, NoStore = false)]
+    public async Task<IActionResult> GetTickets(
+        [FromQuery] GetTicketsWithPaginationQuery query,
+        CancellationToken cancellationToken = default)
     {
-        var result = await Mediator.Send(query);
-        return Ok(result);
+        var result = await Mediator.Send(query, cancellationToken);
+        return HandleResult(result);
     }
 
-    /// <summary>
-    /// Obtiene un ticket por ID
-    /// </summary>
-    [HttpGet("{id}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(TicketDetailsDto), StatusCodes.Status200OK)]
+    [ResponseCache(Duration = 1800, Location = ResponseCacheLocation.Any, NoStore = false)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetTicketById(int id)
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> GetTicketById(int id, CancellationToken cancellationToken = default)
     {
-        var query = new GetTicketByIdQuery { TicketId = id };
-        var result = await Mediator.Send(query);
-        return Ok(result);
+        var result = await Mediator.Send(new GetTicketByIdQuery { TicketId = id }, cancellationToken);
+        return HandleResult(result);
     }
 
-    /// <summary>
-    /// Obtiene tickets del usuario autenticado
-    /// </summary>
-    [HttpGet("my-tickets")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetMyTickets([FromQuery] GetTicketsByUserQuery query)
-    {
-        var result = await Mediator.Send(query);
-        return Ok(result);
-    }
-
-    /// <summary>
-    /// Obtiene tickets asignados al agente autenticado
-    /// </summary>
-    [HttpGet("assigned-to-me")]
-    [Authorize(Roles = "Agent,Admin")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAssignedTickets([FromQuery] GetTicketsByAgentQuery query)
-    {
-        var result = await Mediator.Send(query);
-        return Ok(result);
-    }
-
-    /// <summary>
-    /// Crea un nuevo ticket
-    /// </summary>
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateTicket([FromBody] CreateTicketCommand command)
+    [ProducesResponseType(typeof(CreateTicketResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> CreateTicket(
+        [FromBody] CreateTicketCommand command,
+        CancellationToken cancellationToken = default)
     {
-        var ticketId = await Mediator.Send(command);
-        return CreatedAtAction(nameof(GetTicketById), new { id = ticketId }, new { id = ticketId });
+        var result = await Mediator.Send(command, cancellationToken);
+        
+        if (result.IsSuccess)
+        {
+            // Cache invalidation handled by TicketCacheInvalidationHandler via TicketCreatedEvent
+            return CreatedAtAction(nameof(GetTicketById), 
+                new { id = result.Value!.TicketId }, result.Value);
+        }
+        
+        return HandleResult(result);
     }
 
-    /// <summary>
-    /// Actualiza un ticket existente
-    /// </summary>
-    [HttpPut("{id}")]
+    [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> UpdateTicket(int id, [FromBody] UpdateTicketCommand command)
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<IActionResult> UpdateTicket(
+        int id, 
+        [FromBody] UpdateTicketApiRequest request,
+        CancellationToken cancellationToken = default)
     {
-        // Ensure route ID takes precedence over body ID to prevent tampering
-        var commandWithRouteId = command with { TicketId = id };
-        await Mediator.Send(commandWithRouteId);
-        return NoContent();
+        var command = new UpdateTicketCommand
+        {
+            TicketId = id,
+            Title = request.Title,
+            Description = request.Description,
+            Priority = request.Priority,
+            CategoryId = request.CategoryId,
+            RowVersion = request.RowVersion
+        };
+
+        var result = await Mediator.Send(command, cancellationToken);
+        
+        // Cache invalidation handled by TicketCacheInvalidationHandler via TicketUpdatedEvent
+        return HandleResult(result);
     }
 
-    /// <summary>
-    /// Asigna un ticket a un agente
-    /// </summary>
-    [HttpPost("{id}/assign")]
-    [Authorize(Roles = "Agent,Admin")]
+    [HttpPost("{id:int}/assign")]
+    [Authorize(Policy = Policies.CanAssignTickets)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> AssignTicket(int id, [FromBody] AssignTicketCommand command)
+    public async Task<IActionResult> AssignTicket(
+        int id, 
+        [FromBody] AssignTicketApiRequest request,
+        CancellationToken cancellationToken = default)
     {
-        // Ensure route ID takes precedence over body ID to prevent tampering
-        var commandWithRouteId = command with { TicketId = id };
-        await Mediator.Send(commandWithRouteId);
-        return NoContent();
+        var command = new AssignTicketCommand 
+        { 
+            TicketId = id,
+            AgentId = request.AgentId
+        };
+
+        var result = await Mediator.Send(command, cancellationToken);
+        
+        // Cache invalidation handled by TicketCacheInvalidationHandler via TicketAssignedEvent
+        return HandleResult(result);
     }
 
-    /// <summary>
-    /// Cierra un ticket
-    /// </summary>
-    [HttpPost("{id}/close")]
+    [HttpPost("{id:int}/close")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> CloseTicket(int id)
+    public async Task<IActionResult> CloseTicket(
+        int id, 
+        [FromBody] CloseTicketApiRequest? request = null,
+        CancellationToken cancellationToken = default)
     {
-        var command = new CloseTicketCommand { TicketId = id };
-        await Mediator.Send(command);
-        return NoContent();
+        var command = new CloseTicketCommand 
+        { 
+            TicketId = id,
+            Reason = request?.Reason,
+            Resolution = request?.Resolution
+        };
+
+        var result = await Mediator.Send(command, cancellationToken);
+        
+        // Cache invalidation handled by TicketCacheInvalidationHandler via TicketClosedEvent
+        return HandleResult(result);
     }
 
-    /// <summary>
-    /// Elimina un ticket (soft delete)
-    /// </summary>
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
+    [Authorize(Policy = Policies.CanDeleteTickets)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteTicket(int id)
+    public async Task<IActionResult> DeleteTicket(int id, CancellationToken cancellationToken = default)
     {
-        var command = new DeleteTicketCommand { TicketId = id };
-        await Mediator.Send(command);
-        return NoContent();
+        var result = await Mediator.Send(new DeleteTicketCommand { TicketId = id }, cancellationToken);
+        
+        // Cache invalidation handled by event handlers
+        return HandleResult(result);
     }
 
-    /// <summary>
-    /// Agrega un comentario a un ticket
-    /// </summary>
-    [HttpPost("{id}/comments")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [HttpPost("{id:int}/comments")]
+    [ProducesResponseType(typeof(CommentCreatedResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> AddComment(int id, [FromBody] AddCommentCommand command)
+    [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
+    public async Task<IActionResult> AddComment(
+        int id, 
+        [FromBody] AddCommentApiRequest request,
+        CancellationToken cancellationToken = default)
     {
-        // Ensure route ID takes precedence over body ID to prevent tampering
-        var commandWithRouteId = command with { TicketId = id };
-        var result = await Mediator.Send(commandWithRouteId);
-        return CreatedAtAction(nameof(GetTicketById), new { id }, result);
+        var command = new AddCommentCommand 
+        { 
+            TicketId = id,
+            Content = request.Content,
+            IsInternal = request.IsInternal ?? false
+        };
+
+        var result = await Mediator.Send(command, cancellationToken);
+        
+        if (result.IsSuccess)
+        {
+            // Cache invalidation handled by TicketCacheInvalidationHandler via TicketCommentAddedEvent
+            return CreatedAtAction(nameof(GetTicketById),
+                new { id },
+                result.Value);
+        }
+
+        return HandleResult(result);
     }
+
+    [HttpGet("my-tickets")]
+    [ProducesResponseType(typeof(PaginatedResult<TicketSummaryDto>), StatusCodes.Status200OK)]
+    [ResponseCache(Duration = 120, Location = ResponseCacheLocation.Any, NoStore = false)]
+    public async Task<IActionResult> GetMyTickets(
+        [FromQuery] GetTicketsByUserQuery query,
+        CancellationToken cancellationToken = default)
+    {
+        var result = await Mediator.Send(query, cancellationToken);
+        return HandleResult(result);
+    }
+
+    [HttpGet("assigned-to-me")]
+    [Authorize(Policy = Policies.IsAgentOrAdmin)]
+    [ProducesResponseType(typeof(PaginatedResult<TicketSummaryDto>), StatusCodes.Status200OK)]
+    [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any, NoStore = false)]
+    public async Task<IActionResult> GetAssignedTickets(
+        [FromQuery] GetTicketsByAgentQuery query,
+        CancellationToken cancellationToken = default)
+    {
+        var result = await Mediator.Send(query, cancellationToken);
+        return HandleResult(result);
+    }
+
+    // ❌ REMOVED: Manual cache warmup endpoint
+    // Cache warmup is now handled automatically by CacheWarmupBackgroundService on startup
+    // If manual warmup is needed, create a dedicated Admin API or use a management tool
 }

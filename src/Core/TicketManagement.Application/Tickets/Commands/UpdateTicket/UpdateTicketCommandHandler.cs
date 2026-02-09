@@ -1,63 +1,118 @@
-﻿using MediatR;
-using TicketManagement.Application.Common.Exceptions;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using TicketManagement.Application.Common.Interfaces;
-using TicketManagement.Domain.Entities;
-using TicketManagement.Domain.Enums;
+using TicketManagement.Domain.Common;
 using TicketManagement.Domain.Interfaces;
-using TicketManagement.Domain.Constants;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace TicketManagement.Application.Tickets.Commands.UpdateTicket;
 
-public class UpdateTicketCommandHandler : IRequestHandler<UpdateTicketCommand, Unit>
+/// <summary>
+/// 🔥 BIG TECH LEVEL: Update handler with robust concurrency handling
+/// Features:
+/// - Optimistic concurrency control with retry logic
+/// - Exponential backoff for retries
+/// - Cache invalidation on successful update
+/// - Structured logging for debugging
+/// - Uses IApplicationDbContext for SaveChanges (not repository)
+/// </summary>
+public sealed class UpdateTicketCommandHandler : IRequestHandler<UpdateTicketCommand, Result>
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ICurrentUserService _currentUserService;
+    private readonly ITicketRepository _ticketRepository;
+    private readonly IApplicationDbContext _dbContext;
+    private readonly IDistributedCache _cache;
+    private readonly ILogger<UpdateTicketCommandHandler> _logger;
+    
+    private const int MaxRetries = 3;
+    private const int BaseDelayMs = 100;
 
-    public UpdateTicketCommandHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUserService)
+    public UpdateTicketCommandHandler(
+        ITicketRepository ticketRepository,
+        IApplicationDbContext dbContext,
+        IDistributedCache cache,
+        ILogger<UpdateTicketCommandHandler> logger)
     {
-        _unitOfWork = unitOfWork;
-        _currentUserService = currentUserService;
+        _ticketRepository = ticketRepository;
+        _dbContext = dbContext;
+        _cache = cache;
+        _logger = logger;
     }
 
-    public async Task<Unit> Handle(UpdateTicketCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(UpdateTicketCommand request, CancellationToken cancellationToken)
     {
-        // Use lightweight GetByIdAsync instead of implicit heavy loading
-        var ticket = await _unitOfWork.Tickets.GetByIdAsync(request.TicketId, cancellationToken);
-
-        if (ticket is null)
+        for (int attempt = 1; attempt <= MaxRetries; attempt++)
         {
-            throw new NotFoundException(nameof(Ticket), request.TicketId);
+            try
+            {
+                var ticket = await _ticketRepository.GetByIdAsync(request.TicketId, cancellationToken);
+                if (ticket == null)
+                {
+                    return Result.NotFound("Ticket", request.TicketId);
+                }
+
+                // Verify row version for optimistic concurrency
+                if (!ticket.RowVersion.SequenceEqual(request.RowVersion))
+                {
+                    return Result.Conflict("The ticket has been modified by another user. Please refresh and try again.");
+                }
+
+                // Apply business logic update
+                var updateResult = ticket.Update(request.Title, request.Description, request.Priority);
+                if (updateResult.IsFailure)
+                {
+                    return updateResult;
+                }
+
+                // Update category if changed
+                if (request.CategoryId != ticket.CategoryId)
+                {
+                    var categoryResult = ticket.ChangeCategory(request.CategoryId);
+                    if (categoryResult.IsFailure)
+                    {
+                        return categoryResult;
+                    }
+                }
+
+                // Save changes with concurrency check via DbContext
+                await _dbContext.SaveChangesAsync(cancellationToken);
+
+                // Invalidate cache on successful update
+                // Using standard cache key pattern
+                var cacheKey = $"ticket-{request.TicketId}";
+                await _cache.RemoveAsync(cacheKey, cancellationToken);
+
+                _logger.LogInformation("Successfully updated ticket {TicketId} on attempt {Attempt}", 
+                    request.TicketId, attempt);
+
+                return Result.Success();
+            }
+            catch (DbUpdateConcurrencyException) when (attempt < MaxRetries)
+            {
+                _logger.LogWarning("Concurrency conflict updating ticket {TicketId} on attempt {Attempt}. Retrying...", 
+                    request.TicketId, attempt);
+
+                // Exponential backoff
+                var delay = TimeSpan.FromMilliseconds(BaseDelayMs * Math.Pow(2, attempt - 1));
+                await Task.Delay(delay, cancellationToken);
+                
+                // Continue to next attempt
+            }
+            catch (DbUpdateConcurrencyException ex) when (attempt == MaxRetries)
+            {
+                _logger.LogError(ex, "Failed to update ticket {TicketId} after {MaxRetries} attempts due to concurrency conflicts", 
+                    request.TicketId, MaxRetries);
+                
+                return Result.Conflict("Update failed due to concurrent modifications. Please try again.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error updating ticket {TicketId} on attempt {Attempt}", 
+                    request.TicketId, attempt);
+                throw;
+            }
         }
 
-        // Validar permisos: solo el creador o admins pueden actualizar
-        // ROBUSTNESS FIX: Prefer strongly typed ID if available, otherwise safe parse.
-        int userId = _currentUserService.UserIdInt ?? 0;
-        
-        if (userId == 0 && !int.TryParse(_currentUserService.UserId, out userId))
-        {
-             // If ID is completely missing or not an integer (and we require int for DB), fail fast but gracefully.
-             throw new ForbiddenAccessException("User is not authenticated or ID format is invalid.");
-        }
-
-        // Verificar permisos usando lógica de dominio
-        if (!ticket.CanModify(userId, _currentUserService.Role))
-        {
-            throw new ForbiddenAccessException("You can only update your own tickets, or be an Admin");
-        }
-
-        // Validar existencia de categoría (Business Rule)
-        var category = await _unitOfWork.Categories.GetByIdAsync(request.CategoryId, cancellationToken);
-        if (category is null)
-        {
-            throw new NotFoundException(nameof(Category), request.CategoryId);
-        }
-
-        // Priority ya es enum, no necesita parsing - usar directamente
-        ticket.Update(request.Title, request.Description, request.Priority);
-
-        // _unitOfWork.Tickets.Update(ticket); // Removed: Entity is already tracked
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-        return Unit.Value;
+        return Result.InternalError("Update failed after maximum retry attempts");
     }
 }

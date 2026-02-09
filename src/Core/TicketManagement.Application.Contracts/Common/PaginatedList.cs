@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TicketManagement.Application.Contracts.Common;
 
 /// <summary>
-/// Respuesta paginada genérica para listas
+/// Respuesta paginada gen�rica para listas
 /// </summary>
 /// <typeparam name="T">Tipo de elemento en la lista</typeparam>
 public class PaginatedList<T>

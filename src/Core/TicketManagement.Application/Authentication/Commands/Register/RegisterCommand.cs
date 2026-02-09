@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using TicketManagement.Application.Common.Interfaces;
-using TicketManagement.Application.Common.Models;
+using TicketManagement.Domain.Common;
 
 namespace TicketManagement.Application.Authentication.Commands.Register;
 

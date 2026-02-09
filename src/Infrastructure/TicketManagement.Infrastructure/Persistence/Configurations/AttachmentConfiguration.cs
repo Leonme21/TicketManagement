@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TicketManagement.Domain.Entities;
@@ -17,7 +12,11 @@ public class AttachmentConfiguration : IEntityTypeConfiguration<Attachment>
 
         builder.HasKey(a => a.Id);
 
-        builder.Property(a => a.FileName)
+        builder.Property(a => a.OriginalFileName)
+            .IsRequired()
+            .HasMaxLength(255);
+
+        builder.Property(a => a.StoredFileName)
             .IsRequired()
             .HasMaxLength(255);
 
@@ -29,7 +28,7 @@ public class AttachmentConfiguration : IEntityTypeConfiguration<Attachment>
             .IsRequired()
             .HasMaxLength(100);
 
-        builder.Property(a => a.FileSize)
+        builder.Property(a => a.FileSizeBytes)
             .IsRequired();
 
         builder.Property(a => a.TicketId)

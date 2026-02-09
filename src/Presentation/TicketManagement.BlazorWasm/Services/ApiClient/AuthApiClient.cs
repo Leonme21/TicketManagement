@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using TicketManagement.Application.Contracts.Authentication;
 
 namespace TicketManagement.BlazorWasm.Services.ApiClient;

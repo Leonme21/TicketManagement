@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -9,7 +9,7 @@ using TicketManagement.Domain.Entities;
 namespace TicketManagement.Infrastructure.Identity;
 
 /// <summary>
-/// Generador de tokens JWT para autenticaciÃ³n
+/// Generador de tokens JWT para autenticación
 /// </summary>
 public class JwtTokenGenerator
 {
@@ -51,7 +51,7 @@ public class JwtTokenGenerator
     }
 
     /// <summary>
-    /// Obtiene la fecha de expiraciÃ³n del token
+    /// Obtiene la fecha de expiración del token
     /// </summary>
     public DateTime GetTokenExpiration()
     {

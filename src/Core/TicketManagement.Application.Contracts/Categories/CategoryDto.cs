@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TicketManagement.Application.Contracts.Categories;
 
 /// <summary>
-/// DTO para categoría de ticket
+/// DTO para categor�a de ticket
 /// </summary>
 public class CategoryDto
 {

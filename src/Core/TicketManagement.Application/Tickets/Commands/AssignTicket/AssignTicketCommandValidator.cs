@@ -1,21 +1,22 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 using TicketManagement.Domain.Enums;
-using TicketManagement.Domain.Interfaces;
+
+using TicketManagement.Application.Common.Interfaces;
 
 namespace TicketManagement.Application.Tickets.Commands.AssignTicket;
 
 public class AssignTicketCommandValidator : AbstractValidator<AssignTicketCommand>
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IApplicationDbContext _context;
 
-    public AssignTicketCommandValidator(IUnitOfWork unitOfWork)
+    public AssignTicketCommandValidator(IApplicationDbContext context)
     {
-        _unitOfWork = unitOfWork;
+        _context = context;
 
         RuleFor(x => x.TicketId)
             .GreaterThan(0).WithMessage("TicketId is required");
@@ -27,7 +28,7 @@ public class AssignTicketCommandValidator : AbstractValidator<AssignTicketComman
 
     private async Task<bool> BeValidAgent(int agentId, CancellationToken cancellationToken)
     {
-        var user = await _unitOfWork.Users.GetByIdAsync(agentId, cancellationToken);
+        var user = await _context.Users.FindAsync(new object[] { agentId }, cancellationToken);
         return user != null && user.IsActive && (user.Role == UserRole.Agent || user.Role == UserRole.Admin);
     }
 }

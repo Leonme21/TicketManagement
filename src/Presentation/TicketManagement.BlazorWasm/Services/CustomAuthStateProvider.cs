@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Headers;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
 using Blazored.LocalStorage;
@@ -99,7 +99,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
 
     private byte[] ParseBase64WithoutPadding(string base64)
     {
-        // Normalizar base64 URL-safe a estándar
+        // Normalizar base64 URL-safe a est�ndar
         base64 = base64.Replace('-', '+').Replace('_', '/');
 
         switch (base64.Length % 4)

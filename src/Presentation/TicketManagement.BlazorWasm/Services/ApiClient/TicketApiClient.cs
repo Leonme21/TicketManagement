@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using TicketManagement.Application.Contracts.Tickets;
 using TicketManagement.Application.Contracts.Categories;
 using TicketManagement.BlazorWasm.Models;

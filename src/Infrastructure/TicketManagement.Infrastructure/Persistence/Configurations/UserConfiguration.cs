@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +10,7 @@ using TicketManagement.Domain.Entities;
 namespace TicketManagement.Infrastructure.Persistence.Configurations;
 
 /// <summary>
-/// Configuración de la tabla Users en MySQL
+/// Configuraci�n de la tabla Users en MySQL
 /// </summary>
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {
@@ -28,12 +28,19 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired()
             .HasMaxLength(50);
 
+        // ✅ REFACTORED: Email as Value Object with Value Converter
+        // Maps Email Value Object to string column in database
         builder.Property(u => u.Email)
+            .HasConversion(
+                email => email.Value,                    // To database: Email -> string
+                value => TicketManagement.Domain.ValueObjects.Email.Create(value).Value!) // From database: string -> Email
+            .HasColumnName("Email")
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(254); // RFC 5321 maximum length
 
         builder.HasIndex(u => u.Email)
-            .IsUnique();
+            .IsUnique()
+            .HasDatabaseName("IX_Users_Email");
 
         builder.Property(u => u.PasswordHash)
             .IsRequired()
@@ -58,7 +65,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.DeletedAt);
         builder.Property(u => u.DeletedBy).HasMaxLength(100);
 
-        // Auditoría
+        // Auditor�a
         builder.Property(u => u.CreatedAt)
             .IsRequired();
 
@@ -70,7 +77,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.UpdatedBy)
             .HasMaxLength(100);
 
-        // Relaciones (EF Core las configura automáticamente, pero las hacemos explícitas)
+        // Relaciones (EF Core las configura autom�ticamente, pero las hacemos expl�citas)
         builder.HasMany(u => u.CreatedTickets)
             .WithOne(t => t.Creator)
             .HasForeignKey(t => t.CreatorId)

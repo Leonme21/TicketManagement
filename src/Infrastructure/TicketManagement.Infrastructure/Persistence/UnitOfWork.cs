@@ -1,126 +1,95 @@
-﻿﻿using Microsoft.EntityFrameworkCore.Storage;
-using TicketManagement.Application.Common.Interfaces;
 using TicketManagement.Domain.Interfaces;
 using TicketManagement.Infrastructure.Persistence.Repositories;
 
 namespace TicketManagement.Infrastructure.Persistence;
 
 /// <summary>
-/// Patrón Unit of Work - agrupa múltiples operaciones en una transacción
+/// Unit of Work Pattern - Coordina m�ltiples repositorios y SaveChanges
+/// ? Un solo punto de guardado para transacciones
+/// ? REFACTORIZADO: Inicializaci�n directa (no lazy) para mejor predictibilidad
 /// </summary>
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;
-    private IDbContextTransaction? _currentTransaction;
-    private readonly IDateTime _dateTime;
-    private ITagRepository _tagRepository;
 
+    // ✅ Instanciar directamente (no lazy) - más predecible
     public ITicketRepository Tickets { get; }
     public IUserRepository Users { get; }
     public ICategoryRepository Categories { get; }
-
-    public ITagRepository Tags => _tagRepository ??= new TagRepository(_context, _dateTime);
+    public ITagRepository Tags { get; }
+    public IRefreshTokenRepository RefreshTokens { get; } // ✅ NUEVO
 
     public UnitOfWork(
         ApplicationDbContext context,
-        IDateTime dateTime,
-        ITagRepository tagRepository,
         ITicketRepository ticketRepository,
         IUserRepository userRepository,
-        ICategoryRepository categoryRepository)
+        ICategoryRepository categoryRepository,
+        ITagRepository tagRepository,
+        IRefreshTokenRepository refreshTokenRepository)
     {
         _context = context;
-        _dateTime = dateTime;
-        _tagRepository = tagRepository;
         Tickets = ticketRepository;
         Users = userRepository;
         Categories = categoryRepository;
+        Tags = tagRepository;
+        RefreshTokens = refreshTokenRepository;
     }
 
-    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Guarda todos los cambios de forma transaccional
+    /// Los interceptores (Audit, SoftDelete, DomainEvents) se ejecutan aqu�
+    /// </summary>
+    public async Task<int> SaveChangesAsync(CancellationToken ct = default)
     {
-        return await _context.SaveChangesAsync(cancellationToken);
+        return await _context.SaveChangesAsync(ct);
     }
 
-    public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Inicia una transacci�n expl�cita (para operaciones complejas)
+    /// </summary>
+    public async Task BeginTransactionAsync(CancellationToken ct = default)
     {
-        if (_currentTransaction != null)
-        {
-            throw new InvalidOperationException("A transaction is already in progress.");
-        }
-
-        _currentTransaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+        await _context.Database.BeginTransactionAsync(ct);
     }
 
-    public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Confirma la transacci�n actual
+    /// </summary>
+    public async Task CommitTransactionAsync(CancellationToken ct = default)
     {
+        await _context.Database.CommitTransactionAsync(ct);
+    }
+
+    /// <summary>
+    /// Revierte la transacci�n actual
+    /// </summary>
+    public async Task RollbackTransactionAsync(CancellationToken ct = default)
+    {
+        await _context.Database.RollbackTransactionAsync(ct);
+    }
+
+    /// <summary>
+    /// ? NUEVO: Ejecuta una operaci�n dentro de una transacci�n expl�cita
+    /// �til para operaciones complejas que requieren m�ltiples pasos
+    /// </summary>
+    public async Task ExecuteTransactionAsync(Func<Task> action, CancellationToken ct = default)
+    {
+        await using var transaction = await _context.Database.BeginTransactionAsync(ct);
         try
         {
-            await _context.SaveChangesAsync(cancellationToken);
-
-            if (_currentTransaction != null)
-            {
-                await _currentTransaction.CommitAsync(cancellationToken);
-            }
+            await action();
+            await _context.SaveChangesAsync(ct);
+            await transaction.CommitAsync(ct);
         }
         catch
         {
-            await RollbackTransactionAsync(cancellationToken);
+            await transaction.RollbackAsync(ct);
             throw;
-        }
-        finally
-        {
-            if (_currentTransaction != null)
-            {
-                _currentTransaction.Dispose();
-                _currentTransaction = null;
-            }
-        }
-    }
-
-    public async Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            if (_currentTransaction != null)
-            {
-                await _currentTransaction.RollbackAsync(cancellationToken);
-            }
-        }
-        finally
-        {
-            if (_currentTransaction != null)
-            {
-                _currentTransaction.Dispose();
-                _currentTransaction = null;
-            }
         }
     }
 
     public void Dispose()
     {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            _currentTransaction?.Dispose();
-            _currentTransaction = null;
-        }
-        // No disponer _context aquí. 
-        // Su ciclo de vida es gestionado por el contenedor de DI (Scoped).
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        if (_currentTransaction != null)
-        {
-            await _currentTransaction.DisposeAsync();
-            _currentTransaction = null;
-        }
-        GC.SuppressFinalize(this);
+        _context.Dispose();
     }
 }

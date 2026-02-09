@@ -1,14 +1,14 @@
-Ôªøusing System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TicketManagement.Application.Common.Models;
+using TicketManagement.Domain.Common;
 
 namespace TicketManagement.Application.Common.Interfaces;
 
 /// <summary>
-/// Servicio de autenticaci√≥n e identidad
+/// Servicio de autenticaciÛn e identidad
 /// Infrastructure lo implementa con JWT + BCrypt
 /// </summary>
 public interface IIdentityService
@@ -24,13 +24,13 @@ public interface IIdentityService
     Task<Result<AuthenticationResult>> RegisterAsync(string firstName, string lastName, string email, string password, string confirmPassword, string role = "Customer", CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Verifica si un email ya est√° registrado
+    /// Verifica si un email ya est· registrado
     /// </summary>
     Task<bool> EmailExistsAsync(string email, CancellationToken cancellationToken = default);
 }
 
 /// <summary>
-/// Resultado de autenticaci√≥n exitosa
+/// Resultado de autenticaciÛn exitosa
 /// </summary>
 public class AuthenticationResult
 {

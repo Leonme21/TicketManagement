@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
-using TicketManagement.Domain.Interfaces;
+
 using TicketManagement.Domain.Enums;
 
 namespace TicketManagement.Application.Tickets.Commands.CreateTicket;
@@ -14,11 +14,8 @@ namespace TicketManagement.Application.Tickets.Commands.CreateTicket;
 /// </summary>
 public class CreateTicketCommandValidator : AbstractValidator<CreateTicketCommand>
 {
-    private readonly IUnitOfWork _unitOfWork;
-
-    public CreateTicketCommandValidator(IUnitOfWork unitOfWork)
+    public CreateTicketCommandValidator()
     {
-        _unitOfWork = unitOfWork;
 
         RuleFor(x => x.Title)
             .NotEmpty().WithMessage("Title is required")

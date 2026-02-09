@@ -1,52 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using MediatR;
-using TicketManagement.Application.Common.Exceptions;
+using Microsoft.Extensions.Logging;
+using TicketManagement.Application.Common;
 using TicketManagement.Application.Common.Interfaces;
-using TicketManagement.Domain.Entities;
+using TicketManagement.Domain.Common;
 using TicketManagement.Domain.Interfaces;
 
 namespace TicketManagement.Application.Tickets.Commands.DeleteTicket;
 
-public class DeleteTicketCommandHandler : IRequestHandler<DeleteTicketCommand, Unit>
+/// <summary>
+/// ?? BIG TECH LEVEL: Handler with cache invalidation and proper CQRS
+/// Uses Repository for write operations, DbContext for SaveChanges
+/// </summary>
+public sealed class DeleteTicketCommandHandler : IRequestHandler<DeleteTicketCommand, Result>
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly ICurrentUserService _currentUserService;
+    private readonly ITicketRepository _ticketRepository;
+    private readonly IApplicationDbContext _dbContext;
+    private readonly ICacheService _cache;
+    private readonly ILogger<DeleteTicketCommandHandler> _logger;
+    private static readonly ActivitySource ActivitySource = new("TicketManagement.Commands");
 
-    public DeleteTicketCommandHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUserService)
+    public DeleteTicketCommandHandler(
+        ITicketRepository ticketRepository,
+        IApplicationDbContext dbContext,
+        ICacheService cache,
+        ILogger<DeleteTicketCommandHandler> logger)
     {
-        _unitOfWork = unitOfWork;
-        _currentUserService = currentUserService;
+        _ticketRepository = ticketRepository;
+        _dbContext = dbContext;
+        _cache = cache;
+        _logger = logger;
     }
 
-    public async Task<Unit> Handle(DeleteTicketCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(DeleteTicketCommand request, CancellationToken cancellationToken)
     {
-        var ticket = await _unitOfWork.Tickets.GetByIdAsync(request.TicketId, cancellationToken);
+        using var activity = ActivitySource.StartActivity("DeleteTicket");
+        activity?.SetTag("ticket.id", request.TicketId);
 
-        if (ticket == null)
+        var ticket = await _ticketRepository.GetByIdAsync(request.TicketId, cancellationToken);
+        if (ticket is null)
         {
-            throw new NotFoundException(nameof(Ticket), request.TicketId);
+            return Result.NotFound("Ticket", request.TicketId);
         }
 
-        // Validar permisos
-        var userId = _currentUserService.UserIdInt;
-        if (!userId.HasValue)
-        {
-            throw new ForbiddenAccessException("User is not authenticated");
-        }
+        // Remove via repository (soft delete handled by interceptor)
+        _ticketRepository.Remove(ticket);
+        await _dbContext.SaveChangesAsync(cancellationToken);
 
-        if (ticket.CreatorId != userId.Value)
-        {
-            throw new ForbiddenAccessException("You can only delete your own tickets");
-        }
+        // ?? CRITICAL: Invalidate cache after deletion
+        await _cache.RemoveAsync(CacheKeys.TicketDetails(request.TicketId), cancellationToken);
+        _logger.LogDebug("Cache invalidated for deleted ticket {TicketId}", request.TicketId);
 
-        // Soft delete (marca IsDeleted = true)
-        _unitOfWork.Tickets.Delete(ticket);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        _logger.LogInformation("Ticket {TicketId} soft deleted successfully", request.TicketId);
+        activity?.SetStatus(ActivityStatusCode.Ok);
 
-        return Unit.Value;
+        return Result.Success();
     }
 }
