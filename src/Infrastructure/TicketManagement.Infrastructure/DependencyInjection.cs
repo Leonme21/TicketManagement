@@ -192,6 +192,7 @@ public static class DependencyInjection
         // Infrastructure services
         services.AddScoped<TicketManagement.Application.Common.Interfaces.IAuthorizationService, TicketManagement.Infrastructure.Services.AuthorizationService>();
         services.AddScoped<TicketManagement.Application.Common.Interfaces.IRateLimitService, TicketManagement.Infrastructure.Services.RateLimitService>();
+        services.AddScoped<IResourceAuthorizationService, ResourceAuthorizationService>();
         
         // Outbox pattern
         services.AddScoped<Persistence.Outbox.IOutboxService, Persistence.Outbox.OutboxService>();

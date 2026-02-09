@@ -11,6 +11,7 @@ namespace TicketManagement.Application.Tickets.Commands.UpdateTicket;
 /// <summary>
 /// 🔥 BIG TECH LEVEL: Update handler with robust concurrency handling
 /// Features:
+/// - Resource authorization checks before domain operations
 /// - Optimistic concurrency control with retry logic
 /// - Exponential backoff for retries
 /// - Cache invalidation on successful update
@@ -22,6 +23,8 @@ public sealed class UpdateTicketCommandHandler : IRequestHandler<UpdateTicketCom
     private readonly ITicketRepository _ticketRepository;
     private readonly IApplicationDbContext _dbContext;
     private readonly IDistributedCache _cache;
+    private readonly IResourceAuthorizationService _authorizationService;
+    private readonly ICurrentUserService _currentUserService;
     private readonly ILogger<UpdateTicketCommandHandler> _logger;
     
     private const int MaxRetries = 3;
@@ -31,11 +34,15 @@ public sealed class UpdateTicketCommandHandler : IRequestHandler<UpdateTicketCom
         ITicketRepository ticketRepository,
         IApplicationDbContext dbContext,
         IDistributedCache cache,
+        IResourceAuthorizationService authorizationService,
+        ICurrentUserService currentUserService,
         ILogger<UpdateTicketCommandHandler> logger)
     {
         _ticketRepository = ticketRepository;
         _dbContext = dbContext;
         _cache = cache;
+        _authorizationService = authorizationService;
+        _currentUserService = currentUserService;
         _logger = logger;
     }
 
@@ -49,6 +56,16 @@ public sealed class UpdateTicketCommandHandler : IRequestHandler<UpdateTicketCom
                 if (ticket == null)
                 {
                     return Result.NotFound("Ticket", request.TicketId);
+                }
+
+                // Resource authorization check
+                var userId = _currentUserService.UserIdInt ?? 0;
+                var canUpdate = await _authorizationService.CanUpdateTicketAsync(userId, ticket, cancellationToken);
+                if (!canUpdate)
+                {
+                    _logger.LogWarning("User {UserId} attempted to update ticket {TicketId} without authorization",
+                        userId, request.TicketId);
+                    return Result.Forbidden("You do not have permission to update this ticket.");
                 }
 
                 // Verify row version for optimistic concurrency
