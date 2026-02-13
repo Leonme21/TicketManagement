@@ -113,10 +113,18 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     }
 
     /// <summary>
-    /// ✅ REFACTORED: Simplified SaveChangesAsync - Outbox logic moved to interceptor
+    /// ✅ REFACTORED: SaveChangesAsync with immediate event publishing
+    /// - Outbox interceptor stores events for resilience
+    /// - This method publishes events immediately after successful save for synchronous handlers
     /// </summary>
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        return await base.SaveChangesAsync(cancellationToken);
+        var result = await base.SaveChangesAsync(cancellationToken);
+        
+        // ✅ Publish domain events immediately after successful save
+        // This ensures cache invalidation and other synchronous event handlers run
+        await _outboxInterceptor.PublishEventsAsync(this, cancellationToken);
+        
+        return result;
     }
 }
