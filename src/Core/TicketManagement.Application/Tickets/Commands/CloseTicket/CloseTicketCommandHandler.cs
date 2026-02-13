@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using TicketManagement.Application.Common;
 using TicketManagement.Application.Common.Interfaces;
 using TicketManagement.Domain.Common;
 using TicketManagement.Domain.Interfaces;
@@ -12,26 +11,25 @@ using TicketManagement.Domain.Interfaces;
 namespace TicketManagement.Application.Tickets.Commands.CloseTicket;
 
 /// <summary>
-/// ?? BIG TECH LEVEL: Close ticket command handler with cache invalidation
-/// Uses Repository for aggregate operations, DbContext for SaveChanges
+/// ✅ REFACTORED: Clean handler following Single Responsibility Principle
+/// - No manual cache invalidation (handled by TicketCacheInvalidationHandler via TicketClosedEvent)
+/// - Uses Repository for aggregate operations, DbContext for SaveChanges
+/// - Focuses on orchestrating domain logic
 /// </summary>
 public sealed class CloseTicketCommandHandler : IRequestHandler<CloseTicketCommand, Result>
 {
     private readonly ITicketRepository _ticketRepository;
     private readonly IApplicationDbContext _dbContext;
-    private readonly ICacheService _cache;
     private readonly ILogger<CloseTicketCommandHandler> _logger;
     private static readonly ActivitySource ActivitySource = new("TicketManagement.Commands");
 
     public CloseTicketCommandHandler(
         ITicketRepository ticketRepository,
         IApplicationDbContext dbContext,
-        ICacheService cache,
         ILogger<CloseTicketCommandHandler> logger)
     {
         _ticketRepository = ticketRepository;
         _dbContext = dbContext;
-        _cache = cache;
         _logger = logger;
     }
 
@@ -49,7 +47,7 @@ public sealed class CloseTicketCommandHandler : IRequestHandler<CloseTicketComma
                 return Result.NotFound("Ticket", request.TicketId);
             }
 
-            // ?? Close ticket using domain method (domain event emitted)
+            // ✅ Close ticket using domain method (emits TicketClosedEvent)
             var closeResult = ticket.Close();
             if (closeResult.IsFailure)
             {
@@ -58,11 +56,8 @@ public sealed class CloseTicketCommandHandler : IRequestHandler<CloseTicketComma
                 return closeResult;
             }
 
+            // ✅ TicketClosedEvent triggers TicketCacheInvalidationHandler automatically
             await _dbContext.SaveChangesAsync(cancellationToken);
-
-            // ?? CRITICAL: Invalidate cache after status change
-            await _cache.RemoveAsync(CacheKeys.TicketDetails(request.TicketId), cancellationToken);
-            _logger.LogDebug("Cache invalidated for ticket {TicketId}", request.TicketId);
 
             _logger.LogInformation("Ticket {TicketId} closed successfully", request.TicketId);
             activity?.SetStatus(ActivityStatusCode.Ok);
