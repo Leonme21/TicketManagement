@@ -35,22 +35,21 @@ public class Category : BaseEntity, ISoftDeletable
     /// </summary>
     public static Result<Category> Create(string name, string description)
     {
-        try
-        {
-            ValidateName(name);
-            ValidateDescription(description);
-            
-            var category = new Category(name, description);
-            
-            // TODO: Implementar CategoryCreatedEvent cuando se necesite
-            // category.AddDomainEvent(new CategoryCreatedEvent(category.Id, category.Name));
-            
-            return Result<Category>.Success(category);
-        }
-        catch (DomainException ex)
-        {
-            return Result<Category>.Failure(ex.Message);
-        }
+        // ✅ FIXED: Validations now return Result - check them properly
+        var nameValidation = ValidateName(name);
+        if (nameValidation.IsFailure)
+            return Result<Category>.Failure(nameValidation.Error);
+
+        var descValidation = ValidateDescription(description);
+        if (descValidation.IsFailure)
+            return Result<Category>.Failure(descValidation.Error);
+        
+        var category = new Category(name, description);
+        
+        // TODO: Implementar CategoryCreatedEvent cuando se necesite
+        // category.AddDomainEvent(new CategoryCreatedEvent(category.Id, category.Name));
+        
+        return Result<Category>.Success(category);
     }
     
     // ==================== PROPERTIES ====================

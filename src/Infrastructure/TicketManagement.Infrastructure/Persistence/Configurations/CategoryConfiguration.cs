@@ -14,7 +14,7 @@ public class CategoryConfiguration : BaseEntityConfiguration<Category>
     {
         base.Configure(builder); // ? Aplica configuración base (auditoría, concurrencia, soft delete)
 
-        builder.ToTable("Categories");
+        // builder.ToTable("Categories");
 
         // ==================== PROPERTIES ====================
         

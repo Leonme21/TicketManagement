@@ -1,330 +1,313 @@
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-[Ww][Ii][Nn]32/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
-
-# Visual Studio cache/options directory
+# ==========================================
+# .NET & Visual Studio
+# ==========================================
+## Carpetas de compilación
+bin/
+obj/
 .vs/
+.vscode/
+*.user
+*.userosscache
+*.sln.docstates
+
+## Archivos de usuario de Visual Studio
+*.suo
+*.sln.user
+
+## Archivos de configuración local de VS
+.vscode/extensions/
+launch.json
+tasks.json
+
+## NuGet
+*.nupkg
+*.nupkg.metadata
+*.snupkg
+.nuget/
+packages/
+!packages/build/
+*.nuget.props
+*.nuget.targets
+.nuget.config
+
+## Entity Framework
+Migrations/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.mdf
+*.ldf
+*.ndf
+
+# ==========================================
+# SonarQube & Code Analysis
+# ==========================================
+.sonarqube/
+.sonar/
+.sonarlint/
+.roslyn/
+.ReSharper*/
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+roslynator.json
+
+# ==========================================
+# Test & Coverage
+# ==========================================
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+OpenCover/
+coverage/
+htmlcov/
+.opencover/
+.codecov
+.coverage
+
+# ==========================================
+# Build & Deploy
+# ==========================================
+publish/
+PublishProfiles/
+*.PublishSettings
+*.azurePubxml
+*.pubxml
+*.publishproj
+_Publish/
+_publish/
+.publish/
+artifacts/
+_artifacts/
+_build/
+
+# ==========================================
+# IDE & Tools
+# ==========================================
+# JetBrains Rider
+.idea/
+*.sln.iml
+*.swp
+*.swo
 
 # Visual Studio Code
 .vscode/
 *.code-workspace
 
-# User-specific files
-*.rsuser
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-
-# Local History for Visual Studio
-.localhistory/
-
-# Visual Studio History (VSHistory) files
-.vshistory/
-
-# BeatPulse healthcheck temp database
-healthchecksdb
-
-# Backup & swap files
-*.bak
-*.swp
-*.swo
-*~
-*.tmp
-
-# NuGet Packages
-*.nupkg
-*.snupkg
-.nuget/
-
-# NuGet Symbol Packages
-*.snupkg
-
-# The packages folder can be ignored because of Package Restore
-**/packages/*
-!**/packages/build/
-*.nuget.props
-*.nuget.targets
-
-# Rider
-.idea/
-*.sln.iml
-*.swp
-*.swo
-
-# ResharperPlus
+# Resharper Plus
 _ReSharper*/
-*.[Rr]e[Ss]harper
-*.DotSettings.user
+reSharperPlusCaches/
 
-# JetBrains Rider
-.idea/
-*.sln.iml
+# ==========================================
+# Environment & Configuration
+# ==========================================
+# User Secrets
+appsettings.local.json
+appsettings.*.local.json
+appsettings.Development.local.json
+secrets.json
+.user.secrets
 
-# VS Code extensions
-.vscode/extensions/
-
-# Entity Framework
-migrations/
-*.db
-*.db-shm
-*.db-wal
-
-# Database files
-*.mdf
-*.ldf
-*.ndf
-*.sqlite
-*.sqlite3
-
-# Application Insights Telemetry
-ApplicationInsights.config
-.ApplicationInsightsConfig
-
-# Local env files
+# Environment files
 .env
 .env.local
 .env.*.local
+.env.production.local
 
-# User secrets
-secrets.json
-appsettings.local.json
-appsettings.Development.local.json
+# Application settings
+launchSettings.json
+Properties/launchSettings.json
 
-# TypeScript v1 declaration files
-typings/
+# Configuration overrides
+*.config.local
+web.config.local
+app.config.local
 
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Temporary files
+# ==========================================
+# Temporary & Cache Files
+# ==========================================
 *.tmp
 *.temp
+*.cache
+.cache/
+.temp/
+temp/
+tmp/
 
-# OS specific files
+# npm/yarn (if using frontend build tools)
+node_modules/
+package-lock.json
+yarn.lock
+.npm
+.eslintcache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================================
+# Logs
+# ==========================================
+logs/
+*.log
+*.log.*
+app.log
+application*.log
+
+# ==========================================
+# OS Specific
+# ==========================================
 .DS_Store
-Thumbs.db
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
 ehthumbs.db
+Thumbs.db
+desktop.ini
 
-# Node modules (if using any frontend build tools)
-node_modules/
-dist/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# ==========================================
+# Docker
+# ==========================================
+docker-compose.override.yml
+.dockerignore
+.docker/
 
-# Blazor WebAssembly specific
-**/wwwroot/service-worker.js
-**/wwwroot/service-worker.asset.js
+# ==========================================
+# Azure & Cloud
+# ==========================================
+PublishSettings/
+.azure/
+azure-pipelines.yml.local
+.azureTemp/
 
-# Build output directories for Blazor
-obj/
-bin/
+# ==========================================
+# Blazor WebAssembly Specific
+# ==========================================
+# Service Worker files (generated at build time)
+wwwroot/service-worker.js
+wwwroot/service-worker.asset.json
+wwwroot/service-worker-assets.js.br
+wwwroot/service-worker.assets.json
+wwwroot/manifest.json
+wwwroot/icon-*.png
+wwwroot/_framework/
+wwwroot/css/
+wwwroot/js/
 
-# Coverage reports
-coverage/
-*.opencover.xml
-*.coveragexml
-
-# Test Results
-TestResults/
-*.trx
-
-# Profiler files
+# ==========================================
+# Profiler & Performance
+# ==========================================
 *.prof
 *.vsp
 *.vspx
-*.sap
-
-# ReSharper is a .NET coding add-in
-_ReSharper*/
-*.[Rr]e[Ss]harper
-*.DotSettings.user
-
-# Cake - Uncomment if you are using it
-# tools/**
-# !tools/packages.config
-
-# Tabs Studio
-*.tss
-
-# Telerik's JustMock mock assistant
-*.jmconfig
-
-# MightyMoose
-*.mm.*
-
-# Installshield output folder
-[Ee]xpress/
-
-# DocProject is a documentation generator add-in
-DocProject/buildhelp/
-DocProject/Help/*.HxT
-DocProject/Help/*.HxC
-DocProject/Help/*.hhc
-DocProject/Help/*.hhk
-DocProject/Help/*.hhp
-DocProject/Help/Html2
-DocProject/Help/html
-
-# Click-Once directory
-publish/
-
-# Publish Web Output
-*.[Pp]ublish.xml
-*.azurePubxml
-*.pubxml
-*.publishproj
-
-# Microsoft Azure Web App publish settings. Comment the next line if you want to
-# checkin your publish settings, but in that case, don't check in user secrets
-PublishSettings/
-
-# NuGet Symbol Packages
-*.snupkg
-
-# The packages folder can be ignored because of Package Restore
-**/packages/*
-!**/packages/build/
-*.nuget.props
-*.nuget.targets
-
-# Publish Web Output
-*_Publish.properties
-*.Publish.xml
-
-# MyGet build specific properties
-*.myget.props
-*.myget.targets
-
-# Node.js Tools for Visual Studio
-.ntvs_analysis.dat
-node_modules/
-
-# Visual Studio profiler
 *.psess
-*.vsp
-*.vspx
 *.sap
 
-# Logical backup files created by Transact-SQL Language Service
-*.fnbak
-
-# Temporary test certificate
-*.pfx
-*.pem
-
-# SSDT specific files
+# ==========================================
+# Database
+# ==========================================
 *.dacpac
 *.dacproject
+*.bak
+*.backup
+
+# ==========================================
+# Certificates & Security
+# ==========================================
+*.pfx
+*.pem
+*.crt
+*.key
+*.cer
+*.p12
+
+# ==========================================
+# Misc Development
+# ==========================================
+.venv/
+venv/
+env/
+.python-version
+Gemfile.lock
+.rubocop_todo.yml
+
+# TypeScript
+typings/
+dist/
+
+# Documentation
+docs/_build/
+
+# ==========================================
+# Project Specific Temp Files
+# ==========================================
+temp_jwt.cs
+temp_user.cs
+test_output.txt
+test2.txt
+test3.txt
+*.temp.cs
+*.backup.cs
+
+# ==========================================
+# CI/CD Secrets
+# ==========================================
+.github/workflows/secrets.yml
+.github/secrets/
+.gitlab-ci.yml.local
+.travis.yml.local
+
+# ==========================================
+# Rider specific
+# ==========================================
+.idea/
+out/
+.idea_modules/
+
+# ==========================================
+# Gradle (if applicable)
+# ==========================================
+.gradle/
+build/
+
+# ==========================================
+# Other Build Tools
+# ==========================================
+.ntvs_analysis.dat
+node_modules/
 
 # Fody - auto-generated
 FodyWeavers.xsd
 
-# Unit test / performance analysis files
-*.coverage
-*.coveragexml
-OpenCover/
-
-# ASP.NET Core app settings overrides
-appsettings.*.json
-!appsettings.Development.json
-!appsettings.json
-
-# Docker
-docker-compose.override.yml
-.dockerignore
-
-# Kubernetes
-kustomization.yml
-
-# Azure App Service deployment files
-PublishProfiles/
-*.PublishSettings
-
-# Local settings files
-launchSettings.json
-Properties/launchSettings.json
-
-# Configuration files with sensitive data
-*.config.local
-web.config.local
-
-# Log files
-logs/
-*.log
-*.log.*
-
-# Application logs
-app.log
-application*.log
-
-# Rider specific files
-.idea/
-*.sln.iml
-
-# IntelliJ
-out/
-.idea_modules/
-
-# Gradle
-.gradle/
-build/
-
-# npm
-package-lock.json
-yarn.lock
-
-# Misc
-.cache/
-.temp/
-.venv/
-venv/
-env/
-
-# Azure Storage Emulator
-AzureStorageEmulator/
-
-# OpenTelemetry/Prometheus files
+# ==========================================
+# OpenTelemetry/Monitoring
+# ==========================================
 *.prom
+otel/
 
-# Development environment
+# ==========================================
+# Development Containers
+# ==========================================
 .devcontainer/
 !.devcontainer/devcontainer.json
 !.devcontainer/Dockerfile
 
-# Database Migrations (development)
-Migrations/
+# ==========================================
+# Visual Studio for Mac
+# ==========================================
+.DS_Store
+.AppleDouble
+.LSOverride
+*.swp
+*~.nib
+*.perspective
+*.perspectivev3
 
-# Temporary build output
-_build/
-_artifacts/
-artifacts/
-
-# CI/CD
-.github/workflows/secrets.yml
-.github/secrets/
-
-# Testing
-.coverage
-.coveragerc
-htmlcov/
+# ==========================================
+# BundleArtifacts (Mobile app development)
+# ==========================================
+.BundleArtifacts/

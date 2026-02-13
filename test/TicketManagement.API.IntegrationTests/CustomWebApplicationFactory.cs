@@ -29,8 +29,6 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
             services.RemoveAll<DbContextOptions<ApplicationDbContext>>();
             services.RemoveAll<ApplicationDbContext>();
             
-            // Mock CurrentUser to allow seeding without HttpContext
-            services.AddScoped<ICurrentUserService, MockCurrentUserService>();
 
             // Agregar DbContext con InMemory database único por test
             var databaseName = $"TestDatabase_{Guid.NewGuid()}";
@@ -64,16 +62,6 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         });
     }
 
-    // Mock Service to bypass IHttpContextAccessor during seeding
-    public class MockCurrentUserService : ICurrentUserService
-    {
-        public string? UserId => "1";
-        public int? UserIdInt => 1;
-        public int GetUserId() => 1;
-        public string? Email => "admin@test.com";
-        public string? Role => "Admin";
-        public bool IsAuthenticated => true;
-    }
 
     private static void SeedTestData(ApplicationDbContext context, PasswordHasher passwordHasher)
     {

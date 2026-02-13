@@ -12,7 +12,7 @@ namespace TicketManagement.Application.Tickets.Commands.AssignTicket;
 /// Command para asignar ticket a un agente
 /// ? REFACTORIZADO: Devuelve Result<Unit> para consistencia
 /// </summary>
-public record AssignTicketCommand : IRequest<Result<Unit>>
+public record AssignTicketCommand : IRequest<Result>
 {
     public int TicketId { get; init; }
     public int AgentId { get; init; }

@@ -2,6 +2,7 @@
 @attribute [Authorize(Roles = "Admin,Agent")]
 @inject ITicketApiClient TicketApiClient
 @inject NavigationManager Navigation
+@using TicketManagement.Domain.Enums
 
 <PageTitle>Tickets Asignados</PageTitle>
 
@@ -114,40 +115,40 @@
         }
     }
 
-    private string GetStatusBadgeClass(string status) => status switch
+    private string GetStatusBadgeClass(TicketStatus status) => status switch
     {
-        "Open" => "badge-open",
-        "InProgress" => "badge-in-progress",
-        "Closed" => "badge-closed",
-        "Resolved" => "badge-resolved",
+        TicketStatus.Open => "badge-open",
+        TicketStatus.InProgress => "badge-in-progress",
+        TicketStatus.Closed => "badge-closed",
+        TicketStatus.Resolved => "badge-resolved",
         _ => "bg-secondary"
     };
 
-    private string GetStatusLabel(string status) => status switch
+    private string GetStatusLabel(TicketStatus status) => status switch
     {
-        "Open" => "Abierto",
-        "InProgress" => "En Progreso",
-        "Closed" => "Cerrado",
-        "Resolved" => "Resuelto",
-        _ => status
+        TicketStatus.Open => "Abierto",
+        TicketStatus.InProgress => "En Progreso",
+        TicketStatus.Closed => "Cerrado",
+        TicketStatus.Resolved => "Resuelto",
+        _ => status.ToString()
     };
 
-    private string GetPriorityBadgeClass(string priority) => priority switch
+    private string GetPriorityBadgeClass(TicketPriority priority) => priority switch
     {
-        "Low" => "badge-low",
-        "Medium" => "badge-medium",
-        "High" => "badge-high",
-        "Urgent" => "badge-urgent",
+        TicketPriority.Low => "badge-low",
+        TicketPriority.Medium => "badge-medium",
+        TicketPriority.High => "badge-high",
+        TicketPriority.Critical => "badge-urgent",
         _ => "bg-secondary"
     };
 
-    private string GetPriorityLabel(string priority) => priority switch
+    private string GetPriorityLabel(TicketPriority priority) => priority switch
     {
-        "Low" => "Baja",
-        "Medium" => "Media",
-        "High" => "Alta",
-        "Urgent" => "Urgente",
-        _ => priority
+        TicketPriority.Low => "Baja",
+        TicketPriority.Medium => "Media",
+        TicketPriority.High => "Alta",
+        TicketPriority.Critical => "Urgente",
+        _ => priority.ToString()
     };
 
     private string TruncateText(string text, int maxLength)

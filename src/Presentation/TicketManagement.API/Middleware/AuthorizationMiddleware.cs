@@ -31,8 +31,14 @@ public sealed class AuthorizationMiddleware
         var userId = GetUserId(context);
         if (userId == 0)
         {
+            var claims = context.User?.Claims.Select(c => $"{c.Type}: {c.Value}").ToList();
+            var claimsList = string.Join(", ", claims ?? new List<string>());
+            
+            _logger.LogWarning("Unauthorized access attempt. UserId not found in claims. Existing claims: {Claims}", 
+                claimsList);
+
             context.Response.StatusCode = 401;
-            await context.Response.WriteAsync("Unauthorized");
+            await context.Response.WriteAsync($"Unauthorized. UserId not found. Claims found: [{claimsList}]");
             return;
         }
 
@@ -61,10 +67,10 @@ public sealed class AuthorizationMiddleware
     private static bool ShouldSkipAuthorization(PathString path)
     {
         var pathValue = path.Value?.ToLower() ?? "";
-        return pathValue.StartsWith("/health") ||
-               pathValue.StartsWith("/swagger") ||
-               pathValue.StartsWith("/api/auth/login") ||
-               pathValue.StartsWith("/api/auth/register");
+        return pathValue.Contains("/health") ||
+               pathValue.Contains("/swagger") ||
+               pathValue.Contains("/auth/login") ||
+               pathValue.Contains("/auth/register");
     }
 
     private static int GetUserId(HttpContext context)

@@ -140,7 +140,6 @@ public class TicketsController : ApiControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    [Authorize(Policy = Policies.CanDeleteTickets)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

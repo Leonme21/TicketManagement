@@ -13,7 +13,7 @@ public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
 {
     public void Configure(EntityTypeBuilder<Ticket> builder)
     {
-        builder.ToTable("Tickets");
+
 
         // Primary Key
         builder.HasKey(t => t.Id);
@@ -22,7 +22,6 @@ public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
         builder.OwnsOne(t => t.Title, title =>
         {
             title.Property(t => t.Value)
-                .HasColumnName("Title")
                 .HasMaxLength(200)
                 .IsRequired();
         });
@@ -30,7 +29,6 @@ public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
         builder.OwnsOne(t => t.Description, description =>
         {
             description.Property(d => d.Value)
-                .HasColumnName("Description")
                 .HasMaxLength(5000)
                 .IsRequired();
         });
@@ -69,8 +67,7 @@ public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
             .HasMaxLength(100);
 
         // Soft Delete
-        builder.Property(t => t.IsDeleted)
-            .HasDefaultValue(false);
+        builder.Property(t => t.IsDeleted);
 
         builder.Property(t => t.DeletedAt)
             .IsRequired(false);
@@ -80,40 +77,30 @@ public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
 
         // Concurrency
         builder.Property(t => t.RowVersion)
-            .IsRowVersion();
+            .IsConcurrencyToken();
 
         // ✅ PERFORMANCE: Strategic indexes for common queries
-        builder.HasIndex(t => t.CreatorId)
-            .HasDatabaseName("IX_Tickets_CreatorId");
+        builder.HasIndex(t => t.CreatorId);
 
-        builder.HasIndex(t => t.AssignedToId)
-            .HasDatabaseName("IX_Tickets_AssignedToId");
+        builder.HasIndex(t => t.AssignedToId);
 
-        builder.HasIndex(t => t.CategoryId)
-            .HasDatabaseName("IX_Tickets_CategoryId");
+        builder.HasIndex(t => t.CategoryId);
 
-        builder.HasIndex(t => t.Status)
-            .HasDatabaseName("IX_Tickets_Status");
+        builder.HasIndex(t => t.Status);
 
-        builder.HasIndex(t => t.Priority)
-            .HasDatabaseName("IX_Tickets_Priority");
+        builder.HasIndex(t => t.Priority);
 
-        builder.HasIndex(t => t.CreatedAt)
-            .HasDatabaseName("IX_Tickets_CreatedAt");
+        builder.HasIndex(t => t.CreatedAt);
 
         // ✅ PERFORMANCE: Composite indexes for common filter combinations
-        builder.HasIndex(t => new { t.Status, t.Priority, t.CreatedAt })
-            .HasDatabaseName("IX_Tickets_Status_Priority_CreatedAt");
+        builder.HasIndex(t => new { t.Status, t.Priority, t.CreatedAt });
 
-        builder.HasIndex(t => new { t.CategoryId, t.Status })
-            .HasDatabaseName("IX_Tickets_CategoryId_Status");
+        builder.HasIndex(t => new { t.CategoryId, t.Status });
 
-        builder.HasIndex(t => new { t.AssignedToId, t.Status })
-            .HasDatabaseName("IX_Tickets_AssignedToId_Status");
+        builder.HasIndex(t => new { t.AssignedToId, t.Status });
 
         // ✅ PERFORMANCE: Index for daily ticket count queries
-        builder.HasIndex(t => new { t.CreatorId, t.CreatedAt })
-            .HasDatabaseName("IX_Tickets_CreatorId_CreatedAt");
+        builder.HasIndex(t => new { t.CreatorId, t.CreatedAt });
 
         // Soft delete filter (applied globally in DbContext)
         builder.HasQueryFilter(t => !t.IsDeleted);
@@ -146,7 +133,7 @@ public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
 
         // Many-to-many with Tags
         builder.HasMany(t => t.Tags)
-            .WithMany()
+            .WithMany(t => t.Tickets)
             .UsingEntity("TicketTags");
 
         // ✅ PERFORMANCE: Ignore domain events for EF Core (they're handled separately)

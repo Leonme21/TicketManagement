@@ -99,7 +99,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     private static void SetSoftDeleteFilter<TEntity>(ModelBuilder builder)
         where TEntity : class, ISoftDeletable
     {
-        builder.Entity<TEntity>().HasQueryFilter(e => !e.IsDeleted);
+        builder.Entity<TEntity>().HasQueryFilter(e => e.IsDeleted == false);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

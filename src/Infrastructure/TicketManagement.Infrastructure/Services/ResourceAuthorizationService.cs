@@ -57,7 +57,7 @@ public sealed class ResourceAuthorizationService : IResourceAuthorizationService
     {
         await Task.CompletedTask;
 
-        // Only admins can delete tickets
+        // ✅ FIXED: Only admins can delete tickets (soft delete should be restricted)
         bool canDelete = _currentUser.Role == "Admin";
 
         LogAuthorizationCheck(nameof(CanDeleteTicketAsync), userId, ticket.Id, canDelete);

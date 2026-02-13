@@ -33,11 +33,11 @@ public class TransactionalCommandsTests : IClassFixture<CustomWebApplicationFact
         _client.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-        var request = new CreateTicketRequest
+        var request = new
         {
             Title = "Transaction Test Ticket",
             Description = "Testing transaction commit",
-            Priority = "Medium",
+            Priority = (int)TicketPriority.Medium,
             CategoryId = 1
         };
 
@@ -46,7 +46,8 @@ public class TransactionalCommandsTests : IClassFixture<CustomWebApplicationFact
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Created);
-        var ticketId = await response.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse = await response.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse!.TicketId;
         ticketId.Should().BeGreaterThan(0);
 
         // Verify the ticket was actually persisted
@@ -66,11 +67,11 @@ public class TransactionalCommandsTests : IClassFixture<CustomWebApplicationFact
         _client.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-        var request = new CreateTicketRequest
+        var request = new
         {
             Title = "", // Invalid - empty title should fail validation
             Description = "Testing transaction rollback",
-            Priority = "Medium",
+            Priority = (int)TicketPriority.Medium,
             CategoryId = 1
         };
 
@@ -83,7 +84,7 @@ public class TransactionalCommandsTests : IClassFixture<CustomWebApplicationFact
         // Verify no ticket was persisted (transaction rolled back)
         using var scope = _factory.Services.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var ticketsWithEmptyTitle = dbContext.Tickets.Count(t => t.Title == "");
+        var ticketsWithEmptyTitle = dbContext.Tickets.Count(t => t.Title.Value == "");
         ticketsWithEmptyTitle.Should().Be(0);
     }
 
@@ -96,27 +97,28 @@ public class TransactionalCommandsTests : IClassFixture<CustomWebApplicationFact
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
         // Create a ticket first
-        var createRequest = new CreateTicketRequest
+        var createRequest = new
         {
             Title = "Original Title",
             Description = "Original Description",
-            Priority = "Low",
+            Priority = (int)TicketPriority.Low,
             CategoryId = 1
         };
 
         var createResponse = await _client.PostAsJsonAsync("/api/tickets", createRequest);
-        var ticketId = await createResponse.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse = await createResponse.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse!.TicketId;
 
         // Get the ticket to get its RowVersion
         var getResponse = await _client.GetAsync($"/api/tickets/{ticketId}");
         var ticket = await getResponse.Content.ReadFromJsonAsync<TicketDetailsDto>();
 
         // Update the ticket
-        var updateRequest = new UpdateTicketApiRequest
+        var updateRequest = new
         {
             Title = "Updated Title",
             Description = "Updated Description",
-            Priority = TicketPriority.High,
+            Priority = (int)TicketPriority.High,
             CategoryId = 1,
             RowVersion = ticket!.RowVersion
         };
@@ -147,16 +149,17 @@ public class TransactionalCommandsTests : IClassFixture<CustomWebApplicationFact
         _client.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", customerToken);
 
-        var createRequest = new CreateTicketRequest
+        var createRequest = new
         {
             Title = "Ticket to Delete",
             Description = "Will be deleted",
-            Priority = "Low",
+            Priority = (int)TicketPriority.Low,
             CategoryId = 1
         };
 
         var createResponse = await _client.PostAsJsonAsync("/api/tickets", createRequest);
-        var ticketId = await createResponse.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse = await createResponse.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse!.TicketId;
 
         // Switch back to admin
         _client.DefaultRequestHeaders.Authorization = 

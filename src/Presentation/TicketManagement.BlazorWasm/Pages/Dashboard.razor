@@ -1,6 +1,7 @@
 ﻿@page "/dashboard"
 @attribute [Authorize]
 @inject ITicketApiClient TicketApiClient
+@using TicketManagement.Domain.Enums
 
 <PageTitle>Dashboard</PageTitle>
 
@@ -67,18 +68,18 @@
 
             <div class="col-md-3">
                 <div class="card border-0 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="text-muted mb-2">En Progreso</h6>
-                                <h2 class="mb-0 text-warning">@_inProgressTickets</h2>
-                            </div>
-                            <div class="display-4 text-warning">
-                                <i class="bi bi-hourglass-split"></i>
-                            </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-2">En Progreso</h6>
+                            <h2 class="mb-0 text-warning">@_inProgressTickets</h2>
+                        </div>
+                        <div class="display-4 text-warning">
+                            <i class="bi bi-hourglass-split"></i>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
 
             <div class="col-md-3">
@@ -241,15 +242,15 @@
             }
 
             // Calcular estadísticas por estado
-            _openTickets = _allTickets.Count(t => t.Status == "Open");
-            _inProgressTickets = _allTickets.Count(t => t.Status == "InProgress");
-            _closedTickets = _allTickets.Count(t => t.Status == "Closed" || t.Status == "Resolved");
+            _openTickets = _allTickets.Count(t => t.Status == TicketStatus.Open);
+            _inProgressTickets = _allTickets.Count(t => t.Status == TicketStatus.InProgress);
+            _closedTickets = _allTickets.Count(t => t.Status == TicketStatus.Closed || t.Status == TicketStatus.Resolved);
 
             // Calcular estadísticas por prioridad
-            _urgentTickets = _allTickets.Count(t => t.Priority.Equals("Urgent", StringComparison.OrdinalIgnoreCase));
-            _highTickets = _allTickets.Count(t => t.Priority.Equals("High", StringComparison.OrdinalIgnoreCase));
-            _mediumTickets = _allTickets.Count(t => t.Priority.Equals("Medium", StringComparison.OrdinalIgnoreCase));
-            _lowTickets = _allTickets.Count(t => t.Priority.Equals("Low", StringComparison.OrdinalIgnoreCase));
+            _urgentTickets = _allTickets.Count(t => t.Priority == TicketPriority.Critical);
+            _highTickets = _allTickets.Count(t => t.Priority == TicketPriority.High);
+            _mediumTickets = _allTickets.Count(t => t.Priority == TicketPriority.Medium);
+            _lowTickets = _allTickets.Count(t => t.Priority == TicketPriority.Low);
         }
         catch (Exception ex)
         {

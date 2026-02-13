@@ -31,8 +31,8 @@ public class MappingProfile : Profile
 
         // Ticket -> TicketDto (para listas)
         CreateMap<Ticket, TicketDto>()
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
-            .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority.ToString()))
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+            .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority))
             .ForMember(dest => dest.CreatorName, opt => opt.MapFrom(src => src.Creator.FullName))
             .ForMember(dest => dest.CreatorEmail, opt => opt.MapFrom(src => src.Creator.Email))
             .ForMember(dest => dest.AssignedToName, opt => opt.MapFrom(src => src.AssignedTo != null ? src.AssignedTo.FullName : null))
@@ -42,8 +42,8 @@ public class MappingProfile : Profile
 
         // Ticket -> TicketDetailsDto (para detalle completo)
         CreateMap<Ticket, TicketDetailsDto>()
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
-            .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority.ToString()))
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+            .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority))
             .ForMember(dest => dest.CreatorName, opt => opt.MapFrom(src => src.Creator.FullName))
             .ForMember(dest => dest.CreatorEmail, opt => opt.MapFrom(src => src.Creator.Email))
             .ForMember(dest => dest.AssignedToName, opt => opt.MapFrom(src => src.AssignedTo != null ? src.AssignedTo.FullName : null))

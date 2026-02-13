@@ -16,7 +16,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.ToTable("Users");
+        // builder.ToTable("Users");
 
         builder.HasKey(u => u.Id);
 
@@ -34,13 +34,13 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasConversion(
                 email => email.Value,                    // To database: Email -> string
                 value => TicketManagement.Domain.ValueObjects.Email.Create(value).Value!) // From database: string -> Email
-            .HasColumnName("Email")
+            // .HasColumnName("Email")
             .IsRequired()
             .HasMaxLength(254); // RFC 5321 maximum length
 
         builder.HasIndex(u => u.Email)
-            .IsUnique()
-            .HasDatabaseName("IX_Users_Email");
+            .IsUnique();
+            // .HasDatabaseName("IX_Users_Email");
 
         builder.Property(u => u.PasswordHash)
             .IsRequired()
@@ -53,12 +53,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(u => u.IsActive)
             .IsRequired()
-            .HasDefaultValue(true);
+            ;
 
         // Soft Delete
         builder.Property(u => u.IsDeleted)
             .IsRequired()
-            .HasDefaultValue(false);
+            ;
 
         builder.HasIndex(u => u.IsDeleted);
 

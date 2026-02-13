@@ -32,17 +32,18 @@ public class ConcurrencyTests : IClassFixture<CustomWebApplicationFactory>
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
         // Create a ticket
-        var createRequest = new CreateTicketRequest
+        var createRequest = new
         {
-            Title = "Concurrency Test Ticket",
-            Description = "Testing concurrency handling",
-            Priority = "High",
+            Title = "Concurrent Update Test",
+            Description = "Testing optimistic concurrency",
+            Priority = (int)TicketPriority.Medium,
             CategoryId = 1
         };
 
         var createResponse = await _client.PostAsJsonAsync("/api/tickets", createRequest);
         createResponse.StatusCode.Should().Be(HttpStatusCode.Created);
-        var ticketId = await createResponse.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse1 = await createResponse.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse1!.TicketId;
 
         // Get the ticket to get its RowVersion
         var getResponse = await _client.GetAsync($"/api/tickets/{ticketId}");
@@ -50,11 +51,11 @@ public class ConcurrencyTests : IClassFixture<CustomWebApplicationFactory>
         var originalRowVersion = ticket!.RowVersion;
 
         // First update (this should succeed)
-        var updateRequest1 = new UpdateTicketApiRequest
+        var updateRequest1 = new
         {
             Title = "Updated Title 1",
             Description = "Updated Description 1",
-            Priority = TicketPriority.High,
+            Priority = (int)TicketPriority.High,
             CategoryId = 1,
             RowVersion = originalRowVersion
         };
@@ -63,11 +64,11 @@ public class ConcurrencyTests : IClassFixture<CustomWebApplicationFactory>
         updateResponse1.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
         // Second update with stale RowVersion (this should fail with Conflict)
-        var updateRequest2 = new UpdateTicketApiRequest
+        var updateRequest2 = new
         {
             Title = "Updated Title 2",
             Description = "Updated Description 2",
-            Priority = TicketPriority.Medium,
+            Priority = (int)TicketPriority.Medium,
             CategoryId = 1,
             RowVersion = originalRowVersion // Stale version
         };
@@ -91,27 +92,28 @@ public class ConcurrencyTests : IClassFixture<CustomWebApplicationFactory>
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
         // Create a ticket
-        var createRequest = new CreateTicketRequest
+        var createRequest = new
         {
             Title = "Fresh Update Test",
             Description = "Testing fresh update",
-            Priority = "Medium",
+            Priority = (int)TicketPriority.Medium,
             CategoryId = 1
         };
 
         var createResponse = await _client.PostAsJsonAsync("/api/tickets", createRequest);
-        var ticketId = await createResponse.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse2 = await createResponse.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse2!.TicketId;
 
         // Get the ticket to get its current RowVersion
         var getResponse = await _client.GetAsync($"/api/tickets/{ticketId}");
         var ticket = await getResponse.Content.ReadFromJsonAsync<TicketDetailsDto>();
 
         // Update with current RowVersion
-        var updateRequest = new UpdateTicketApiRequest
+        var updateRequest = new
         {
-            Title = "Updated Title",
-            Description = "Updated Description",
-            Priority = TicketPriority.High,
+            Title = "Freshly Updated Title",
+            Description = "Freshly Updated Description",
+            Priority = (int)TicketPriority.Low,
             CategoryId = 1,
             RowVersion = ticket!.RowVersion
         };

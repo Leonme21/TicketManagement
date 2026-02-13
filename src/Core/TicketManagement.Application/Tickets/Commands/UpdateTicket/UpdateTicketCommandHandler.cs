@@ -1,10 +1,10 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using TicketManagement.Application.Common;
 using TicketManagement.Application.Common.Interfaces;
 using TicketManagement.Domain.Common;
 using TicketManagement.Domain.Interfaces;
-using Microsoft.Extensions.Caching.Distributed;
 
 namespace TicketManagement.Application.Tickets.Commands.UpdateTicket;
 
@@ -22,7 +22,7 @@ public sealed class UpdateTicketCommandHandler : IRequestHandler<UpdateTicketCom
 {
     private readonly ITicketRepository _ticketRepository;
     private readonly IApplicationDbContext _dbContext;
-    private readonly IDistributedCache _cache;
+    private readonly ICacheService _cache;
     private readonly IResourceAuthorizationService _authorizationService;
     private readonly ICurrentUserService _currentUserService;
     private readonly ILogger<UpdateTicketCommandHandler> _logger;
@@ -33,7 +33,7 @@ public sealed class UpdateTicketCommandHandler : IRequestHandler<UpdateTicketCom
     public UpdateTicketCommandHandler(
         ITicketRepository ticketRepository,
         IApplicationDbContext dbContext,
-        IDistributedCache cache,
+        ICacheService cache,
         IResourceAuthorizationService authorizationService,
         ICurrentUserService currentUserService,
         ILogger<UpdateTicketCommandHandler> logger)
@@ -60,11 +60,12 @@ public sealed class UpdateTicketCommandHandler : IRequestHandler<UpdateTicketCom
 
                 // Resource authorization check
                 var userId = _currentUserService.UserIdInt ?? 0;
+                var role = _currentUserService.Role ?? "None";
                 var canUpdate = await _authorizationService.CanUpdateTicketAsync(userId, ticket, cancellationToken);
+                
                 if (!canUpdate)
                 {
-                    _logger.LogWarning("User {UserId} attempted to update ticket {TicketId} without authorization",
-                        userId, request.TicketId);
+                    _logger.LogWarning("User {UserId} attempted to update ticket {TicketId} without authorization", userId, request.TicketId);
                     return Result.Forbidden("You do not have permission to update this ticket.");
                 }
 
@@ -95,9 +96,7 @@ public sealed class UpdateTicketCommandHandler : IRequestHandler<UpdateTicketCom
                 await _dbContext.SaveChangesAsync(cancellationToken);
 
                 // Invalidate cache on successful update
-                // Using standard cache key pattern
-                var cacheKey = $"ticket-{request.TicketId}";
-                await _cache.RemoveAsync(cacheKey, cancellationToken);
+                await _cache.RemoveAsync(CacheKeys.TicketDetails(request.TicketId), cancellationToken);
 
                 _logger.LogInformation("Successfully updated ticket {TicketId} on attempt {Attempt}", 
                     request.TicketId, attempt);

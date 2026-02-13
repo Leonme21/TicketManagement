@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using TicketManagement.Application.Common.Exceptions;
 using TicketManagement.Application.Common.Interfaces;
+using TicketManagement.Application.Contracts.Tickets;
 using TicketManagement.Domain.Entities;
 using TicketManagement.Domain.Interfaces;
 using TicketManagement.Domain.Common;
@@ -36,6 +37,13 @@ public sealed class CreateTicketCommandHandler : IRequestHandler<CreateTicketCom
     {
         var userId = _currentUserService.GetUserId();
 
+        // Check if category exists
+        var category = await _context.Categories.FindAsync(new object[] { request.CategoryId }, cancellationToken);
+        if (category == null)
+        {
+            return Result.NotFound<CreateTicketResponse>("Category", request.CategoryId);
+        }
+
         // 1. Create Aggregate (Pure Domain Logic)
         var ticketResult = Ticket.Create(
             request.Title,
@@ -66,8 +74,8 @@ public sealed class CreateTicketCommandHandler : IRequestHandler<CreateTicketCom
         {
             TicketId = ticket.Id,
             Message = "Ticket created successfully",
-            Priority = ticket.Priority.ToString(),
-            Status = ticket.Status.ToString(),
+            Priority = ticket.Priority,
+            Status = ticket.Status,
             CreatedAt = ticket.CreatedAt,
             EstimatedResolutionTime = null 
         });

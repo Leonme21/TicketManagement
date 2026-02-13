@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TicketManagement.Application.Common.Interfaces;
 using TicketManagement.Domain.Common;
@@ -12,8 +13,9 @@ using TicketManagement.Domain.Common;
 namespace TicketManagement.Infrastructure.Persistence.Interceptors;
 
 /// <summary>
-/// Interceptor que autom�ticamente llena CreatedAt/UpdatedAt/CreatedBy/UpdatedBy
+/// Interceptor que automáticamente llena CreatedAt/UpdatedAt/CreatedBy/UpdatedBy
 /// Se ejecuta ANTES de SaveChanges
+/// ✅ REFACTORED: Now handles RowVersion for InMemory database provider
 /// </summary>
 public class AuditableEntityInterceptor : SaveChangesInterceptor
 {
@@ -45,18 +47,33 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
     {
         if (context == null) return;
 
+        // Check if we are using InMemory provider (which doesn't support automatic RowVersion/Timestamp)
+        bool isInMemory = context.Database.ProviderName == "Microsoft.EntityFrameworkCore.InMemory";
+
         foreach (var entry in context.ChangeTracker.Entries<BaseEntity>())
         {
             if (entry.State == EntityState.Added)
             {
                 entry.Entity.CreatedBy = _currentUserService.UserId;
                 entry.Entity.CreatedAt = _dateTime.UtcNow;
+                
+                // Simulate RowVersion for InMemory tests
+                if (isInMemory)
+                {
+                    entry.Entity.RowVersion = Guid.NewGuid().ToByteArray();
+                }
             }
 
             if (entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
             {
                 entry.Entity.UpdatedBy = _currentUserService.UserId;
                 entry.Entity.UpdatedAt = _dateTime.UtcNow;
+                
+                // Update RowVersion for InMemory tests
+                if (isInMemory)
+                {
+                    entry.Entity.RowVersion = Guid.NewGuid().ToByteArray();
+                }
             }
         }
     }

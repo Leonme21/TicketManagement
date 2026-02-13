@@ -3,6 +3,7 @@ using TicketManagement.Domain.Enums;
 using TicketManagement.Domain.Common;
 using TicketManagement.Application.Common.Interfaces;
 using TicketManagement.Application.Common.Behaviors;
+using TicketManagement.Application.Contracts.Tickets;
 
 namespace TicketManagement.Application.Tickets.Commands.CreateTicket;
 
@@ -29,14 +30,4 @@ public record CreateTicketCommand : ICommand<CreateTicketResponse>, IIdempotentC
     /// ✅ Rate limiting operation type
     /// </summary>
     public string OperationType => "TicketCreation";
-}
-
-public record CreateTicketResponse
-{
-    public required int TicketId { get; init; }
-    public required string Message { get; init; }
-    public TimeSpan? EstimatedResolutionTime { get; init; }
-    public required string Priority { get; init; }
-    public required string Status { get; init; }
-    public required DateTimeOffset CreatedAt { get; init; }
 }

@@ -4,6 +4,7 @@
 @inject NavigationManager Navigation
 @inject AuthenticationStateProvider AuthStateProvider
 @using TicketManagement.Domain.Enums
+@using TicketManagement.Application.Contracts.Tickets
 
 <PageTitle>Ticket #@Id</PageTitle>
 
@@ -129,13 +130,12 @@
                         <!-- Agregar comentario -->
                         <hr class="my-4" />
                         <h6 class="mb-3 fw-semibold text-slate-700">Agregar comentario</h6>
-                        <EditForm Model="@_commentRequest" OnValidSubmit="@HandleAddComment">
+                        <EditForm Model="@_commentModel" OnValidSubmit="@HandleAddComment">
                             <DataAnnotationsValidator />
                             <div class="mb-3">
                                 <InputTextArea class="form-control border-slate-200" rows="3"
-                                               @bind-Value="_commentRequest.Content"
+                                               @bind-Value="_commentModel.Content"
                                                placeholder="Escribe tu comentario aquí..." />
-                                <ValidationMessage For="@(() => _commentRequest.Content)" class="text-danger small mt-1" />
                             </div>
                             <button type="submit" class="btn btn-emerald" disabled="@_isSubmittingComment">
                                 @if (_isSubmittingComment)
@@ -326,28 +326,25 @@
                             <h5 class="modal-title fw-semibold text-slate-800">Editar Ticket</h5>
                             <button type="button" class="btn-close" @onclick="() => _showUpdateModal = false"></button>
                         </div>
-                        <EditForm Model="@_updateRequest" OnValidSubmit="@HandleUpdateTicket">
+                        <EditForm Model="@_updateModel" OnValidSubmit="@HandleUpdateTicket">
                             <DataAnnotationsValidator />
                             <div class="modal-body">
                                 <div class="mb-4">
                                     <label class="form-label fw-medium text-slate-700">Título</label>
-                                    <InputText class="form-control border-slate-200" @bind-Value="_updateRequest.Title" />
-                                    <ValidationMessage For="@(() => _updateRequest.Title)" class="text-danger small mt-1" />
+                                    <InputText class="form-control border-slate-200" @bind-Value="_updateModel!.Title" />
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label fw-medium text-slate-700">Descripción</label>
-                                    <InputTextArea class="form-control border-slate-200" rows="5" @bind-Value="_updateRequest.Description" />
-                                    <ValidationMessage For="@(() => _updateRequest.Description)" class="text-danger small mt-1" />
+                                    <InputTextArea class="form-control border-slate-200" rows="5" @bind-Value="_updateModel!.Description" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label fw-medium text-slate-700">Prioridad</label>
-                                    <InputSelect class="form-select border-slate-200" @bind-Value="_updateRequest.Priority">
-                                        <option value="Low">Baja</option>
-                                        <option value="Medium">Media</option>
-                                        <option value="High">Alta</option>
-                                        <option value="Urgent">Urgente</option>
+                                    <InputSelect class="form-select border-slate-200" @bind-Value="_updateModel!.Priority">
+                                        <option value="1">Baja</option>
+                                        <option value="2">Media</option>
+                                        <option value="3">Alta</option>
+                                        <option value="4">Crítica</option>
                                     </InputSelect>
-                                    <ValidationMessage For="@(() => _updateRequest.Priority)" class="text-danger small mt-1" />
                                 </div>
                             </div>
                             <div class="modal-footer border-0 pt-0">
@@ -373,8 +370,8 @@
     public int Id { get; set; }
 
     private TicketDetailsDto? _ticket;
-    private AddCommentRequest _commentRequest = new();
-    private UpdateTicketRequest _updateRequest = new();
+    private AddCommentModel _commentModel = new();
+    private UpdateTicketModel? _updateModel;
 
     private bool _isLoading = true;
     private bool _isSubmittingComment = false;
@@ -412,14 +409,11 @@
             _isLoading = true;
             _errorMessage = null;
             _ticket = await TicketApiClient.GetTicketByIdAsync(Id);
-            _commentRequest.TicketId = Id;
 
             if (_ticket != null)
             {
-                _updateRequest.TicketId = _ticket.Id;
-                _updateRequest.Title = _ticket.Title;
-                _updateRequest.Description = _ticket.Description;
-                _updateRequest.Priority = _ticket.Priority.ToString();
+                // Reset comment model
+                _commentModel = new AddCommentModel();
             }
         }
         catch (Exception ex)
@@ -437,8 +431,15 @@
         try
         {
             _isSubmittingComment = true;
-            await TicketApiClient.AddCommentAsync(Id, _commentRequest);
-            _commentRequest.Content = "";
+            
+            var request = new AddCommentApiRequest
+            {
+                Content = _commentModel.Content,
+                IsInternal = false
+            };
+            
+            await TicketApiClient.AddCommentAsync(Id, request);
+            _commentModel.Content = "";
             _successMessage = "Comentario agregado correctamente.";
             await LoadTicket();
         }
@@ -455,7 +456,21 @@
     private void ShowAssignModal() => _showAssignModal = true;
     private void ShowCloseModal() => _showCloseModal = true;
     private void ShowDeleteModal() => _showDeleteModal = true;
-    private void ShowUpdateModal() => _showUpdateModal = true;
+    private void ShowUpdateModal()
+    {
+        if (_ticket != null)
+        {
+            _updateModel = new UpdateTicketModel
+            {
+                Title = _ticket.Title,
+                Description = _ticket.Description,
+                Priority = (int)_ticket.Priority,
+                CategoryId = _ticket.CategoryId,
+                RowVersion = _ticket.RowVersion
+            };
+            _showUpdateModal = true;
+        }
+    }
 
     private async Task HandleAssignTicket()
     {
@@ -521,7 +536,23 @@
         try
         {
             _isProcessing = true;
-            await TicketApiClient.UpdateTicketAsync(Id, _updateRequest);
+            
+            if (_updateModel == null)
+            {
+                _errorMessage = "Error: Update model is null";
+                return;
+            }
+
+            var request = new UpdateTicketApiRequest
+            {
+                Title = _updateModel.Title,
+                Description = _updateModel.Description,
+                Priority = (TicketPriority)_updateModel.Priority,
+                CategoryId = _updateModel.CategoryId,
+                RowVersion = _updateModel.RowVersion
+            };
+
+            await TicketApiClient.UpdateTicketAsync(Id, request);
             _showUpdateModal = false;
             _successMessage = "Ticket actualizado correctamente.";
             await LoadTicket();
@@ -571,4 +602,18 @@
         TicketPriority.Critical => "Urgente",
         _ => priority.ToString()
     };
-}
+
+    private class AddCommentModel
+    {
+        public string Content { get; set; } = string.Empty;
+    }
+
+    private class UpdateTicketModel
+    {
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public int Priority { get; set; } = (int)TicketPriority.Medium;
+        public int CategoryId { get; set; }
+        public byte[] RowVersion { get; set; } = Array.Empty<byte>();
+    }
+}}

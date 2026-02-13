@@ -42,7 +42,7 @@ public class IdentityService : IIdentityService
     {
         // Buscar usuario por email
         var user = await _context.Users
-            .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+            .FirstOrDefaultAsync(u => u.Email.Value == email, cancellationToken);
 
         if (user == null)
         {
@@ -142,6 +142,6 @@ public class IdentityService : IIdentityService
     public async Task<bool> EmailExistsAsync(string email, CancellationToken cancellationToken = default)
     {
         return await _context.Users
-            .AnyAsync(u => u.Email == email, cancellationToken);
+            .AnyAsync(u => u.Email.Value == email, cancellationToken);
     }
 }

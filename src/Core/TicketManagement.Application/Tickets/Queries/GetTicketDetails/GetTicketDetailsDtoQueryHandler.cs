@@ -64,11 +64,11 @@ public class GetTicketDetailsDtoQueryHandler : IGetTicketDetailsDtoQuery
                 UpdatedAt = t.UpdatedAt,
 
                 CreatorId = t.CreatorId,
-                CreatorName = t.Creator.FirstName + " " + t.Creator.LastName,
-                CreatorEmail = t.Creator.Email,
+                CreatorName = t.Creator != null ? t.Creator.FirstName + " " + t.Creator.LastName : "Unknown",
+                CreatorEmail = t.Creator != null && t.Creator.Email != null ? t.Creator.Email.Value : "Unknown",
 
                 CategoryId = t.CategoryId,
-                CategoryName = t.Category.Name,
+                CategoryName = t.Category != null ? t.Category.Name : "Unknown",
 
                 AssignedToId = t.AssignedToId,
                 AssignedToName = t.AssignedTo != null
@@ -83,7 +83,7 @@ public class GetTicketDetailsDtoQueryHandler : IGetTicketDetailsDtoQuery
                         Id = c.Id,
                         Content = c.Content,
                         AuthorId = c.AuthorId,
-                        AuthorName = c.Author.FirstName + " " + c.Author.LastName,
+                        AuthorName = c.Author != null ? c.Author.FirstName + " " + c.Author.LastName : "Unknown",
                         CreatedAt = c.CreatedAt,
                         IsInternal = c.IsInternal
                     })
@@ -121,11 +121,11 @@ public class GetTicketDetailsDtoQueryHandler : IGetTicketDetailsDtoQuery
             {
                 Id = t.Id,
                 Title = t.Title.Value,
-                Status = t.Status.ToString(),
-                Priority = t.Priority.ToString(),
+                Status = t.Status,
+                Priority = t.Priority,
                 CreatedAt = t.CreatedAt,
-                CreatorName = t.Creator.FirstName + " " + t.Creator.LastName,
-                CategoryName = t.Category.Name,
+                CreatorName = t.Creator != null ? t.Creator.FirstName + " " + t.Creator.LastName : "Unknown",
+                CategoryName = t.Category != null ? t.Category.Name : "Unknown",
                 AssignedToName = t.AssignedTo != null
                     ? t.AssignedTo.FirstName + " " + t.AssignedTo.LastName
                     : null

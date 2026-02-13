@@ -26,15 +26,15 @@ public class TicketApiClient : ITicketApiClient
             ?? throw new Exception("Ticket not found");
     }
 
-    public async Task<TicketDto> CreateTicketAsync(CreateTicketRequest request)
+    public async Task<CreateTicketResponse> CreateTicketAsync(CreateTicketRequest request)
     {
         var response = await _httpClient.PostAsJsonAsync("api/Tickets", request);
         response.EnsureSuccessStatusCode();
-        return await response.Content.ReadFromJsonAsync<TicketDto>()
+        return await response.Content.ReadFromJsonAsync<CreateTicketResponse>()
             ?? throw new Exception("Failed to create ticket");
     }
 
-    public async Task UpdateTicketAsync(int id, UpdateTicketRequest request)
+    public async Task UpdateTicketAsync(int id, UpdateTicketApiRequest request)
     {
         var response = await _httpClient.PutAsJsonAsync($"api/Tickets/{id}", request);
         response.EnsureSuccessStatusCode();
@@ -48,7 +48,7 @@ public class TicketApiClient : ITicketApiClient
 
     public async Task AssignTicketAsync(int id, int agentId)
     {
-        var response = await _httpClient.PostAsJsonAsync($"api/Tickets/{id}/assign", new { ticketId = id, agentId });
+        var response = await _httpClient.PostAsJsonAsync($"api/Tickets/{id}/assign", new { agentId });
         response.EnsureSuccessStatusCode();
     }
 
@@ -70,7 +70,7 @@ public class TicketApiClient : ITicketApiClient
             ?? new List<TicketDto>();
     }
 
-    public async Task AddCommentAsync(int ticketId, AddCommentRequest request)
+    public async Task AddCommentAsync(int ticketId, AddCommentApiRequest request)
     {
         var response = await _httpClient.PostAsJsonAsync($"api/Tickets/{ticketId}/comments", request);
         response.EnsureSuccessStatusCode();

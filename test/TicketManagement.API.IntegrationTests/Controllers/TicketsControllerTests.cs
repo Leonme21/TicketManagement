@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using FluentAssertions;
 using TicketManagement.Application.Contracts.Authentication;
 using TicketManagement.Application.Contracts.Tickets;
+using TicketManagement.Domain.Enums;
 
 namespace TicketManagement.API.IntegrationTests.Controllers;
 
@@ -29,11 +30,11 @@ public class TicketsControllerTests : IClassFixture<CustomWebApplicationFactory>
         _client.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-        var request = new CreateTicketRequest
+        var request = new
         {
             Title = "Test Ticket",
             Description = "Test Description",
-            Priority = "Medium",
+            Priority = (int)TicketPriority.Medium,
             CategoryId = 1
         };
 
@@ -43,7 +44,8 @@ public class TicketsControllerTests : IClassFixture<CustomWebApplicationFactory>
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Created);
         
-        var ticketId = await response.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse = await response.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse!.TicketId;
         ticketId.Should().BeGreaterThan(0);
     }
 
@@ -51,11 +53,11 @@ public class TicketsControllerTests : IClassFixture<CustomWebApplicationFactory>
     public async Task CreateTicket_WithoutAuthentication_ReturnsUnauthorized()
     {
         // Arrange
-        var request = new CreateTicketRequest
+        var request = new
         {
             Title = "Test Ticket",
             Description = "Test Description",
-            Priority = "Medium",
+            Priority = (int)TicketPriority.Medium,
             CategoryId = 1
         };
 
@@ -74,11 +76,11 @@ public class TicketsControllerTests : IClassFixture<CustomWebApplicationFactory>
         _client.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-        var request = new CreateTicketRequest
+        var request = new
         {
             Title = "Test Ticket",
             Description = "Test Description",
-            Priority = "Medium",
+            Priority = (int)TicketPriority.Medium,
             CategoryId = 999 // No existe
         };
 
@@ -90,21 +92,21 @@ public class TicketsControllerTests : IClassFixture<CustomWebApplicationFactory>
     }
 
     [Theory]
-    [InlineData("", "Description", "Medium", 1)] // Título vacío
-    [InlineData("Title", "", "Medium", 1)] // Descripción vacía
+    [InlineData("", "Description", TicketPriority.Medium, 1)] // TÃ­tulo vacÃ­o
+    [InlineData("Title", "", TicketPriority.Medium, 1)] // DescripciÃ³n vacÃ­a
     public async Task CreateTicket_WithInvalidData_ReturnsBadRequest(
-        string title, string description, string priority, int categoryId)
+        string title, string description, TicketPriority priority, int categoryId)
     {
         // Arrange
         var token = await GetAuthTokenAsync("customer@test.com", "Test123!");
         _client.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-        var request = new CreateTicketRequest
+        var request = new
         {
             Title = title,
             Description = description,
-            Priority = priority,
+            Priority = (int)priority,
             CategoryId = categoryId
         };
 
@@ -124,15 +126,16 @@ public class TicketsControllerTests : IClassFixture<CustomWebApplicationFactory>
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
         // Crear ticket primero
-        var createRequest = new CreateTicketRequest
+        var createRequest = new
         {
             Title = "Test Ticket",
             Description = "Test Description",
-            Priority = "Medium",
+            Priority = (int)TicketPriority.Medium,
             CategoryId = 1
         };
         var createResponse = await _client.PostAsJsonAsync("/api/tickets", createRequest);
-        var ticketId = await createResponse.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse = await createResponse.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse!.TicketId;
 
         // Act
         var response = await _client.GetAsync($"/api/tickets/{ticketId}");
@@ -168,25 +171,26 @@ public class TicketsControllerTests : IClassFixture<CustomWebApplicationFactory>
         _client.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", customerToken);
 
-        var createRequest = new CreateTicketRequest
+        var createRequest = new
         {
             Title = "Test Ticket",
             Description = "Test Description",
-            Priority = "High",
+            Priority = (int)TicketPriority.High,
             CategoryId = 1
         };
         var createResponse = await _client.PostAsJsonAsync("/api/tickets", createRequest);
-        var ticketId = await createResponse.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse = await createResponse.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse!.TicketId;
 
         // Cambiar a agent token
         var agentToken = await GetAuthTokenAsync("agent@test.com", "Test123!");
         _client.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", agentToken);
 
-        var assignRequest = new AssignTicketRequest { AgentId = 2 }; // ID del agente
+        var assignRequest = new { AgentId = 2 }; // ID del agente
 
         // Act
-        var response = await _client.PutAsJsonAsync($"/api/tickets/{ticketId}/assign", assignRequest);
+        var response = await _client.PostAsJsonAsync($"/api/tickets/{ticketId}/assign", assignRequest);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);

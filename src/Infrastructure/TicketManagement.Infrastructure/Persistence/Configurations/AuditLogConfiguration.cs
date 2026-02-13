@@ -11,7 +11,7 @@ public class AuditLogConfiguration : IEntityTypeConfiguration<AuditLog>
 {
     public void Configure(EntityTypeBuilder<AuditLog> builder)
     {
-        builder.ToTable("AuditLogs");
+        // builder.ToTable("AuditLogs");
 
         builder.HasKey(a => a.Id);
 

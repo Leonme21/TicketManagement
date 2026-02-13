@@ -14,6 +14,7 @@ public class UpdateTicketCommandValidator : AbstractValidator<UpdateTicketComman
 
         RuleFor(x => x.Title)
             .NotEmpty().WithMessage("Title is required")
+            .MinimumLength(3).WithMessage("Title must be at least 3 characters long")
             .MaximumLength(200).WithMessage("Title must not exceed 200 characters");
 
         RuleFor(x => x.Description)

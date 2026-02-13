@@ -32,27 +32,28 @@ public class ResourceAuthorizationTests : IClassFixture<CustomWebApplicationFact
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
         // Create a ticket as customer
-        var createRequest = new CreateTicketRequest
+        var createRequest = new
         {
             Title = "Creator's Ticket",
             Description = "Created by customer",
-            Priority = "Medium",
+            Priority = (int)TicketPriority.Medium,
             CategoryId = 1
         };
 
         var createResponse = await _client.PostAsJsonAsync("/api/tickets", createRequest);
-        var ticketId = await createResponse.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse = await createResponse.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse!.TicketId;
 
         // Get the ticket to get RowVersion
         var getResponse = await _client.GetAsync($"/api/tickets/{ticketId}");
         var ticket = await getResponse.Content.ReadFromJsonAsync<TicketDetailsDto>();
 
         // Update as the same user (creator)
-        var updateRequest = new UpdateTicketApiRequest
+        var updateRequest = new
         {
             Title = "Updated by Creator",
             Description = "Creator can update their own ticket",
-            Priority = TicketPriority.High,
+            Priority = (int)TicketPriority.High,
             CategoryId = 1,
             RowVersion = ticket!.RowVersion
         };
@@ -73,16 +74,17 @@ public class ResourceAuthorizationTests : IClassFixture<CustomWebApplicationFact
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", customerToken);
 
         // Create a ticket as customer
-        var createRequest = new CreateTicketRequest
+        var createRequest = new
         {
             Title = "Customer's Ticket",
             Description = "Created by customer",
-            Priority = "Medium",
+            Priority = (int)TicketPriority.Medium,
             CategoryId = 1
         };
 
         var createResponse = await _client.PostAsJsonAsync("/api/tickets", createRequest);
-        var ticketId = await createResponse.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse = await createResponse.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse!.TicketId;
 
         // Get the ticket as the creator
         var getResponse = await _client.GetAsync($"/api/tickets/{ticketId}");
@@ -93,20 +95,21 @@ public class ResourceAuthorizationTests : IClassFixture<CustomWebApplicationFact
         _client.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", agentToken);
 
-        var updateRequest = new UpdateTicketApiRequest
+        var updateRequest = new
         {
             Title = "Attempted Update",
             Description = "Should fail - not authorized",
-            Priority = TicketPriority.High,
+            Priority = (int)TicketPriority.High,
             CategoryId = 1,
             RowVersion = ticket!.RowVersion
         };
 
         // Act
         var updateResponse = await _client.PutAsJsonAsync($"/api/tickets/{ticketId}", updateRequest);
+        var content = await updateResponse.Content.ReadAsStringAsync();
 
         // Assert
-        updateResponse.StatusCode.Should().Be(HttpStatusCode.Forbidden);
+        updateResponse.StatusCode.Should().Be(HttpStatusCode.Forbidden, $"Response content: {content}");
     }
 
     [Fact]
@@ -118,16 +121,17 @@ public class ResourceAuthorizationTests : IClassFixture<CustomWebApplicationFact
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", customerToken);
 
         // Create a ticket as customer
-        var createRequest = new CreateTicketRequest
+        var createRequest = new
         {
             Title = "Customer Ticket",
             Description = "Will be updated by admin",
-            Priority = "Low",
+            Priority = (int)TicketPriority.Low,
             CategoryId = 1
         };
 
         var createResponse = await _client.PostAsJsonAsync("/api/tickets", createRequest);
-        var ticketId = await createResponse.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse = await createResponse.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse!.TicketId;
 
         // Get the ticket
         var getResponse = await _client.GetAsync($"/api/tickets/{ticketId}");
@@ -138,11 +142,11 @@ public class ResourceAuthorizationTests : IClassFixture<CustomWebApplicationFact
         _client.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", adminToken);
 
-        var updateRequest = new UpdateTicketApiRequest
+        var updateRequest = new
         {
             Title = "Updated by Admin",
             Description = "Admin can update any ticket",
-            Priority = TicketPriority.High,
+            Priority = (int)TicketPriority.High,
             CategoryId = 1,
             RowVersion = ticket!.RowVersion
         };
@@ -163,16 +167,17 @@ public class ResourceAuthorizationTests : IClassFixture<CustomWebApplicationFact
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", customerToken);
 
         // Create a ticket as customer
-        var createRequest = new CreateTicketRequest
+        var createRequest = new
         {
             Title = "Ticket to Delete",
             Description = "Customer will try to delete",
-            Priority = "Low",
+            Priority = (int)TicketPriority.Low,
             CategoryId = 1
         };
 
         var createResponse = await _client.PostAsJsonAsync("/api/tickets", createRequest);
-        var ticketId = await createResponse.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse = await createResponse.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse!.TicketId;
 
         // Try to delete as customer (should fail - only admins can delete)
         // Act
@@ -191,16 +196,17 @@ public class ResourceAuthorizationTests : IClassFixture<CustomWebApplicationFact
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", customerToken);
 
         // Create a ticket as customer
-        var createRequest = new CreateTicketRequest
+        var createRequest = new
         {
             Title = "Admin Will Delete",
             Description = "Admin has permission",
-            Priority = "Low",
+            Priority = (int)TicketPriority.Low,
             CategoryId = 1
         };
 
         var createResponse = await _client.PostAsJsonAsync("/api/tickets", createRequest);
-        var ticketId = await createResponse.Content.ReadFromJsonAsync<int>();
+        var createTicketResponse = await createResponse.Content.ReadFromJsonAsync<CreateTicketResponse>();
+        var ticketId = createTicketResponse!.TicketId;
 
         // Delete as admin
         var adminToken = await GetAuthTokenAsync("admin@test.com", "Test123!");

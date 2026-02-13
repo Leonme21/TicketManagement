@@ -44,7 +44,7 @@ public sealed class AuthorizationService : IAuthorizationService
             ("ticket", "update", UserRole.Admin) => true,
             ("ticket", "update", UserRole.Agent) => true,
             ("ticket", "update", UserRole.Customer) => true, // Check ownership in command handler
-            ("ticket", "delete", UserRole.Admin) => true,
+            ("ticket", "delete", _) => true, // Check ownership in command handler
             ("ticket", "assign", UserRole.Admin) => true,
             ("ticket", "assign", UserRole.Agent) => true,
             ("ticket", "close", UserRole.Admin) => true,
@@ -135,8 +135,9 @@ public sealed class AuthorizationService : IAuthorizationService
 
     public async Task<bool> CanUserDeleteTicketAsync(int userId, int ticketId, CancellationToken cancellationToken = default)
     {
-         var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId, cancellationToken);
-         return user?.Role == UserRole.Admin;
+         // Delegate to resource authorization check which includes ownership
+         var result = await CanAccessTicketAsync(userId, ticketId, "delete", cancellationToken);
+         return result.IsSuccess;
     }
 
     public async Task<bool> CanUserCloseTicketAsync(int userId, int ticketId, CancellationToken cancellationToken = default)

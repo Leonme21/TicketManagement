@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using TicketManagement.Application.Common;
 using TicketManagement.Application.Common.Interfaces;
 
 namespace TicketManagement.Infrastructure.Caching;
@@ -14,12 +15,7 @@ public sealed class CacheInvalidationService : ICacheInvalidationService
     private readonly IDistributedCache _cache;
     private readonly ILogger<CacheInvalidationService> _logger;
 
-    // Cache key patterns
-    private const string TicketSummaryKeyPattern = "ticket:summary:{0}:v1";
-    private const string TicketDetailsKeyPattern = "ticket:details:{0}:v1";
-    private const string TicketListKeyPattern = "tickets:list:*";
-    private const string UserTicketsKeyPattern = "user:{0}:tickets:*";
-    private const string CategoryKeyPattern = "category:{0}:*";
+    // Using CacheKeys for consistency
 
     public CacheInvalidationService(
         IDistributedCache cache,
@@ -33,8 +29,8 @@ public sealed class CacheInvalidationService : ICacheInvalidationService
     {
         var keysToInvalidate = new[]
         {
-            string.Format(TicketSummaryKeyPattern, ticketId),
-            string.Format(TicketDetailsKeyPattern, ticketId)
+            CacheKeys.TicketDetails(ticketId),
+            // Add other relevant keys if needed, but standardizing on TicketDetails
         };
 
         await InvalidateKeysAsync(keysToInvalidate, cancellationToken);

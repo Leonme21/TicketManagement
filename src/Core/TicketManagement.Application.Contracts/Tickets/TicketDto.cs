@@ -8,8 +8,8 @@ public class TicketDto
     public int Id { get; set; }
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public string Status { get; set; } = string.Empty;
-    public string Priority { get; set; } = string.Empty;
+    public TicketManagement.Domain.Enums.TicketStatus Status { get; set; }
+    public TicketManagement.Domain.Enums.TicketPriority Priority { get; set; }
 
     // Creator info
     public int CreatorId { get; set; }

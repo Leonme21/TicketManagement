@@ -17,6 +17,8 @@ public sealed class DeleteTicketCommandHandler : IRequestHandler<DeleteTicketCom
     private readonly ITicketRepository _ticketRepository;
     private readonly IApplicationDbContext _dbContext;
     private readonly ICacheService _cache;
+    private readonly IResourceAuthorizationService _authorizationService;
+    private readonly ICurrentUserService _currentUserService;
     private readonly ILogger<DeleteTicketCommandHandler> _logger;
     private static readonly ActivitySource ActivitySource = new("TicketManagement.Commands");
 
@@ -24,11 +26,15 @@ public sealed class DeleteTicketCommandHandler : IRequestHandler<DeleteTicketCom
         ITicketRepository ticketRepository,
         IApplicationDbContext dbContext,
         ICacheService cache,
+        IResourceAuthorizationService authorizationService,
+        ICurrentUserService currentUserService,
         ILogger<DeleteTicketCommandHandler> logger)
     {
         _ticketRepository = ticketRepository;
         _dbContext = dbContext;
         _cache = cache;
+        _authorizationService = authorizationService;
+        _currentUserService = currentUserService;
         _logger = logger;
     }
 
@@ -41,6 +47,15 @@ public sealed class DeleteTicketCommandHandler : IRequestHandler<DeleteTicketCom
         if (ticket is null)
         {
             return Result.NotFound("Ticket", request.TicketId);
+        }
+
+        // Authorization check
+        var userId = _currentUserService.UserIdInt ?? 0;
+        var canDelete = await _authorizationService.CanDeleteTicketAsync(userId, ticket, cancellationToken);
+        if (!canDelete)
+        {
+            _logger.LogWarning("User {UserId} attempted to delete ticket {TicketId} without authorization", userId, request.TicketId);
+            return Result.Forbidden("You do not have permission to delete this ticket.");
         }
 
         // Remove via repository (soft delete handled by interceptor)

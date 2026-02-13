@@ -2,6 +2,7 @@
 @attribute [Authorize]
 @inject ITicketApiClient TicketApiClient
 @inject NavigationManager Navigation
+@using TicketManagement.Domain.Enums
 
 <PageTitle>Crear Ticket</PageTitle>
 
@@ -86,11 +87,11 @@
                                     <label for="priority" class="form-label fw-medium text-slate-700">
                                         Prioridad <span class="text-danger">*</span>
                                     </label>
-                                    <InputSelect id="priority" class="form-select border-slate-200" @bind-Value="_ticketRequest.Priority">
-                                        <option value="Low">Baja</option>
-                                        <option value="Medium" selected>Media</option>
-                                        <option value="High">Alta</option>
-                                        <option value="Urgent">Urgente</option>
+                                    <InputSelect id="priority" class="form-select border-slate-200" @bind-Value="_selectedPriority">
+                                        <option value="1">Baja</option>
+                                        <option value="2" selected>Media</option>
+                                        <option value="3">Alta</option>
+                                        <option value="4">Crítica</option>
                                     </InputSelect>
                                     <ValidationMessage For="@(() => _ticketRequest.Priority)" class="text-danger small mt-1" />
                                 </div>
@@ -121,7 +122,7 @@
                                         <div class="col-md-6"><span class="badge badge-low me-1">Baja</span> Problemas menores sin impacto urgente</div>
                                         <div class="col-md-6"><span class="badge badge-medium me-1">Media</span> Requiere atención pero no es urgente</div>
                                         <div class="col-md-6"><span class="badge badge-high me-1">Alta</span> Afecta funcionalidad importante</div>
-                                        <div class="col-md-6"><span class="badge badge-urgent me-1">Urgente</span> Requiere atención inmediata</div>
+                                        <div class="col-md-6"><span class="badge badge-urgent me-1">Crítica</span> Requiere atención inmediata</div>
                                     </div>
                                 </div>
                             </div>
@@ -152,12 +153,13 @@
 </div>
 
 @code {
-    private CreateTicketRequest _ticketRequest = new() { Priority = "Medium" };
+    private CreateTicketRequest _ticketRequest = new() { Priority = TicketPriority.Medium };
     private List<CategoryDto> _categories = new();
     private string? _errorMessage;
     private string? _successMessage;
     private bool _isSubmitting = false;
     private bool _isLoadingCategories = true;
+    private int _selectedPriority = (int)TicketPriority.Medium;
 
     protected override async Task OnInitializedAsync()
     {
@@ -195,12 +197,15 @@
                 return;
             }
 
+            // Asignar la prioridad seleccionada
+            _ticketRequest.Priority = (TicketPriority)_selectedPriority;
+
             var result = await TicketApiClient.CreateTicketAsync(_ticketRequest);
 
             _successMessage = "¡Ticket creado exitosamente! Redirigiendo...";
 
             await Task.Delay(1500);
-            Navigation.NavigateTo($"/tickets/{result.Id}");
+            Navigation.NavigateTo($"/tickets/{result.TicketId}");
         }
         catch (Exception ex)
         {

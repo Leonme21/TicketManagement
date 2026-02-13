@@ -1,26 +1,26 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+ï»¿using System;
 using System.ComponentModel.DataAnnotations;
+using TicketManagement.Domain.Enums;
 
 namespace TicketManagement.Application.Contracts.Tickets;
 
+/// <summary>
+/// Request DTO for creating a ticket
+/// </summary>
 public class CreateTicketRequest
 {
-    [Required(ErrorMessage = "El título es requerido")]
-    [StringLength(200, ErrorMessage = "El título no puede exceder 200 caracteres")]
+    [Required(ErrorMessage = "Title is required")]
+    [StringLength(200, ErrorMessage = "Title cannot exceed 200 characters")]
     public string Title { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "La descripción es requerida")]
-    [StringLength(2000, ErrorMessage = "La descripción no puede exceder 2000 caracteres")]
+    [Required(ErrorMessage = "Description is required")]
+    [StringLength(5000, ErrorMessage = "Description cannot exceed 5000 characters")]
     public string Description { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "La prioridad es requerida")]
-    public string Priority { get; set; } = "Medium";
+    [Required(ErrorMessage = "Priority is required")]
+    public TicketPriority Priority { get; set; } = TicketPriority.Medium;
 
-    [Required(ErrorMessage = "La categoría es requerida")]
-    [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar una categoría válida")]
+    [Required(ErrorMessage = "CategoryId is required")]
+    [Range(1, int.MaxValue, ErrorMessage = "Category ID must be valid")]
     public int CategoryId { get; set; }
 }

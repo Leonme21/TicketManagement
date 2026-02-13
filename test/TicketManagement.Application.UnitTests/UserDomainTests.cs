@@ -30,7 +30,7 @@ public class UserDomainTests
         var user = result.Value!;
         user.FirstName.Should().Be(firstName);
         user.LastName.Should().Be(lastName);
-        user.Email.Should().Be(email);
+        user.Email.Value.Should().Be(email);  // ? FIXED: Compare Email.Value not Email object
         user.PasswordHash.Should().Be(ValidPasswordHash);
         user.Role.Should().Be(role);
         user.IsActive.Should().BeTrue();

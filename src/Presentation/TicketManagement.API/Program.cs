@@ -169,6 +169,7 @@ try
     var app = builder.Build();
 
     // Middleware pipeline
+    app.UseMiddleware<TicketManagement.WebApi.Middleware.CorrelationIdMiddleware>();
     app.UseExceptionHandler();
     
     // Security headers
@@ -192,7 +193,6 @@ try
     
     // Custom middlewares
     app.UseMiddleware<TicketManagement.API.Middleware.RateLimitingMiddleware>();
-    app.UseMiddleware<TicketManagement.API.Middleware.AuthorizationMiddleware>();
     
     if (app.Environment.IsDevelopment())
     {
@@ -207,6 +207,7 @@ try
     app.UseHttpsRedirection();
     app.UseResponseCaching();
     app.UseAuthentication();
+    app.UseMiddleware<TicketManagement.API.Middleware.AuthorizationMiddleware>();
     app.UseAuthorization();
     app.MapControllers();
 

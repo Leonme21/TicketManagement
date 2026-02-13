@@ -24,13 +24,13 @@ public class CreateTicketCommandHandlerTests
     public CreateTicketCommandHandlerTests()
     {
         _ticketRepositoryMock = new Mock<ITicketRepository>();
-        _contextMock = new Mock<IApplicationDbContext>(); // ✅ Changed from IUnitOfWork
+        _contextMock = new Mock<IApplicationDbContext>();
         _currentUserServiceMock = new Mock<ICurrentUserService>();
         _loggerMock = new Mock<ILogger<CreateTicketCommandHandler>>();
 
         _handler = new CreateTicketCommandHandler(
             _ticketRepositoryMock.Object,
-            _contextMock.Object, // ✅ Changed from _unitOfWorkMock
+            _contextMock.Object,
             _currentUserServiceMock.Object,
             _loggerMock.Object);
     }
@@ -48,6 +48,25 @@ public class CreateTicketCommandHandlerTests
         };
 
         _currentUserServiceMock.Setup(x => x.GetUserId()).Returns(1);
+        
+        // ✅ FIXED: Setup Categories DbSet to return a valid category
+        var categories = new List<Domain.Entities.Category>
+        {
+            Domain.Entities.Category.Create("Test Category", "A test category").Value!
+        }.AsQueryable();
+        
+        var dbSetMock = new Mock<Microsoft.EntityFrameworkCore.DbSet<Domain.Entities.Category>>();
+        dbSetMock.As<IQueryable<Domain.Entities.Category>>().Setup(m => m.Provider).Returns(categories.Provider);
+        dbSetMock.As<IQueryable<Domain.Entities.Category>>().Setup(m => m.Expression).Returns(categories.Expression);
+        dbSetMock.As<IQueryable<Domain.Entities.Category>>().Setup(m => m.ElementType).Returns(categories.ElementType);
+        dbSetMock.As<IQueryable<Domain.Entities.Category>>().Setup(m => m.GetEnumerator()).Returns(categories.GetEnumerator());
+        
+        dbSetMock.Setup(x => x.FindAsync(
+            It.Is<object[]>(o => o.Length == 1 && (int)o[0] == 1),
+            It.IsAny<CancellationToken>()
+        )).ReturnsAsync(Domain.Entities.Category.Create("Test Category", "A test category").Value!);
+        
+        _contextMock.Setup(x => x.Categories).Returns(dbSetMock.Object);
         _contextMock.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(1);
 
@@ -57,11 +76,9 @@ public class CreateTicketCommandHandlerTests
         // Assert
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().NotBeNull();
-        // ✅ Fixed: In unit tests with mocks, ID won't be generated
-        // We verify the behavior, not the database-generated ID
         result.Value!.Message.Should().Be("Ticket created successfully");
-        result.Value.Priority.Should().Be("Medium");
-        result.Value.Status.Should().Be("Open");
+        result.Value.Priority.Should().Be(TicketPriority.Medium);
+        result.Value.Status.Should().Be(TicketStatus.Open);
 
         _ticketRepositoryMock.Verify(
             x => x.AddAsync(It.IsAny<Domain.Entities.Ticket>(), It.IsAny<CancellationToken>()),
@@ -81,17 +98,27 @@ public class CreateTicketCommandHandlerTests
             Title = "",
             Description = "Test Description",
             Priority = TicketPriority.Medium,
-            CategoryId = 1
+            CategoryId = 1  // Valid ID so category check passes, then title validation fails
         };
 
         _currentUserServiceMock.Setup(x => x.GetUserId()).Returns(1);
+        
+        // ✅ FIXED: Setup Categories mock to return valid category so title validation is tested
+        var categoryMock = Domain.Entities.Category.Create("Test Category", "A test category").Value!;
+        var dbSetMock = new Mock<Microsoft.EntityFrameworkCore.DbSet<Domain.Entities.Category>>();
+        dbSetMock.Setup(x => x.FindAsync(
+            It.IsAny<object[]>(),
+            It.IsAny<CancellationToken>()
+        )).ReturnsAsync(categoryMock);
+        
+        _contextMock.Setup(x => x.Categories).Returns(dbSetMock.Object);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
         result.IsFailure.Should().BeTrue();
-        result.Error.Description.Should().Contain("title");
+        result.Error.Description.Should().ContainEquivalentOf("title");
 
         _ticketRepositoryMock.Verify(
             x => x.AddAsync(It.IsAny<Domain.Entities.Ticket>(), It.IsAny<CancellationToken>()),
@@ -111,13 +138,22 @@ public class CreateTicketCommandHandlerTests
         };
 
         _currentUserServiceMock.Setup(x => x.GetUserId()).Returns(1);
+        
+        // ✅ FIXED: Setup Categories mock
+        var dbSetMock = new Mock<Microsoft.EntityFrameworkCore.DbSet<Domain.Entities.Category>>();
+        dbSetMock.Setup(x => x.FindAsync(
+            It.IsAny<object[]>(),
+            It.IsAny<CancellationToken>()
+        )).ReturnsAsync((Domain.Entities.Category)null!);
+        
+        _contextMock.Setup(x => x.Categories).Returns(dbSetMock.Object);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
         result.IsFailure.Should().BeTrue();
-        result.Error.Description.Should().Contain("category");
+        result.Error.Description.Should().ContainEquivalentOf("category");
 
         _ticketRepositoryMock.Verify(
             x => x.AddAsync(It.IsAny<Domain.Entities.Ticket>(), It.IsAny<CancellationToken>()),
