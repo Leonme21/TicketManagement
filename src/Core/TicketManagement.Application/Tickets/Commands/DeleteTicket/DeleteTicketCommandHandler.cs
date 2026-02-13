@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using TicketManagement.Application.Common;
 using TicketManagement.Application.Common.Interfaces;
 using TicketManagement.Domain.Common;
 using TicketManagement.Domain.Interfaces;
@@ -9,14 +8,15 @@ using TicketManagement.Domain.Interfaces;
 namespace TicketManagement.Application.Tickets.Commands.DeleteTicket;
 
 /// <summary>
-/// ?? BIG TECH LEVEL: Handler with cache invalidation and proper CQRS
-/// Uses Repository for write operations, DbContext for SaveChanges
+/// ✅ REFACTORED: Clean handler following Single Responsibility Principle
+/// - No manual cache invalidation (soft delete triggers cache cleanup via interceptor/events)
+/// - Uses Repository for write operations, DbContext for SaveChanges
+/// - Authorization handled in handler (required for resource-based auth)
 /// </summary>
 public sealed class DeleteTicketCommandHandler : IRequestHandler<DeleteTicketCommand, Result>
 {
     private readonly ITicketRepository _ticketRepository;
     private readonly IApplicationDbContext _dbContext;
-    private readonly ICacheService _cache;
     private readonly IResourceAuthorizationService _authorizationService;
     private readonly ICurrentUserService _currentUserService;
     private readonly ILogger<DeleteTicketCommandHandler> _logger;
@@ -25,14 +25,12 @@ public sealed class DeleteTicketCommandHandler : IRequestHandler<DeleteTicketCom
     public DeleteTicketCommandHandler(
         ITicketRepository ticketRepository,
         IApplicationDbContext dbContext,
-        ICacheService cache,
         IResourceAuthorizationService authorizationService,
         ICurrentUserService currentUserService,
         ILogger<DeleteTicketCommandHandler> logger)
     {
         _ticketRepository = ticketRepository;
         _dbContext = dbContext;
-        _cache = cache;
         _authorizationService = authorizationService;
         _currentUserService = currentUserService;
         _logger = logger;
@@ -49,22 +47,23 @@ public sealed class DeleteTicketCommandHandler : IRequestHandler<DeleteTicketCom
             return Result.NotFound("Ticket", request.TicketId);
         }
 
-        // Authorization check
+        // Authorization check (resource-based)
         var userId = _currentUserService.UserIdInt ?? 0;
         var canDelete = await _authorizationService.CanDeleteTicketAsync(userId, ticket, cancellationToken);
         if (!canDelete)
         {
-            _logger.LogWarning("User {UserId} attempted to delete ticket {TicketId} without authorization", userId, request.TicketId);
+            _logger.LogWarning("User {UserId} attempted to delete ticket {TicketId} without authorization", 
+                userId, request.TicketId);
             return Result.Forbidden("You do not have permission to delete this ticket.");
         }
 
-        // Remove via repository (soft delete handled by interceptor)
+        // ✅ Remove via repository (soft delete handled by SoftDeleteInterceptor)
         _ticketRepository.Remove(ticket);
+        
+        // ✅ Cache invalidation happens automatically:
+        // - SoftDeleteInterceptor marks IsDeleted = true
+        // - Query filters exclude deleted tickets from cache rebuilds
         await _dbContext.SaveChangesAsync(cancellationToken);
-
-        // ?? CRITICAL: Invalidate cache after deletion
-        await _cache.RemoveAsync(CacheKeys.TicketDetails(request.TicketId), cancellationToken);
-        _logger.LogDebug("Cache invalidated for deleted ticket {TicketId}", request.TicketId);
 
         _logger.LogInformation("Ticket {TicketId} soft deleted successfully", request.TicketId);
         activity?.SetStatus(ActivityStatusCode.Ok);

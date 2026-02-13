@@ -234,15 +234,15 @@ public class Result<TValue> : Result
     public static implicit operator Result<TValue>(TValue value) => Success(value);
     public static implicit operator Result<TValue>(Error error) => Failure(error);
 
-    // === SHADOWING FACTORY METHODS ===
-    public static new Result<TValue> Success(TValue value) => new(value);
-    public static new Result<TValue> Failure(Error error) => new(error);
-    public static new Result<TValue> Failure(string message) => new(Error.Validation("Validation.Error", message));
-    public static new Result<TValue> Invalid(string message) => new(Error.Validation("Validation.Invalid", message));
-    public static new Result<TValue> NotFound(string message) => new(Error.NotFound("Resource.NotFound", message));
-    public static new Result<TValue> Forbidden(string message) => new(Error.Forbidden("Access.Forbidden", message));
-    public static new Result<TValue> Unauthorized(string message) => new(Error.Unauthorized("Access.Unauthorized", message));
-    public static new Result<TValue> Conflict(string message) => new(Error.Conflict("Resource.Conflict", message));
-    public static new Result<TValue> RateLimitExceeded(string message) => new(Error.RateLimitExceeded("RateLimit.Exceeded", message));
-    public static new Result<TValue> InternalError(string message) => new(Error.Internal("Internal.Error", message));
+    // ✅ FIXED: Use 'new' keyword intentionally to shadow base class methods with typed versions
+    public static Result<TValue> Success(TValue value) => new(value);
+    public new static Result<TValue> Failure(Error error) => new(error);
+    public new static Result<TValue> Failure(string message) => new(Error.Validation("Validation.Error", message));
+    public new static Result<TValue> Invalid(string message) => new(Error.Validation("Validation.Invalid", message));
+    public new static Result<TValue> NotFound(string message) => new(Error.NotFound("Resource.NotFound", message));
+    public new static Result<TValue> Forbidden(string message) => new(Error.Forbidden("Access.Forbidden", message));
+    public new static Result<TValue> Unauthorized(string message) => new(Error.Unauthorized("Access.Unauthorized", message));
+    public new static Result<TValue> Conflict(string message) => new(Error.Conflict("Resource.Conflict", message));
+    public new static Result<TValue> RateLimitExceeded(string message) => new(Error.RateLimitExceeded("RateLimit.Exceeded", message));
+    public new static Result<TValue> InternalError(string message) => new(Error.Internal("Internal.Error", message));
 }
